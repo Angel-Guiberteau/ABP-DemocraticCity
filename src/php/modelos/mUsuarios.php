@@ -16,13 +16,15 @@ class MUsuarios{
         return $this->comprobarRegistro($this->conexion->affected_rows);
     }
     public function registrarAdm($datos){
-        //try{
-        $sql="INSERT INTO UsuariosAdmin(usuario, contrasena, superAdmin) VALUES('".$datos['usuario']."', '".$datos["password"]."', 0);";
+        try{
+            $sql="INSERT INTO UsuariosAdmin(usuario, contrasena, superAdmin) VALUES('".$datos['usuario']."', '".$datos["password"]."', 0);";
 
-        $this->conexion->query($sql);
+            $this->conexion->query($sql);
 
-        return $this->comprobarRegistro($this->conexion->affected_rows);
-        //}catch{}
+            return $this->comprobarRegistro($this->conexion->affected_rows);
+        }catch (Exception $e){
+            return 'Error en el registro';
+        }
     }
     private function comprobarRegistro($p){
         if($p = 1)
