@@ -25,7 +25,7 @@ CREATE TABLE Usuarios (
     idUsuario TINYINT UNSIGNED AUTO_INCREMENT,
     nombreUsuario VARCHAR(50) NOT NULL,
     passUsuario VARCHAR(100) NOT NULL,
-    idMultimedia TINYINT UNSIGNED NOT NULL,
+    idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_usuario PRIMARY KEY (idUsuario),
     CONSTRAINT fk_usuario FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
 );
@@ -59,7 +59,7 @@ CREATE TABLE Usuarios_partidas (
 CREATE TABLE Edificios (
     idEdificio TINYINT UNSIGNED AUTO_INCREMENT,
     nombreEdificio VARCHAR(255) NOT NULL,
-    idMultimedia TINYINT UNSIGNED NOT NULL,
+    idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_edificio PRIMARY KEY (idEdificio),
     CONSTRAINT fk_edificio FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
 );
@@ -67,7 +67,7 @@ CREATE TABLE Edificios (
 CREATE TABLE Logros(
     idLogro TINYINT UNSIGNED AUTO_INCREMENT,
     textoLogro VARCHAR(255) NOT NULL,
-    idMultimedia TINYINT UNSIGNED NOT NULL,
+    idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_logro PRIMARY KEY (idLogro),
     CONSTRAINT fk_logro FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
 );
@@ -83,7 +83,7 @@ CREATE TABLE Partidas_logros(
 CREATE TABLE Preguntas(
     idPregunta TINYINT UNSIGNED AUTO_INCREMENT,
     texto VARCHAR(255) NOT NULL,
-    idMultimedia TINYINT UNSIGNED NOT NULL,
+    idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_pregunta PRIMARY KEY (idPregunta),
     CONSTRAINT fk_pregunta FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
 );
