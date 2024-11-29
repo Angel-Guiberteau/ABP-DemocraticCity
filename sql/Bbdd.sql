@@ -104,7 +104,7 @@ CREATE TABLE Respuestas(
     seguridad TINYINT NOT NULL,
     economia TINYINT NOT NULL,
     idEdificio TINYINT UNSIGNED NOT NULL,    
-    CONSTRAINT pk_respuesta PRIMARY KEY (idPregunta, letraRespuesta),
+    CONSTRAINT pk_respuesta PRIMARY KEY (idPregunta, letraRespuesta) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT fk_respuesta FOREIGN KEY (idEdificio) REFERENCES Edificios (idEdificio),
     CONSTRAINT chk_letraRespuesta CHECK (letraRespuesta IN ('A', 'B', 'C', 'D')),
     CONSTRAINT chk_educacion CHECK (educacion BETWEEN -10 AND 10),
