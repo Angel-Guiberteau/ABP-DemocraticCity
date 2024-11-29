@@ -97,15 +97,18 @@ CREATE TABLE Partidas_preguntas(
 );
 
 CREATE TABLE Respuestas(
-    idPregunta SMALLINT UNSIGNED AUTO_INCREMENT,
+    idPregunta TINYINT UNSIGNED,
     letraRespuesta CHAR(1) NOT NULL,
     educacion TINYINT NOT NULL,
     sanidad TINYINT NOT NULL,
     seguridad TINYINT NOT NULL,
     economia TINYINT NOT NULL,
     idEdificio TINYINT UNSIGNED NOT NULL,    
-    CONSTRAINT pk_respuesta PRIMARY KEY (idPregunta, letraRespuesta) ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT fk_respuesta FOREIGN KEY (idEdificio) REFERENCES Edificios (idEdificio),
+    CONSTRAINT pk_respuesta PRIMARY KEY (idPregunta, letraRespuesta),
+    CONSTRAINT fk_respuesta_pregunta FOREIGN KEY (idPregunta) REFERENCES Preguntas (idPregunta)
+        ON UPDATE CASCADE 
+        ON DELETE CASCADE, 
+    CONSTRAINT fk_respuesta_edificio FOREIGN KEY (idEdificio) REFERENCES Edificios (idEdificio),
     CONSTRAINT chk_letraRespuesta CHECK (letraRespuesta IN ('A', 'B', 'C', 'D')),
     CONSTRAINT chk_educacion CHECK (educacion BETWEEN -10 AND 10),
     CONSTRAINT chk_sanidad CHECK (sanidad BETWEEN -10 AND 10),
