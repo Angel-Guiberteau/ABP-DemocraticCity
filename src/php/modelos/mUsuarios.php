@@ -7,13 +7,16 @@ class MUsuarios{
     }
     // registro de usuarios
     public function registrar($datos){
-        
+        try{
+            $sql="INSERT INTO Usuarios(usuario, contrasena) VALUES('".$datos['usuario']."', '".$datos["password"]."');";
 
-        $sql="INSERT INTO Usuarios(usuario, contrasena) VALUES('".$datos['usuario']."', '".$datos["password"]."');";
+            $this->conexion -> query($sql);
 
-        $this->conexion -> query($sql);
+            return $this->comprobar($this->conexion->affected_rows);
 
-        return $this->comprobar($this->conexion->affected_rows);
+        }catch (mysqli_sql_exception $e){
+            return false;
+        }
     }
     public function registrarAdm($datos){
         try{
@@ -22,26 +25,51 @@ class MUsuarios{
             $this->conexion->query($sql);
 
             return $this->comprobar($this->conexion->affected_rows);
+
         }catch (mysqli_sql_exception $e){
-            return 'Error en el registro';
+            return false;
         }
     }
     //inicio de sesion
     public function inicio($datos){
-        $sql='select * from Usuarios where usuario = "'.$_POST["usuario"].'";';
-        $this->conexion->query($sql);
-        $this->comprobar($this->conexion->affected_rows);
+        try{
+            $sql='select * from Usuarios where usuario = "'.$datos["usuario"].'";';
+            $resultado = $this->conexion->query($sql);
+
+            if($this->comprobar($this->conexion->affected_rows)){
+                $fila=$resultado->fetch_assoc();
+                if($datos["usuario"] == $fila['usuario'] && password_verify($datos["passw"], $fila["passw"]))
+                    return $resultado;
+                else
+                    return false;
+            }
+            
+        }catch (mysqli_sql_exception $e){
+            return false;
+        }
     }
     public function inicioAdm($datos){
-        $sql='select * from Usuarios where usuario = "'.$_POST["usuario"].'" AND superAdmin = 0;';
-        $this->conexion->query($sql);
-        $this->comprobar($this->conexion->affected_rows);
+        try{
+            $sql='select * from Usuarios where usuario = "'.$datos["usuario"].'";';
+            $resultado = $this->conexion->query($sql);
+
+            if($this->comprobar($this->conexion->affected_rows)){
+                $fila=$resultado->fetch_assoc();
+                if($datos["usuario"] == $fila['usuario'] && password_verify($datos["passw"], $fila["passw"]))
+                    return $resultado;
+                else
+                    return false;
+            }
+            
+        }catch (mysqli_sql_exception $e){
+            return false;
+        }
     }
 
     private function comprobar($p){
         if($p = 1)
-            return 'Registro correcto';
+            return true;
         else
-            return 'Ha sucedido un error';
+            return false;
     }
 }

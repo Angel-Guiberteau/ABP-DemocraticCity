@@ -22,7 +22,7 @@ class CUsuarios{
             $datos["passw"] = $this->cifrarPassword($datos["passw"]);
             return $this->objMUsuario->registrarAdm($datos);
         }else{
-            
+            return false;
         }
     }
 
@@ -30,12 +30,17 @@ class CUsuarios{
         if($this->comprobarDatosIni($datos)){
             $datos["passw"] = $this->cifrarPassword($datos["rpassw"]);
             return $this->objMUsuario->inicio($datos);
+        }else{
+            return false;
         }
     }
     public function inicioAdm($datos){
-        if($this->comprobarDatosIni($datos))
+        if($this->comprobarDatosIni($datos)){
             $datos["passw"] = $this->cifrarPassword($datos["rpassw"]);
             return $this->objMUsuario->inicioAdm($datos);
+        }else{
+            return false;
+        }
     }
 
     private function comprobarDatosIni($datos){
