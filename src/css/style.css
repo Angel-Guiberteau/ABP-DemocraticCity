@@ -28,6 +28,12 @@ body{
     
     display: flow-root;
 }
+/* Musica */
+
+.mute{
+    display: none;
+}
+
 /* Main */
 main{
     margin: 0px;
@@ -315,3 +321,4 @@ a{
 .panel3 div img{
     width: 45%;
 }
+
