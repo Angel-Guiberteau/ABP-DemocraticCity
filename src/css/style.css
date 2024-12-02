@@ -185,6 +185,12 @@ a{
     justify-content: flex-end;
     padding: 1rem;
 }
+.icons a:visited{
+    color: black;
+}
+.icons a, .icons a svg{
+    color: black;
+}
 /* Página de inicio */
 .inicio{
     display: flex;

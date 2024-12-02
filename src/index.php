@@ -22,8 +22,8 @@
     //     if(method_exists($objControlador, $_GET['m']))$datos = $objControlador->{$_GET['m']}($_POST);
     // else
         if(method_exists($objControlador, $_GET['m'])){
-            $datos = $objControlador->{$_GET['m']}();
-    }
+            $datos = $objControlador->{$_GET['m']}($_POST);
+        }
 
     if(isset($datos['usuario']))$_SESSION = $datos;
     require_once 'php/vistas/'.$objControlador->vista.'.html';

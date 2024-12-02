@@ -9,11 +9,11 @@ class MUsuarios{
     // registro de usuarios
     public function registrar($datos){
         try{
-            $sql="INSERT INTO Usuarios(nombreUsuario, passw) VALUES('".$datos['usuario']."', '".$datos["password"]."');";
+            $sql="INSERT INTO Usuarios(nombreUsuario, passUsuario) VALUES('".$datos['usuario']."', '".$datos["passw"]."');";
 
             $this->conexion -> query($sql);
 
-            return $this->comprobar($this->conexion->affected_rows);
+            return $this->conexion->affected_rows > 0;
 
         }catch (mysqli_sql_exception $e){
             return false;
@@ -22,11 +22,11 @@ class MUsuarios{
     public function registrarAdm($datos){
         try{
 
-            $sql="INSERT INTO Administradores(nombreUsuario, passwAdmin, superAdmin) VALUES('".$datos['usuario']."', '".$datos["password"]."', 0);";
+            $sql="INSERT INTO Administradores(nombreUsuario, passAdmin, superAdmin) VALUES('".$datos['usuario']."', '".$datos["passw"]."', 0);";
 
             $this->conexion->query($sql);
 
-            return $this->comprobar($this->conexion->affected_rows);
+            return $this->conexion->affected_rows > 0;
 
         }catch (mysqli_sql_exception $e){
             return false;
@@ -38,10 +38,10 @@ class MUsuarios{
             $sql='SELECT * from Usuarios where nombreUsuario = "'.$datos["usuario"].'";';
             $resultado = $this->conexion->query($sql);
             $datos["passw"] = mysqli_real_escape_string($this->conexion, $datos["passw"]);
-            if($this->comprobar($this->conexion->affected_rows)){
+            if($this->conexion->affected_rows > 0){
                 $fila=$resultado->fetch_assoc();
-                if($datos["usuario"] == $fila['usuario'] && password_verify($datos["passw"], $fila["passw"]))
-                    return $resultado;
+                if($datos["usuario"] == $fila['nombreUsuario'] && password_verify($datos["passw"], $fila["passUsuario"]))
+                    return $fila;
                 else
                     return false;
             }
@@ -55,10 +55,12 @@ class MUsuarios{
             $sql='SELECT * from Administradores where nombreUsuario = "'.$datos["usuario"].'";';
             $resultado = $this->conexion->query($sql);
             $datos["passw"] = mysqli_real_escape_string($this->conexion, $datos["passw"]);
-            if($this->comprobar($this->conexion->affected_rows)){
+            if($this->conexion->affected_rows > 0){
                 $fila=$resultado->fetch_assoc();
-                if($datos["usuario"] == $fila['usuario'] && password_verify($datos["passw"], $fila["passw"]))
-                    return $resultado;
+
+                if(password_verify($datos["passw"], $fila["passAdmin"])){
+                    return $fila;
+                }
                 else
                     return false;
             }
@@ -66,12 +68,5 @@ class MUsuarios{
         }catch (mysqli_sql_exception $e){
             return false;
         }
-    }
-
-    private function comprobar($p){
-        if($p = 1)
-            return true;
-        else
-            return false;
     }
 }

@@ -1,111 +1,168 @@
 //----------------MOSTRAR CONTRASEÑAS
-// Función para alternar entre mostrar u ocultar la contraseña en el campo de entrada.
 function mostrarPassw() {
-    let passlogin = document.querySelector('#passw'); // Obtiene el campo de la contraseña.
-    let checkbox = document.querySelector('#verPassw'); // Obtiene el checkbox para controlar la visibilidad.
-    // Cambia el tipo del campo de contraseña según el estado del checkbox (text o password).
-    passlogin.type = checkbox.checked ? "text" : "password"; 
+    let passlogin1 = document.querySelector('#passw');
+    let passlogin2 = document.querySelector('#rpassw');
+
+    let checkbox = document.querySelector('#verPassw');
+
+    passlogin1.type = checkbox.checked ? "text" : "password";
+    passlogin2.type = checkbox.checked ? "text" : "password";
 }
 
-//----------------VERIFICAR CAMPOS VACÍOS
-// Función que verifica si un campo está vacío y muestra un mensaje de advertencia si es necesario.
-function verificarCampo(inputSelector, mensajeSelector) {
-    let input = document.querySelector(inputSelector); // Obtiene el campo de entrada específico.
-    let mensaje = document.querySelector(mensajeSelector); // Obtiene el elemento del mensaje de advertencia.
+document.addEventListener("DOMContentLoaded", function () {
+    
+    //---------------- VERIFICAR CAMPOS VACÍOS
+    function verificarCampo(inputSelector, mensajeSelector) {
+        let input = document.querySelector(inputSelector);
+        let mensaje = document.querySelector(mensajeSelector);
 
-    if (input && mensaje) { // Verifica que ambos elementos existan.
-        // Agrega un evento que se activa cuando el campo pierde el foco.
-        input.addEventListener("blur", function () {
-            // Si el campo está vacío, muestra el mensaje; si no, lo oculta.
-            mensaje.style.display = input.value.trim() === '' ? 'inline' : 'none';
+        if (input && mensaje) {
+            input.addEventListener("blur", function () {
+                mensaje.style.display = input.value.trim() === '' ? 'inline' : 'none';
+            });
+        }
+    }
+
+    //---------------- VERIFICAR SEGUNDA CONTRASEÑA IGUAL AL ANTERIOR
+    function repetirPassw(inputPassw, inputrPassw, mensajeSelector){
+        let input = document.querySelector(inputPassw);
+        let input2 = document.querySelector(inputrPassw);
+        let mensaje = document.querySelector(mensajeSelector);
+        if (input && input2 && mensaje) {
+            input2.addEventListener("blur", function (){
+                if(input2.value.trim() === ''){
+                    mensaje.style.display = 'inline';
+                    mensaje.textContent = 'Este campo no puede estar vacío';
+                }else if(input.value != input2.value){
+                    mensaje.style.display = 'inline';
+                    mensaje.textContent = 'Las contraseñas no coinciden';
+                }else{ mensaje.style.display = 'none'; }
+            });
+        }   
+    }
+
+    function verificarCampoBoton(inputNombre,inputPass,inputRPass,boton){
+        let nombre = document.querySelector(inputNombre);
+        let pass = document.querySelector(inputPass);
+        let rpass = document.querySelector(inputRPass);
+        let botonEnviar = document.querySelector(boton);
+        
+        nombre.addEventListener("blur", function(){
+            if(nombre.value.trim() === '' || pass.value.trim() === '' || rpass.value.trim() === ''){
+                botonEnviar.disabled = true;
+            }else{
+                botonEnviar.disabled = false;
+            }
+        });
+
+        pass.addEventListener("blur", function(){
+            if(nombre.value.trim() === '' || pass.value.trim() === '' || rpass.value.trim() === ''){
+                botonEnviar.disabled = true;
+            }else{
+                botonEnviar.disabled = false;
+            }
+        });
+
+        rpass.addEventListener("blur", function(){
+            if(nombre.value.trim() === '' || pass.value.trim() === '' || rpass.value.trim() === ''){
+                botonEnviar.disabled = true;
+            }else{
+                botonEnviar.disabled = false;
+            }
         });
     }
-}
 
-//----------------REVISAR MEDIANTE FETCH USUARIO Y CONTRASEÑA (ADMIN)
-// Evento para manejar el formulario de login del administrador.
-document.getElementById('formularioLoginAdmin').addEventListener('submit', async function (event) { 
-    event.preventDefault(); // Evita que el formulario recargue la página al enviarse.
+    // Validaciones de campos
+    verificarCampo('#nombre', '.nombreUsuarioValidacion');
+    verificarCampo('#passw', '.passwUsuarioValidacion');
+    verificarCampo('#rpassw', '.rpasswUsuarioValidacion');
+    repetirPassw('#passw', '#rpassw', '.rpasswUsuarioValidacion');
+    verificarCampoBoton('#nombre','#passw','#rpassw','#registroAdmin');
+    verificarCampoBoton('#nombre','#passw','#rpassw','#registroUser');
+});
 
-    // Obtiene los valores ingresados en los campos de usuario y contraseña.
-    let nombreUsuario = document.getElementById('nombreUsuario').value; 
-    let passlogin = document.getElementById('passw').value; 
 
-    // Crea un objeto FormData para enviar los datos al servidor.
-    let formData = new FormData(); 
-    formData.append('usuario', nombreUsuario); // Agrega el usuario.
-    formData.append('passw', passlogin); // Agrega la contraseña.
+document.getElementById('registroAdmin').addEventListener('submit', async function (event){
 
-    try {
-        // Envía los datos al servidor mediante una solicitud POST con fetch.
-        const response = await fetch('../index.php?c=Usuarios&m=registrarAdm', { 
-            method: 'POST', 
-            body: formData, 
+    event.preventDefault(); // Evita que la página se recargue cuando se envía el formulario.
+
+    // Obtiene los valores que el usuario ingresó en los campos del formulario.
+
+    let nombreUsuario = document.getElementById('nombre').value;
+    let passlogin = document.getElementById('passw').value;
+    let passlogin2 = document.getElementById('rpassw').value;
+
+    let formData = new FormData();
+    formData.append('usuario', nombreUsuario);
+    formData.append('passw', passlogin);
+    formData.append('rpassw', passlogin2);
+
+    //Enviar los datos al servidor mediantes fetch.
+
+    try{
+        const response = await fetch('../index.php?c=Usuarios&m=registrarAdm',{ //CAMBIAR SERVIDOR
+            method: 'POST', //Usamos post para enviar datos
+            body: formData, //Enviamos datos en el body de la solicitud
         });
 
-        if (response.ok) { // Verifica si la respuesta del servidor fue exitosa.
-            const result = await response.text(); // Obtiene la respuesta del servidor como texto.
-
-            if (result != false) { // Si el servidor indica autenticación exitosa.
-                window.location.href = "vistaInicio.html"; // Redirige a la página de inicio.
-            } else {
-                // Si las credenciales son incorrectas, muestra un mensaje de error.
-                document.querySelector('.loginIncorrecto').style.display = 'inline'; 
+        if(response.ok){
+            const result = await response.text();
+            if(result != false){
+                window.location.href = "vistaInicio.html";
+            }else{
+                document.querySelector('.registroIncorrecto').style.display = 'inline';
             }
-        } else {
-            // Si el servidor devuelve un error, muestra un mensaje al usuario.
-            let error = document.querySelector('.loginIncorrecto');
+        }else{
+            let error = document.querySelector('.registroIncorrecto');
             error.innerHTML = 'ERROR AL CONECTAR CON EL SERVIDOR. Inténtelo de nuevo más tarde.';
-            error.style.display = 'inline'; 
+            error.style.display = 'inline';
         }
-    } catch (error) { // Maneja errores relacionados con la conexión.
-        console.error('Error:', error); // Muestra el error en la consola.
-        let resultado = document.getElementById('resultado'); // Obtiene el contenedor para mensajes.
-        resultado.innerText = 'Error de conexión.'; // Muestra un mensaje de error al usuario.
-        resultado.style.color = 'red'; 
+    }catch(error){
+        console.log(error);
+        document.getElementById('resultado').innerText = 'Error de conexión.';  // Muestra un mensaje de error al usuario.
+        resultado.style.color = 'red';
     }
 });
 
-//----------------REVISAR MEDIANTE FETCH USUARIO Y CONTRASEÑA (USER)
-// Evento para manejar el formulario de login del usuario (similar al de admin).
-document.getElementById('formularioLoginUser').addEventListener('submit', async function (event) { 
-    event.preventDefault(); // Evita que el formulario recargue la página al enviarse.
+document.getElementById('registroUser').addEventListener('submit', async function (event){
 
-    // Obtiene los valores ingresados en los campos de usuario y contraseña.
-    let nombreUsuario = document.getElementById('nombreUsuario').value; 
-    let passlogin = document.getElementById('passw').value; 
+    event.preventDefault(); // Evita que la página se recargue cuando se envía el formulario.
 
-    // Crea un objeto FormData para enviar los datos al servidor.
-    let formData = new FormData(); 
-    formData.append('usuario', nombreUsuario); // Agrega el usuario.
-    formData.append('passw', passlogin); // Agrega la contraseña.
+    // Obtiene los valores que el usuario ingresó en los campos del formulario.
 
-    try {
-        // Envía los datos al servidor mediante una solicitud POST con fetch.
-        const response = await fetch('../index.php?c=Usuarios&m=inicio', { 
-            method: 'POST', 
-            body: formData, 
+    let nombreUsuario = document.getElementById('nombre').value;
+    let passlogin = document.getElementById('passw').value;
+    let passlogin2 = document.getElementById('rpassw').value;
+
+    let formData = new FormData();
+    formData.append('usuario', nombreUsuario);
+    formData.append('passw', passlogin);
+    formData.append('rpassw', passlogin2);
+
+    //Enviar los datos al servidor mediantes fetch.
+
+    try{
+        const response = await fetch('index.php?c=Usuarios&m=registrar',{ //CAMBIAR SERVIDOR
+            method: 'POST', //Usamos post para enviar datos
+            body: formData, //Enviamos datos en el body de la solicitud
         });
 
-        if (response.ok) { // Verifica si la respuesta del servidor fue exitosa.
-            const result = await response.text(); // Obtiene la respuesta del servidor como texto.
-
-            if (result != false) { // Si el servidor indica autenticación exitosa.
-                window.location.href = "vistaInicio.html"; // Redirige a la página de inicio.
-            } else {
-                // Si las credenciales son incorrectas, muestra un mensaje de error.
-                document.querySelector('.loginIncorrecto').style.display = 'inline'; 
+        if(response.ok){
+            const result = await response.text();
+            if(result != 'incorrecto'){
+                // window.location.href = "index.php?c=Usuarios&m=predeterminada";
+                document.querySelector('.registroIncorrecto').style.display = 'inline';
+            }else{
+                document.querySelector('.registroIncorrecto').style.display = 'inline';
             }
-        } else {
-            // Si el servidor devuelve un error, muestra un mensaje al usuario.
-            let error = document.querySelector('.loginIncorrecto');
+        }else{
+            let error = document.querySelector('.registroIncorrecto');
             error.innerHTML = 'ERROR AL CONECTAR CON EL SERVIDOR. Inténtelo de nuevo más tarde.';
-            error.style.display = 'inline'; 
+            error.style.display = 'inline';
         }
-    } catch (error) { // Maneja errores relacionados con la conexión.
-        console.error('Error:', error); // Muestra el error en la consola.
-        let resultado = document.getElementById('resultado'); // Obtiene el contenedor para mensajes.
-        resultado.innerText = 'Error de conexión.'; // Muestra un mensaje de error al usuario.
-        resultado.style.color = 'red'; 
+    }catch(error){
+        console.log(error);
+        document.getElementById('resultado').innerText = 'Error de conexión.';  // Muestra un mensaje de error al usuario.
+        resultado.style.color = 'red';
     }
 });

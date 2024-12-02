@@ -61,7 +61,7 @@ document.querySelector('#iniciarSesionAdmin').addEventListener('submit', async f
 
     // Intenta enviar los datos al servidor mediante una solicitud fetch. 
     try {
-        const response = await fetch('../index.php?c=Usuarios&m=inicio', {  // Cambiar "servidorlogin.php".
+        const response = await fetch('../index.php?c=Usuarios&m=inicioAdm', {  // Cambiar "servidorlogin.php".
             method: 'POST',  // Usamos el método POST para enviar los datos.
             body: formData,  // Enviamos los datos en el cuerpo de la solicitud.
         });
@@ -72,14 +72,14 @@ document.querySelector('#iniciarSesionAdmin').addEventListener('submit', async f
 
             // Si la respuesta es "Usuario autenticado correctamente", muestra el mensaje y redirige.
             if (result!=false) {
-                window.location.href = "vistaInicio.html"; // Cambia la página si la autenticación es exitosa.
+                window.location.href = "index.php?c=Usuarios&m=mostrarPanel"; // Cambia la página si la autenticación es exitosa.
             } else {
                 document.querySelector('.loginIncorrecto').style.display = 'inline'; 
             }
         } else {
             // Si la respuesta del servidor no fue exitosa dará un error.
             let error = document.querySelector('.loginIncorrecto');
-            error.innerHTML = 'ERROR AL CONECTAR CON EL SERVIDOR. Innténtelo de nuevo más tarde.'
+            error.innerHTML = 'ERROR AL CONECTAR CON EL SERVIDOR. Inténtelo de nuevo más tarde.'
             error.style.display = 'inline'; ;
         }
     } catch (error) {  // Si ocurre un error al hacer la solicitud al servidor.
