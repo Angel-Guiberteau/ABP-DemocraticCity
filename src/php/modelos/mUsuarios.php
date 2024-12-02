@@ -20,6 +20,7 @@ class MUsuarios{
     }
     public function registrarAdm($datos){
         try{
+
             $sql="INSERT INTO UsuariosAdmin(usuario, contrasena, superAdmin) VALUES('".$datos['usuario']."', '".$datos["password"]."', 0);";
 
             $this->conexion->query($sql);
@@ -35,7 +36,7 @@ class MUsuarios{
         try{
             $sql='select * from Usuarios where usuario = "'.$datos["usuario"].'";';
             $resultado = $this->conexion->query($sql);
-
+            $datos["passw"] = mysqli_real_escape_string($this->conexion, $datos["passw"]);
             if($this->comprobar($this->conexion->affected_rows)){
                 $fila=$resultado->fetch_assoc();
                 if($datos["usuario"] == $fila['usuario'] && password_verify($datos["passw"], $fila["passw"]))
@@ -52,7 +53,7 @@ class MUsuarios{
         try{
             $sql='select * from Usuarios where usuario = "'.$datos["usuario"].'";';
             $resultado = $this->conexion->query($sql);
-
+            $datos["passw"] = mysqli_real_escape_string($this->conexion, $datos["passw"]);
             if($this->comprobar($this->conexion->affected_rows)){
                 $fila=$resultado->fetch_assoc();
                 if($datos["usuario"] == $fila['usuario'] && password_verify($datos["passw"], $fila["passw"]))

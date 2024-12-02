@@ -2,6 +2,8 @@
     require_once 'php/config/config.php';
     require_once 'php/modelos/db.php';
 
+    session_start();
+
     //   Asignamos automaticamente el metodo y controlador por defecto si no le pasas ninguno.
     if(!isset($_GET['c']))$_GET['c'] = controlador_Usuario;
     if(!isset($_GET['m'])){$_GET['m'] = '';} // sin metodo por defecto.
@@ -19,5 +21,7 @@
         if(method_exists($objControlador, $_GET['m']))$datos = $objControlador->{$_GET['m']}($_POST);
     else
         if(method_exists($objControlador, $_GET['m']))$datos = $objControlador->{$_GET['m']}();
+
+    if(isset($datos['usuario']))$_SESSION = $datos;
 
     require_once 'php/vistas/'.$objControlador->vista.'.php';
