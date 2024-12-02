@@ -1,14 +1,14 @@
 //----------------MOSTRAR CONTRASEÑAS
 function mostrarPassw() {
-    let contrasenia1 = document.getElementById('passw');
-    let contrasenia2 = document.getElementById('rpassw');
+    let passlogin1 = document.querySelector('#passw');
+    let passlogin2 = document.querySelector('#rpassw');
 
     let checkbox = document.querySelector('#verPassw');
-    let tipo = checkbox.checked ? "text" : "password";
 
-    if (contrasenia1) contrasenia1.type = tipo;
-    if (contrasenia2) contrasenia2.type = tipo;
+    passlogin1.type = checkbox.checked ? "text" : "password";
+    passlogin2.type = checkbox.checked ? "text" : "password";
 }
+
 document.addEventListener("DOMContentLoaded", function () {
     
     //----------------VERIFICAR CAMPOS VACÍOS
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    //----------------VERIFICAR SEGUNDA CONTRASEÑA IGUAL
+    //----------------VERIFICAR SEGUNDA CONTRASEÑA IGUAL AL ANTERIOR
     function repetirPassw(inputPassw, inputrPassw, mensajeSelector){
         let input = document.querySelector(inputPassw);
         let input2 = document.querySelector(inputrPassw);
