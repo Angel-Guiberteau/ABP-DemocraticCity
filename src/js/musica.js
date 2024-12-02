@@ -14,4 +14,5 @@ document.addEventListener('DOMContentLoaded', function () {
         boton.style.display = 'inline'; // Muestra el botón de silencio.
         botonMute.style.display = 'none'; // Muestra el botón de silencio.
     });
+    
 });
