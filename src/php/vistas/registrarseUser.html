@@ -14,7 +14,7 @@
         </div>
         <div>
             <h1>Registrarse</h1>
-            <form action="index.php?c=Usuarios&m=registrar" method="POST">
+            <form action="index.php?c=Usuarios&m=registrar" method="POST"  id="formularioRegistro">
                 <p class="nombreUsuarioValidacion">Introduce un nombre de usuario correcto</p>
                 <input type="text" id="nombre" placeholder="Nombre de usuario" name="usuario">
                 <p class="passwUsuarioValidacion">Introduce una contraseña correcta</p>
@@ -25,7 +25,7 @@
                     <input id="verPassw" type="checkbox" onclick="mostrarPassw()">
                     Mostrar contraseña
                 </label>
-                <input type="submit" class="boton" value="Registrarse">
+                <input type="submit" class="boton" value="Registrarse" id="registroUser" disabled>
             </form>
             
             <div class="alcaldes">
