@@ -38,7 +38,7 @@ document.getElementById('formularioLoginAdmin').addEventListener('submit', async
 
     try {
         // Envía los datos al servidor mediante una solicitud POST con fetch.
-        const response = await fetch('../index.php?c=Usuarios&m=inicio', { 
+        const response = await fetch('../index.php?c=Usuarios&m=registrarAdm', { 
             method: 'POST', 
             body: formData, 
         });

@@ -3,12 +3,15 @@ class CUsuarios{
     private $objMUsuario;
     public $vista;
     function __construct(){
-        require_once 'modelos/mRegistro.php';
+        require_once 'php/modelos/mUsuarios.php';
         $this->objMRegistro = new MUsuarios();
     }
 
     public function predeterminada(){
-        $this->vista = 'inicioSesion';
+        $this->vista = 'loginUser';
+    }
+    public function mostrarRegistrar(){
+        $this->vista = 'registrarseUser';
     }
 
     public function registrar($datos){

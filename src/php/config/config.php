@@ -1,5 +1,5 @@
 <?php
-// VISTAR
+// VISTAS
 
 define("VISTA_INICIAL", "inicioSesion");
 
@@ -12,7 +12,7 @@ define("VISTA_REGISTRO_ADMIN","registroAdmin");
 
 // CONTROLADORES y MODELOS
 
-define("CONTROLADOR_USUARIO","Usuario");
+define("CONTROLADOR_USUARIO","Usuarios");
 
 define("METODO_PREDETERMINADO","predeterminada");
 

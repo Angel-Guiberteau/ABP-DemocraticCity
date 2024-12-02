@@ -6,7 +6,7 @@ class Db{
     private $bbdd;
     public $conexion;
     function __construct(){
-        require_once '../config/configDB.php';
+        require_once 'php/config/configDB.php';
         $this->servidor = constant('SERVIDOR');
         $this->usuario = constant('USUARIO');
         $this->password = constant('PASSWORD');
