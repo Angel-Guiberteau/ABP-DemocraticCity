@@ -25,7 +25,7 @@ CREATE TABLE Usuarios (
     idUsuario TINYINT UNSIGNED AUTO_INCREMENT,
     nombreUsuario VARCHAR(50) NOT NULL,
     passUsuario VARCHAR(100) NOT NULL,
-    idMultimedia TINYINT UNSIGNED NOT NULL,
+    idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_usuario PRIMARY KEY (idUsuario),
     CONSTRAINT fk_usuario FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
 );
