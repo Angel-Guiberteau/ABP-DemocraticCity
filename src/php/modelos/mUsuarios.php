@@ -8,7 +8,7 @@ class MUsuarios{
     // registro de usuarios
     public function registrar($datos){
         try{
-            $sql="INSERT INTO Usuarios(usuario, contrasena) VALUES('".$datos['usuario']."', '".$datos["password"]."');";
+            $sql="INSERT INTO Usuarios(nombreUsuario, passw) VALUES('".$datos['usuario']."', '".$datos["password"]."');";
 
             $this->conexion -> query($sql);
 
@@ -21,7 +21,7 @@ class MUsuarios{
     public function registrarAdm($datos){
         try{
 
-            $sql="INSERT INTO UsuariosAdmin(usuario, contrasena, superAdmin) VALUES('".$datos['usuario']."', '".$datos["password"]."', 0);";
+            $sql="INSERT INTO Administradores(nombreUsuario, passwAdmin, superAdmin) VALUES('".$datos['usuario']."', '".$datos["password"]."', 0);";
 
             $this->conexion->query($sql);
 
@@ -34,7 +34,7 @@ class MUsuarios{
     //inicio de sesion
     public function inicio($datos){
         try{
-            $sql='select * from Usuarios where usuario = "'.$datos["usuario"].'";';
+            $sql='SELECT * from Usuarios where nombreUsuario = "'.$datos["usuario"].'";';
             $resultado = $this->conexion->query($sql);
             $datos["passw"] = mysqli_real_escape_string($this->conexion, $datos["passw"]);
             if($this->comprobar($this->conexion->affected_rows)){
@@ -51,7 +51,7 @@ class MUsuarios{
     }
     public function inicioAdm($datos){
         try{
-            $sql='select * from Usuarios where usuario = "'.$datos["usuario"].'";';
+            $sql='SELECT * from Administradores where nombreUsuario = "'.$datos["usuario"].'";';
             $resultado = $this->conexion->query($sql);
             $datos["passw"] = mysqli_real_escape_string($this->conexion, $datos["passw"]);
             if($this->comprobar($this->conexion->affected_rows)){

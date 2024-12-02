@@ -5,19 +5,28 @@ class CUsuarios{
     function __construct(){
         require_once 'modelos/mRegistro.php';
         $this->objMRegistro = new MUsuarios();
-        $this->vista = VISTA_INICIAL;
+    }
+
+    public function predeterminada(){
+        $this->vista = 'inicioSesion';
     }
 
     public function registrar($datos){
         if($this->comprobarDatosReg($datos)){
             $datos["passw"] = $this->cifrarPassword($datos["passw"]);
-            return $this->objMUsuario->registrar($datos);
+            if ($this->objMUsuario->registrar($datos)){
+                $this->vista = 'inicioSesion';
+                return true;
+            }else{
+                $this->vista = 'registro';
+                return false;
+            }
         }else{
-            $this->vista = VISTA_REGISTRO;
+            $this->vista = 'registro';
         }
     }
     public function registrarAdm($datos){
-        $this->vista = VISTA_REGISTRO_ADMIN;
+        $this->vista = 'registroAdmin';
         if($this->comprobarDatosReg($datos)){
             $datos["passw"] = $this->cifrarPassword($datos["passw"]);
             return $this->objMUsuario->registrarAdm($datos);
@@ -27,6 +36,7 @@ class CUsuarios{
     }
 
     public function inicio($datos){
+        $this->vista = '';
         if($this->comprobarDatosIni($datos)){
             $datos["passw"] = $this->cifrarPassword($datos["rpassw"]);
             return $this->objMUsuario->inicio($datos);
@@ -35,6 +45,7 @@ class CUsuarios{
         }
     }
     public function inicioAdm($datos){
+        $this->vista = '';
         if($this->comprobarDatosIni($datos)){
             $datos["passw"] = $this->cifrarPassword($datos["rpassw"]);
             return $this->objMUsuario->inicioAdm($datos);

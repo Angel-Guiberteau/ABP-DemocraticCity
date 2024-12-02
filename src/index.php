@@ -5,8 +5,8 @@
     session_start();
 
     //   Asignamos automaticamente el metodo y controlador por defecto si no le pasas ninguno.
-    if(!isset($_GET['c']))$_GET['c'] = controlador_Usuario;
-    if(!isset($_GET['m'])){$_GET['m'] = '';} // sin metodo por defecto.
+    if(!isset($_GET['c']))$_GET['c'] = CONTROLADOR_USUARIO;
+    if(!isset($_GET['m'])){$_GET['m'] = METODO_PREDETERMINADO;} // sin metodo por defecto.
 
     //Concatenamos para la ruta del controlador e incluirlo despues
     $rutaControlador = 'php/controladores/c' . $_GET['m'] . '.php';
