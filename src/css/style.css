@@ -120,7 +120,7 @@ form p a:hover{
     transition: 1s;
     color: #fe773e;
 }
-form .nombreUsuarioValidacion, form .passwUsuarioValidacion, form .rpasswUsuarioValidacion{
+form .nombreUsuarioValidacion, form .passwUsuarioValidacion, form .rpasswUsuarioValidacion,form .loginIncorrecto{
     color: red;
     display: none;
 }

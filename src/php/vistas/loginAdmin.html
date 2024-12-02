@@ -14,14 +14,15 @@
         </nav>
         <div>
             <h1>Iniciar sesión</h1>
-            <form action="index.php?c=Usuarios&m=inicioAdm" method="POST">
-                <input type="text" placeholder="Nombre de usuario" name="usuario">
+            <form action="index.php?c=Usuarios&m=inicioAdm" method="POST" id="formularioLoginAdmin">
+                <p class="loginIncorrecto">ERROR AL INICIAR SESION. Introduce un nombre de usuario y contraseña correctos.</p>
+                <p class="nombreUsuarioValidación">Introduce un nombre de usuario correcto</p>
+                <input type="text" placeholder="Nombre de usuario" name="usuario" id="nombreUsuario">
                 <input type="password" id="passw" placeholder="Contraseña" name="passw">
                 <label id="mostrarpassw">
-                    <input type="checkbox" id="verPassw" onclick="mostrarPassw()">
+                    <input type="checkbox" id="verPassw" onclick="mostrarPassw('#nombreUsuario', '#')">
                     Mostrar contraseña
                 </label>
-                
                 <input type="submit" class="boton" value="Iniciar sesión">
                 <p>¿No tienes cuenta? <a href="registrarse.html">REGÍSTRATE</a> </p>
             </form>

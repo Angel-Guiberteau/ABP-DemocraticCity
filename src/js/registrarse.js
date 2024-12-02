@@ -11,7 +11,6 @@ function mostrarPassw() {
 }
 document.addEventListener("DOMContentLoaded", function () {
     
-
     //----------------VERIFICAR CAMPOS VACÍOS
     function verificarCampo(inputSelector, mensajeSelector) {
         let input = document.querySelector(inputSelector);
@@ -41,9 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }   
     }
+
     // Validaciones de campos
     verificarCampo('#nombre', '.nombreUsuarioValidacion');
     verificarCampo('#passw', '.passwUsuarioValidacion');
     verificarCampo('#rpassw', '.rpasswUsuarioValidacion');
     repetirPassw('#passw', '#rpassw', '.rpasswUsuarioValidacion');
+
 });

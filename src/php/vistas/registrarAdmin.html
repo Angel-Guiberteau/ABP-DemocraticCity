@@ -15,15 +15,17 @@
         <div>
             <h1>Registrar Administrador</h1>
             <form action="index.php?c=Usuarios&m=registrarAdm" method="POST">
-                <p class="nombreUsuarioValidación">Introduce un nombre de usuario correcto</p>
-                <input type="text" placeholder="Nombre de usuario" name="usuario">
+                <p class="nombreUsuarioValidacion">Introduce un nombre de usuario correcto</p>
+                <input type="text" placeholder="Nombre de usuario" name="usuario" id="nombre" blur="validarFormulario">
+                <p class="passwUsuarioValidacion">Introduce una contraseña correcta</p>
                 <input type="password" placeholder="Contraseña" name="passw" id="passw">
+                <p class="rpasswUsuarioValidacion"></p>
                 <input type="password" placeholder="Repetir contraseña" name="rpassw" id="rpassw">
                 <label id="mostrarpassw">
                     <input id="verPassw" type="checkbox" onclick="mostrarPassw()">
                     Mostrar contraseña
                 </label>
-                <input type="submit" class="boton" value="Registrar">
+                <input type="submit" class="boton" value="Registrar" disabled>
             </form>
             <div class="alcaldes">
                 <div><img src="assets/img/alcalde1.png" alt=""></div>
