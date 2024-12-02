@@ -17,13 +17,37 @@ function verificarCampo(inputSelector, mensajeSelector) {
         });
     }
 }
+function verificarCamposParaBoton(inputNombre, inputPassw, boton){
+    let input1 = document.querySelector(inputNombre);
+    let input2 = document.querySelector(inputPassw);
+    let submit = document.querySelector(boton);
 
-//metodo validar campos vacios
+    input1.addEventListener('blur', function(){
+        if(input1.value.trim()!= '' && input2.value.trim() != ''){
+            submit.disabled = false;
+        }else{
+            submit.disabled = true;
+        }
+    });
+    input2.addEventListener('blur', function(){
+        if(input1.value.trim()!= '' && input2.value.trim() != ''){
+            submit.disabled = false;
+        }else{
+            submit.disabled = true;
+        }
+    });
+    
+}
+
+verificarCampo('#nombreUsuario', '.nombreUsuarioValidacion');
+verificarCampo('#passw', '.passwUsuarioValidacion');
+verificarCamposParaBoton('#nombreUsuario', '#passw', '#iniciarSesion');
+verificarCamposParaBoton('#nombreUsuario', '#passw', '#iniciarSesionAdmin');
 
 
 //----------------REVISAR MEDIANTE FETCH USUARIO Y CONTRASEÑA
 //ADMIN
-document.getElementById('formularioLoginAdmin').addEventListener('submit', async function (event) { 
+document.querySelector('#iniciarSesionAdmin').addEventListener('submit', async function (event) { 
     event.preventDefault(); // Evita que la página se recargue cuando se envía el formulario.
 
     // Obtiene los valores que el usuario ingresó en los campos del formulario.
@@ -66,7 +90,7 @@ document.getElementById('formularioLoginAdmin').addEventListener('submit', async
 });
 
 //USER
-document.getElementById('formularioLoginUser').addEventListener('submit', async function (event) { 
+document.querySelector('#iniciarSesion').addEventListener('submit', async function (event) { 
     event.preventDefault(); // Evita que la página se recargue cuando se envía el formulario.
 
     // Obtiene los valores que el usuario ingresó en los campos del formulario.
@@ -98,7 +122,7 @@ document.getElementById('formularioLoginUser').addEventListener('submit', async 
         } else {
             // Si la respuesta del servidor no fue exitosa dará un error.
             let error = document.querySelector('.loginIncorrecto');
-            error.innerHTML = 'ERROR AL CONECTAR CON EL SERVIDOR. Innténtelo de nuevo más tarde.'
+            error.innerHTML = 'ERROR AL CONECTAR CON EL SERVIDOR. Inténtelo de nuevo más tarde.'
             error.style.display = 'inline'; ;
         }
     } catch (error) {  // Si ocurre un error al hacer la solicitud al servidor.
