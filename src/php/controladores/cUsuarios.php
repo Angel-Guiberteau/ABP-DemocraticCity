@@ -42,7 +42,7 @@ class CUsuarios{
                 return false;
             }
         }else{
-            $this->vista = 'registro';
+            $this->vista = 'registrarseUser';
         }
     }
     public function registrarAdm($datos){
