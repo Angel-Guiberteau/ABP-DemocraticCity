@@ -1,17 +1,13 @@
     //----------------MOSTRAR CONTRASEÑAS
-function mostrarPassw() {
-    let passlogin1 = document.querySelector('#passw');
-    let passlogin2 = document.querySelector('#rpassw');
-
-    let checkbox = document.querySelector('#verPassw');
-
-    passlogin1.type = checkbox.checked ? "text" : "password";
-    passlogin2.type = checkbox.checked ? "text" : "password";
-}
-
-document.addEventListener("DOMContentLoaded", function () {
+    function mostrarPassw() {
+        let passlogin1 = document.querySelector('#passw');
+        let passlogin2 = document.querySelector('#rpassw');
     
-    //---------------- VERIFICAR CAMPOS VACÍOS
+        let checkbox = document.querySelector('#verPassw');
+    
+        passlogin1.type = checkbox.checked ? "text" : "password";
+        passlogin2.type = checkbox.checked ? "text" : "password";
+    }
     function verificarCampo(inputSelector, mensajeSelector) {
         let input = document.querySelector(inputSelector);
         let mensaje = document.querySelector(mensajeSelector);
@@ -22,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     }
-
-    //---------------- VERIFICAR SEGUNDA CONTRASEÑA IGUAL AL ANTERIOR
     function repetirPassw(inputPassw, inputrPassw, mensajeSelector){
         let input = document.querySelector(inputPassw);
         let input2 = document.querySelector(inputrPassw);
@@ -40,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }   
     }
-
     function verificarCampoBoton(inputNombre,inputPass,inputRPass,boton){
         let nombre = document.querySelector(inputNombre);
         let pass = document.querySelector(inputPass);
@@ -71,19 +64,20 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-
-    // Validaciones de campos
+     // Validaciones de campos
     verificarCampo('#nombre', '.nombreUsuarioValidacion');
     verificarCampo('#passw', '.passwUsuarioValidacion');
     verificarCampo('#rpassw', '.rpasswUsuarioValidacion');
     repetirPassw('#passw', '#rpassw', '.rpasswUsuarioValidacion');
     verificarCampoBoton('#nombre','#passw','#rpassw','#registroAdmin');
     verificarCampoBoton('#nombre','#passw','#rpassw','#registroUser');
-});
 
 
-
-document.getElementById('formularioRegistro').addEventListener('submit', async function (event){
+    
+/**
+ * Este método permite registrar mediante asincronía. 
+ */
+document.getElementById('registroAdmin').addEventListener('submit', async function (event){
 
     event.preventDefault(); // Evita que la página se recargue cuando se envía el formulario.
 
@@ -101,22 +95,22 @@ document.getElementById('formularioRegistro').addEventListener('submit', async f
     //Enviar los datos al servidor mediantes fetch.
 
     try{
-        const response = await fetch('index.php?c=Usuarios&m=registrar',{ //CAMBIAR SERVIDOR
+        const response = await fetch('../index.php?c=Usuarios&m=registrarAdm',{ //CAMBIAR SERVIDOR
             method: 'POST', //Usamos post para enviar datos
             body: formData, //Enviamos datos en el body de la solicitud
         });
 
         if(response.ok){
             const result = await response.text();
-            // alert(result);
-            if(result == 'correcto'){
-                window.location.href = "index.php?c=Usuarios&m=predeterminada";
-                // document.querySelector('.registroIncorrecto').style.display = 'inline';
+            if(result != false){
+                window.location.href = "vistaInicio.html";
             }else{
                 document.querySelector('.registroIncorrecto').style.display = 'inline';
             }
         }else{
-            document.querySelector('.registroIncorrecto').style.display = 'inline';
+            let error = document.querySelector('.registroIncorrecto');
+            error.innerHTML = 'ERROR AL CONECTAR CON EL SERVIDOR. Inténtelo de nuevo más tarde.';
+            error.style.display = 'inline';
         }
     }catch(error){
         console.log(error);
@@ -124,4 +118,3 @@ document.getElementById('formularioRegistro').addEventListener('submit', async f
         resultado.style.color = 'red';
     }
 });
-

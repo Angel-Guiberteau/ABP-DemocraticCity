@@ -1,4 +1,7 @@
 //----------------MOSTRAR CONTRASEÑAS
+/**
+ * Este método permite mostrar las contraseñas.
+ */
 function mostrarPassw(){
     let passlogin = document.querySelector('#passw');
         
@@ -43,7 +46,6 @@ verificarCampo('#nombreUsuario', '.nombreUsuarioValidacion');
 verificarCampo('#passw', '.passwUsuarioValidacion');
 verificarCamposParaBoton('#nombreUsuario', '#passw', '#iniciarSesion');
 verificarCamposParaBoton('#nombreUsuario', '#passw', '#iniciarSesionAdmin');
-
 
 //----------------REVISAR MEDIANTE FETCH USUARIO Y CONTRASEÑA
 //ADMIN
