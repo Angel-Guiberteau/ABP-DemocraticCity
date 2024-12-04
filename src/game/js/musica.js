@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
         botonMute.style.display = 'none'; // Muestra el botón de silencio.
     });
 
-    const sonidoSecreto = document.getElementById('ss');
-    sonidoSecreto.addEventListener('click', function(){
-        const audio = document.getElementById('sonidosecreto');
-        audio.play();
-    });
+    // const sonidoSecreto = document.getElementById('ss');
+    // sonidoSecreto.addEventListener('click', function(){
+    //     const audio = document.getElementById('sonidosecreto');
+    //     audio.play();
+    // });
     
 });
