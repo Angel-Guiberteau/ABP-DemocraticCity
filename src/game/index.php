@@ -26,4 +26,6 @@
         }
 
     if(isset($datos['usuario']))$_SESSION = $datos;
-    require_once RUTA_VISTAS.$objControlador->vista.'.html';
+    
+    if($objControlador->vista != '')
+        require_once RUTA_VISTAS.$objControlador->vista.'.html';

@@ -108,15 +108,21 @@ document.getElementById('formularioRegistro').addEventListener('submit', async f
 
         if(response.ok){
             const result = await response.text();
-            alert(result);
+            // alert(result);
             if(result == 'correcto'){
                 window.location.href = "index.php?c=Usuarios&m=predeterminada";
                 // document.querySelector('.registroIncorrecto').style.display = 'inline';
             }else{
-                document.querySelector('.registroIncorrecto').style.display = 'inline';
+                const error = document.querySelector('.registrarseIncorrecto');
+                if(result == '1062')
+                    error.innerHTML = 'El usuario ya existe';
+                else
+                    error.innerHTML = 'Las contraseñas no son iguales';
+
+                document.querySelector('.registrarseIncorrecto').style.display = 'inline';
             }
         }else{
-            document.querySelector('.registroIncorrecto').style.display = 'inline';
+            document.querySelector('.registrarseIncorrecto').style.display = 'inline';
         }
     }catch(error){
         console.log(error);

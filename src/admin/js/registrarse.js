@@ -1,4 +1,4 @@
-//----------------MOSTRAR CONTRASEÑAS
+    //----------------MOSTRAR CONTRASEÑAS
 function mostrarPassw() {
     let passlogin1 = document.querySelector('#passw');
     let passlogin2 = document.querySelector('#rpassw');
@@ -108,7 +108,7 @@ document.getElementById('formularioRegistro').addEventListener('submit', async f
 
         if(response.ok){
             const result = await response.text();
-            alert(result);
+            // alert(result);
             if(result == 'correcto'){
                 window.location.href = "index.php?c=Usuarios&m=predeterminada";
                 // document.querySelector('.registroIncorrecto').style.display = 'inline';
