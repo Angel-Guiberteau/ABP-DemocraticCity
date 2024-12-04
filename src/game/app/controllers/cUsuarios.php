@@ -34,15 +34,17 @@ class CUsuarios{
             $datos["passw"] = $this->cifrarPassword($datos["passw"]);
             if ($this->objMUsuario->registrar($datos)){
                 $this->vista = 'loginUser';
-                // json_encode(['status' => 'correcto']);
-                return 'correcto';
+                echo 'correcto';
+                return true;
             }else{
                 $this->vista = 'registrarseUser';
-                // json_encode(['status' => 'incorrecto']);
+                echo 'incorrecto';
                 return false;
             }
         }else{
             $this->vista = 'registrarseUser';
+            echo 'incorrecto';
+            return false;
         }
     }
     public function registrarAdm($datos){

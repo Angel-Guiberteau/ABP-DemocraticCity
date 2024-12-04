@@ -99,7 +99,7 @@ class MUsuarios{
             $stmt->execute();
             if($stmt->rowCount() > 0){
                 $fila = $stmt->fetch(PDO::FETCH_ASSOC);
-                if($datos["usuario"] == $fila['nombreUsuario'] && password_verify($datos["passw"], $fila["passUsuario"]))
+                if($datos["usuario"] == $fila['nombreUsuario'] && password_verify($datos["passw"], $fila["passAdmin"]))
                     return $fila;
                 else
                     return false;
