@@ -3,7 +3,7 @@ class CUsuarios{
     private $objMUsuario;
     public $vista;
     function __construct(){
-        require_once 'php/modelos/mUsuarios.php';
+        require_once RUTA_MODELOS.'Usuarios.php';
         $this->objMUsuario = new MUsuarios();
     }
 

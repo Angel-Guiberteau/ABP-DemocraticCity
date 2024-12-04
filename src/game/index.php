@@ -1,5 +1,5 @@
 <?php
-    require_once 'php/config/config.php';
+    require_once 'app/config/config.php';
 
     session_start();
 
@@ -9,7 +9,7 @@
     if(!isset($_GET['m'])){$_GET['m'] = METODO_PREDETERMINADO;} // sin metodo por defecto.
 
     //Concatenamos para la ruta del controlador e incluirlo despues
-    $rutaControlador = 'php/controladores/c' . $_GET['c'] . '.php';
+    $rutaControlador = RUTA_CONTROLADORES . $_GET['c'] . '.php';
     require_once $rutaControlador;
 
     //Creamos el objeto del controlador.
@@ -26,4 +26,4 @@
         }
 
     if(isset($datos['usuario']))$_SESSION = $datos;
-    require_once 'php/vistas/'.$objControlador->vista.'.html';
+    require_once RUTA_VISTAS.$objControlador->vista.'.html';
