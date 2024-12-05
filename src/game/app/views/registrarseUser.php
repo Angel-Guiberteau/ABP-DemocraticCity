@@ -38,7 +38,8 @@
             </div>
         </div>
     </main>
-    <script src="js/registrarse.js"></script>
-    <script src="js/musica.js"></script>
+    <script type="module" src="js/views/registrarse.js"></script>
+    <script type="module" src="js/controllers/cRegistrarse.js"></script>
+    <script type="module" src="js/models/mRegistrarse.js"></script>
 </body>
 </html>

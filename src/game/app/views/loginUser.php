@@ -38,7 +38,9 @@
             </div>
         </div>
     </main>
-    <script src="js/iniciarSesion.js"></script>
-    <script src="js/musica.js"></script>
+    <script type="module" src="js/views/iniciarSesion.js"></script>
+    <script type="module" src="js/controllers/cIniciarSesion.js"></script>
+    <script type="module" src="js/models/mIniciarSesion.js"></script>
+    <!-- <script src="js/musica.js"></script> -->
 </body>
 </html>
