@@ -28,4 +28,4 @@
     if(isset($datos['usuario']))$_SESSION = $datos;
     
     if($objControlador->vista != '')
-        require_once RUTA_VISTAS.$objControlador->vista.'.html';
+        require_once RUTA_VISTAS.$objControlador->vista.'.php';

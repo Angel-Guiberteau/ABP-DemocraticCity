@@ -7,12 +7,6 @@ class CUsuarios{
         $this->objMUsuario = new MUsuarios();
     }
 
-    public function predeterminada(){
-        $this->vista = 'loginUser';
-    }
-    public function mostrarRegistrar(){
-        $this->vista = 'registrarseUser';
-    }
     public function mostrarAdminRegistro(){
         $this->vista = 'registrarAdmin';
     }
@@ -28,64 +22,48 @@ class CUsuarios{
     public function mostrarPanelSuper(){
         $this->vista = 'panelAdminSuper';
     }
-
-    public function registrar($datos){
-        if($this->comprobarDatosReg($datos)){
-            $datos["passw"] = $this->cifrarPassword($datos["passw"]);
-            if ($this->objMUsuario->registrar($datos)){
-                $this->vista = 'loginUser';
-                // json_encode(['status' => 'correcto']);
-                return 'correcto';
-            }else{
-                $this->vista = 'registrarseUser';
-                // json_encode(['status' => 'incorrecto']);
-                return false;
-            }
-        }else{
-            $this->vista = 'registrarseUser';
-        }
-    }
     public function registrarAdm($datos){
         
         if($this->comprobarDatosReg($datos)){
             $datos["passw"] = $this->cifrarPassword($datos["passw"]);
-            $this->vista = 'panelAdminSuper';
-            return $this->objMUsuario->registrarAdm($datos);
-        }else{
-            $this->vista = 'registroAdmin';
-            return false;
-        }
-    }
-
-    public function inicio($datos){
-        if($this->comprobarDatosIni($datos)){
-            if($resultado = $this->objMUsuario->inicio($datos)){
-                $this->vista = 'inicio';
-                return $this->objMUsuario->inicio($datos);
+            $this->vista = '';
+            if($this->objMUsuario->registrarAdm($datos)){
+                $this->vista = '';
+                echo 'correcto';
+                return true;
             }else{
-                $this->vista = 'loginUser';
+                $this->vista = '';
+                echo $this->objMUsuario->codError;
                 return false;
             }
                 
-            // $datos["passw"] = $this->cifrarPassword($datos["rpassw"]);
+        }else{
+            $this->vista = '';
+            echo 'Los datos introducidos no son correctos';
+            return false;
         }
     }
-
     public function inicioAdm($datos){
         if($this->comprobarDatosIni($datos)){
             // $datos["passw"] = $this->cifrarPassword($datos["passw"]);
             if($resultado = $this->objMUsuario->inicioAdm($datos)){
-                if($resultado['superAdmin'] == 1){ $this->vista = 'panelAdminSuper'; }
-                else{ $this->vista = 'panelAdminGeneral'; }
-                    
-                return $datos;
-            }else{
-                $this->vista = 'loginAdmin';
-                return false;
-            }
+                if($resultado['superAdmin'] == 1){
+                    $this->vista = ''; 
+                    echo 'SUPER';
+                }
+                else{ 
+                    echo 'correcto';
+                }
                 
+                return $resultado;
+            }else{
+                $this->vista = '';
+                echo 'Contraseña incorrecta';
+                return false;
+            }     
         }else{
-            $this->vista = 'loginAdmin';
+            $this->vista = '';
+            echo 'Error inesperado';
             return false;
         }
     }
