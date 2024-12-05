@@ -16,7 +16,15 @@
         </div>
         <div>
             <h1>Registrar Administrador</h1>
-            <form action="index.php?c=Usuarios&m=registrarAdm" method="POST" id="formularioRegistroAdmin">
+            <form id="formularioRegistroAdmin">
+                <?php
+                    if(isset($_GET['registro']) == 'correcto'){
+                        echo '<div class="registroExistoso">';
+                        echo 'El registro se ha completado correctamente';
+                        echo '</div>';
+                    }
+                ?>
+                <p class="registrarseIncorrecto"></p>
                 <p class="nombreUsuarioValidacion">Introduce un nombre de usuario correcto</p>
                 <input type="text" placeholder="Nombre de usuario" name="usuario" id="nombre" blur="validarFormulario">
                 <p class="passwUsuarioValidacion">Introduce una contraseña correcta</p>
@@ -37,7 +45,9 @@
             
         </div>
     </main>
-    <script src="js/registrarse.js"></script>
-    <script src="js/musica.js"></script>
+    <script type="module" src="js/views/registrarse.js"></script>
+    <script type="module" src="js/controllers/cRegistrarse.js"></script>
+    <script type="module" src="js/models/mRegistrarse.js"></script>
+    <!-- <script src="js/musica.js"></script> -->
 </body>
 </html>

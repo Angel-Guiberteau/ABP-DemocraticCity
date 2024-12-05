@@ -126,7 +126,7 @@ form p a:hover{
     transition: 1s;
     color: #fe773e;
 }
-form .nombreUsuarioValidacion, form .passwUsuarioValidacion, form .rpasswUsuarioValidacion,form .loginIncorrecto{
+form .registrarseIncorrecto, form .nombreUsuarioValidacion, form .passwUsuarioValidacion, form .rpasswUsuarioValidacion,form .loginIncorrecto{
     color: red;
     display: none;
 }
@@ -178,6 +178,16 @@ a{
 
 /* ----- Páginas especificas ----- */
 /* Inicio de sesión */
+.registroExistoso{
+    background-color: green;
+    border: 1px solid rgb(0, 86, 0);
+    padding: 1rem 0;
+    text-align: center;
+    border-radius: 20px;
+    width: 50%;
+    margin: 0 auto;
+    color: white;
+}
 .icons{
     display: flex;
     flex-direction: row;
@@ -222,11 +232,12 @@ a{
 /* Panel de administración */
 .paneles a:visited {
     color: #276359;
-
 }
 .paneles{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 60%;
     margin: 0 auto;
     transition: 1s;
@@ -277,7 +288,7 @@ a{
     background: linear-gradient(90deg, rgba(65,152,137,1) 0%, rgba(142,187,167,1) 50%, rgba(165,226,199,1) 100%);
     display: flex;
     height: 150px;
-    width: 50%;
+    width: 56%;
     justify-content: space-around;
     align-items: center;
     text-align: center;

@@ -16,7 +16,7 @@
         </nav>
         <div>
             <h1>Iniciar sesión</h1>
-            <form action="index.php?c=Usuarios&m=inicioAdm" method="POST" id="formularioLoginAdmin">
+            <form id="formularioLoginAdmin">
                 <p class="loginIncorrecto">ERROR AL INICIAR SESION. Introduce un nombre de usuario y contraseña correctos.</p>
                 <p class="nombreUsuarioValidacion">Introduce un nombre de usuario correcto</p>
                 <input type="text" placeholder="Nombre de usuario" name="usuario" id="nombreUsuario">
@@ -34,7 +34,9 @@
             </div>
         </div>
     </main>
-    <script src="js/iniciarSesion.js"></script>
-    <script src="js/musica.js"></script>
+    <script type="module" src="js/views/iniciarSesion.js"></script>
+    <script type="module" src="js/controllers/cIniciarSesion.js"></script>
+    <script type="module" src="js/models/mIniciarSesion.js"></script>
+    <!-- <script src="js/musica.js"></script> -->
 </body>
 </html>
