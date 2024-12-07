@@ -25,6 +25,10 @@
             $datos = $objControlador->{$_GET['m']}($_POST);
         }
 
-    if(isset($datos['usuario']))$_SESSION = $datos;
+    if(isset($datos['idUsuario'])){
+        $_SESSION['id']= $datos['idUsuario'];
+        $_SESSION['id']= $datos['nombreUsuario'];
+        $_SESSION['id']= $datos['superAdmin'];
+    }
     if($objControlador->vista!='')
         require_once RUTA_VISTAS.$objControlador->vista.'.php';
