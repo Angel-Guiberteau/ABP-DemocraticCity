@@ -2,7 +2,7 @@ export class MIniciarSesion {
     constructor() {}
     async mIniciarSesion(formData){
         try {
-            const response = await fetch('index.php?c=Usuarios&m=inicioAdm', {
+            const response = await fetch('index.php?c=Usuarios&m=inicio', {
                 method: 'POST',  // Usamos el método POST para enviar los datos.
                 body: formData,  // Enviamos los datos en el cuerpo de la solicitud.
             });

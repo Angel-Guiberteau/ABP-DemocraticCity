@@ -5,12 +5,19 @@ const controlador = new CIniciarSesion();
 /**
  * Este método permite mostrar las contraseñas.
  */
-function mostrarPassw(){
-    let passlogin = document.querySelector('#passw');
-        
+function mostrarPassw() {
+    let passlogin = document.querySelector('#passw');    
     let checkbox = document.querySelector('#verPassw');
     passlogin.type = checkbox.checked ? "text" : "password";
 }
+
+// Vincular evento para mostrar contraseñas
+document.addEventListener('DOMContentLoaded', () => {
+    const checkbox = document.querySelector('#verPassw'); // Checkbox para mostrar contraseña
+    if (checkbox) {
+        checkbox.addEventListener('change', mostrarPassw); // Vincula el evento
+    }
+});
 
 //----------------VERIFICAR CAMPOS VACÍOS
 function verificarCampo(inputSelector, mensajeSelector) {
@@ -23,26 +30,18 @@ function verificarCampo(inputSelector, mensajeSelector) {
         });
     }
 }
-function verificarCamposParaBoton(inputNombre, inputPassw, boton){
+
+function verificarCamposParaBoton(inputNombre, inputPassw, boton) {
     let input1 = document.querySelector(inputNombre);
     let input2 = document.querySelector(inputPassw);
     let submit = document.querySelector(boton);
 
-    input1.addEventListener('blur', function(){
-        if(input1.value.trim()!= '' && input2.value.trim() != ''){
-            submit.disabled = false;
-        }else{
-            submit.disabled = true;
-        }
+    input1.addEventListener('blur', function () {
+        submit.disabled = !(input1.value.trim() && input2.value.trim());
     });
-    input2.addEventListener('blur', function(){
-        if(input1.value.trim()!= '' && input2.value.trim() != ''){
-            submit.disabled = false;
-        }else{
-            submit.disabled = true;
-        }
+    input2.addEventListener('blur', function () {
+        submit.disabled = !(input1.value.trim() && input2.value.trim());
     });
-    
 }
 
 verificarCampo('#nombreUsuario', '.nombreUsuarioValidacion');
@@ -51,17 +50,14 @@ verificarCamposParaBoton('#nombreUsuario', '#passw', '#iniciarSesion');
 verificarCamposParaBoton('#nombreUsuario', '#passw', '#iniciarSesionAdmin');
 
 //----------------REVISAR MEDIANTE FETCH USUARIO Y CONTRASEÑA
-//ADMIN
-document.getElementById('formularioLoginAdmin').addEventListener('submit', async function (event) { 
+// ADMIN
+document.getElementById('formularioLoginUser').addEventListener('submit', async function (event) {
     event.preventDefault(); // Evita que la página se recargue cuando se envía el formulario.
 
     // Obtiene los valores que el usuario ingresó en los campos del formulario.
-    let nombreUsuario = document.getElementById('nombreUsuario').value;  
-    let passlogin = document.getElementById('passw').value; 
+    let nombreUsuario = document.getElementById('nombreUsuario').value;
+    let passlogin = document.getElementById('passw').value;
 
     // Crea un objeto FormData que se utilizará para enviar los datos del formulario al servidor.
     controlador.cIniciarSesion(nombreUsuario, passlogin);
-
-    // Intenta enviar los datos al servidor mediante una solicitud fetch. 
-    
 });
