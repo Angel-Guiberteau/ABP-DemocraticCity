@@ -30,7 +30,7 @@
                     </a>
                     
                 </div>
-                <a href="" class="panel2">
+                <a href="index.php?c=Preguntas&m=cMostrarPreguntasyRespuestas" class="panel2">
                     <div>
                         <img src="img/pixel_art_building_design_using_the_provided_colors.png" alt="">
                     </div>

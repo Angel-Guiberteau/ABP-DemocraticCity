@@ -22,6 +22,7 @@ class CUsuarios{
     public function mostrarPanelSuper(){
         $this->vista = 'panelAdminSuper';
     }
+    
     public function registrarAdm($datos){
         
         if($this->comprobarDatosReg($datos)){

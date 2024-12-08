@@ -348,18 +348,17 @@ a{
     width: 45%;
 }
 
-/* Mod preguntas */
-
+/* crud pregutnas */
 .botones{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 2rem auto;
-    width: 50%;
+    width: 75%;
     padding: 1rem;
 }
-
-.botones button{
+.botones button, .botones a{
+    text-align: center;
     width: 20%;
     padding: 1.2rem 0.7rem;
     font-size: 1.5rem;
@@ -374,7 +373,23 @@ a{
     transition: 1.1s;
     background: linear-gradient(90deg, #56CCF2 0%, #2F80ED 100%);
 }
-
+.botones button:hover, .botones a:hover{
+    transition: 1.1s;
+    width: 30%;
+    color: black;
+    background: rgb(227,129,80);
+    background: linear-gradient(90deg, rgba(227,129,80,1) 0%, rgba(252,172,137,1) 50%, rgb(243, 162, 128) 100%);
+}
+.botones button:focus, .botones a:focus{
+    transition: 1.1s;
+    width: 30%;
+    color: black;
+    background: rgb(227,129,80);
+    background: linear-gradient(90deg, rgba(227,129,80,1) 0%, rgba(252,172,137,1) 50%, rgb(243, 162, 128) 100%);
+}
+details{
+    margin-bottom: 2rem;
+}
 summary {
     margin: 0 auto;
     padding: 2rem;
@@ -387,7 +402,6 @@ summary {
     font-size: 1.7rem;
     text-align: left;
     margin-top: 2rem;
-    margin-bottom: 2rem;
     list-style-type: disc;
 }
 
@@ -406,38 +420,30 @@ details:nth-of-type(odd) > summary {
     margin: 0 auto;
     background-color: #00000043;
     padding: 1rem;  
-    border-radius: 1em;
-    
 }
 
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    border-radius: 1em;
-}
 
 table{
     width: 100%;
     margin: 0 auto;
-    border-collapse: collapse;
-    border-radius: 1em;
     box-shadow: -3px 3px 7px black;
     border: none;
-    color: #0e221f;
+    color: white;
     font-weight: bold;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     text-align: left;
     margin-top: 2rem;
-    margin-bottom: 2rem;
 }
 
 th, td {
     padding: 1rem;
+    vertical-align: middle;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .center{
     text-align: center;
-    line-height: 1.5em;
 }
 
 table tr:nth-child(1) > td:nth-child(1){ 
@@ -446,10 +452,34 @@ table tr:nth-child(1) > td:nth-child(1){
 }
 
 table tr:nth-child(1) > td:nth-child(2){
-    line-height: 1.2em;
     vertical-align: middle;
 }
 
 .blanco{
     color: white;
+}
+td{
+    border: 1px solid #00000050;
+    border-radius: 100px;
+}
+.botonesPreguntas{
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    margin: 0 auto;
+    background-color: #00000043;
+    padding: 1rem; 
+}
+.botonesPreguntas .boton{
+    width: 20%;
+}
+
+/* AÑADIR PREGUNTAS */
+.formularioAniadirPreguntas div{
+    display: flex;
 }
