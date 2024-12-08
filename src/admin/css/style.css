@@ -483,3 +483,69 @@ td{
 .formularioAniadirPreguntas div{
     display: flex;
 }
+
+/* Estilos para los campos con error */
+input.error {
+    border: 2px solid red; /* Borde rojo para campos con error */
+}
+
+/* Estilos para los mensajes de validación */
+.validacionPregunta,
+.validacionRespuesta1,
+.validacionRespuesta2,
+.validacionRespuesta3,
+.validacionRespuesta4,
+.validacionEducacion1,
+.validacionSanidad1,
+.validacionSeguridad1,
+.validacionEconomia1,
+.validacionEducacion2,
+.validacionSanidad2,
+.validacionSeguridad2,
+.validacionEconomia2,
+.validacionEducacion3,
+.validacionSanidad3,
+.validacionSeguridad3,
+.validacionEconomia3,
+.validacionEducacion4,
+.validacionSanidad4,
+.validacionSeguridad4,
+.validacionEconomia4 {
+    color: red; /* Color rojo para el texto de los errores */
+    font-size: 2em; /* Tamaño de fuente más pequeño */
+    font-weight: bold; /* Texto en negrita */
+    margin-top: 5px; /* Espaciado superior */
+    display: none; /* Ocultar los mensajes por defecto */
+}
+
+/* Estilo para el botón deshabilitado */
+#registroAdmin:disabled {
+    background-color: #ccc; /* Fondo gris cuando el botón está deshabilitado */
+    cursor: not-allowed; /* Cursor de no permitido */
+}
+
+/* Estilo para el botón habilitado */
+#registroAdmin {
+    background-color: #4CAF50; /* Fondo verde cuando el botón está habilitado */
+    color: white; /* Color del texto en blanco */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+#registroAdmin:hover {
+    background-color: #45a049; /* Fondo verde más oscuro al pasar el ratón */
+}
+
+/* Estilo para los campos con error */
+input.error {
+    border: 2px solid red; /* Borde rojo para campos con error */
+}
+
+/* Estilo para los mensajes de error */
+div.validacion {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
