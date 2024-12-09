@@ -16,7 +16,7 @@ export class mAnadirPregunta {
                     window.location.href = "index.php?c=Preguntas&m=mostrarAniadirPreguntas";
                 } else {
                     const error = document.querySelector('.errorMensaje');
-                    error.innerHTML = result; // Muestra el mensaje del servidor.
+                    error.innerHTML = result; 
                     error.style.display = 'block';
                 }
             } else {

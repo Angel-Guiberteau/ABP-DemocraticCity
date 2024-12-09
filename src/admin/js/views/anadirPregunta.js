@@ -1,8 +1,8 @@
-// Función para validar campos del formulario
+// Validar campos del formulario
 function validarCampo(input) {
-    const valor = input.value.trim(); // Eliminar espacios en blanco del valor del campo
-    let mensajeError = ''; // Mensaje de error que se mostrará si es necesario
-    const idCampo = input.id; // Identificador del campo
+    const valor = input.value.trim(); // Eliminar espacios en blanco
+    let mensajeError = ''; 
+    const idCampo = input.id; // Id del campo
 
     // Validar que el campo de pregunta no esté vacío
     if (idCampo === 'pregunta' && valor === '') {
@@ -16,6 +16,7 @@ function validarCampo(input) {
 
     // Validar campos numéricos (Educación, Sanidad, Seguridad, Economía)
     if (idCampo.includes('educacion') || idCampo.includes('sanidad') || idCampo.includes('seguridad') || idCampo.includes('economia')) {
+
         const numero = parseInt(valor); // Convertir el valor a número
 
         // Verificar que sea un número válido y dentro del rango permitido
@@ -32,13 +33,13 @@ function validarCampo(input) {
 
     if (mensajeError) {
         divError.style.display = 'block'; // Mostrar mensaje de error
-        divError.textContent = mensajeError; // Asignar el texto del mensaje de error
-        input.classList.add('error'); // Añadir clase de error al campo
+        divError.textContent = mensajeError; // Asignar el texto 
+        input.classList.add('error'); // Añadir clase
         botonRegistrar.disabled = true; // Desactivar el botón de registro si hay errores
     } else {
         divError.style.display = 'none'; // Ocultar mensaje de error
         divError.textContent = ''; // Limpiar texto del mensaje
-        input.classList.remove('error'); // Quitar la clase de error del campo
+        input.classList.remove('error'); // Quitar la clase 
         if (todosCamposValidos()) {
             botonRegistrar.disabled = false; // Activar el botón de registro si todo está correcto
         }
@@ -67,10 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Configuración del evento para enviar el formulario
     document.getElementById('formularioAnadirPregunta').addEventListener('submit', async (event) => {
-        event.preventDefault(); // Evita el comportamiento por defecto de recargar la página
+        
+        event.preventDefault(); // Evita recargar la página
 
         const formulario = document.getElementById('formularioAnadirPregunta'); // Obtener el formulario
-        const formData = new FormData(formulario); // Crear un objeto FormData con los datos del formulario
+        const formData = new FormData(formulario); 
 
         // Validar el formulario antes de enviarlo
         if (formulario.checkValidity()) {
