@@ -9,7 +9,6 @@ export class MRegistrarse {
     
             if(response.ok){
                 const result = await response.text();
-                alert(result);
                 if(result == 'correcto'){
                     window.location.href = "index.php?c=Usuarios&m=registrarAdmin&registro=correcto";
                     // document.querySelector('.registroIncorrecto').style.display = 'inline';
