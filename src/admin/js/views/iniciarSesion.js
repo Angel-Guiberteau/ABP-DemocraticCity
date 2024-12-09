@@ -5,63 +5,69 @@ const controlador = new CIniciarSesion();
 /**
  * Este método permite mostrar las contraseñas.
  */
-function mostrarPassw(){
-    let passlogin = document.querySelector('#passw');
-        
-    let checkbox = document.querySelector('#verPassw');
-    passlogin.type = checkbox.checked ? "text" : "password";
+function mostrarPassw() {
+    const passlogin = document.querySelector('#passw');
+    const checkbox = document.querySelector('#verPassw');
+    if (passlogin && checkbox) {
+        passlogin.type = checkbox.checked ? 'text' : 'password';
+    }
 }
+
+// Vincular evento para mostrar contraseñas
+document.addEventListener('DOMContentLoaded', () => {
+    const checkbox = document.querySelector('#verPassw'); // Checkbox para mostrar contraseña
+    if (checkbox) {
+        checkbox.addEventListener('change', mostrarPassw); // Vincula el evento
+    }
+});
 
 //----------------VERIFICAR CAMPOS VACÍOS
 function verificarCampo(inputSelector, mensajeSelector) {
-    let input = document.querySelector(inputSelector);
-    let mensaje = document.querySelector(mensajeSelector);
+    const input = document.querySelector(inputSelector);
+    const mensaje = document.querySelector(mensajeSelector);
 
     if (input && mensaje) {
-        input.addEventListener("blur", function () {
+        input.addEventListener('blur', () => {
             mensaje.style.display = input.value.trim() === '' ? 'inline' : 'none';
         });
     }
 }
-function verificarCamposParaBoton(inputNombre, inputPassw, boton){
-    let input1 = document.querySelector(inputNombre);
-    let input2 = document.querySelector(inputPassw);
-    let submit = document.querySelector(boton);
 
-    input1.addEventListener('blur', function(){
-        if(input1.value.trim()!= '' && input2.value.trim() != ''){
+function verificarCamposParaBoton(inputNombre, inputPassw, boton) {
+    const input1 = document.querySelector(inputNombre);
+    const input2 = document.querySelector(inputPassw);
+    const submit = document.querySelector(boton);
+
+    const verificarEstadoBoton = () => {
+        if (input1.value.trim() && input2.value.trim()) {
             submit.disabled = false;
-        }else{
+        } else {
             submit.disabled = true;
         }
-    });
-    input2.addEventListener('blur', function(){
-        if(input1.value.trim()!= '' && input2.value.trim() != ''){
-            submit.disabled = false;
-        }else{
-            submit.disabled = true;
-        }
-    });
-    
+    };
+
+    if (input1 && input2 && submit) {
+        input1.addEventListener('blur', verificarEstadoBoton);
+        input2.addEventListener('blur', verificarEstadoBoton);
+    }
 }
 
 verificarCampo('#nombreUsuario', '.nombreUsuarioValidacion');
 verificarCampo('#passw', '.passwUsuarioValidacion');
-verificarCamposParaBoton('#nombreUsuario', '#passw', '#iniciarSesion');
 verificarCamposParaBoton('#nombreUsuario', '#passw', '#iniciarSesionAdmin');
 
 //----------------REVISAR MEDIANTE FETCH USUARIO Y CONTRASEÑA
-//ADMIN
-document.getElementById('formularioLoginAdmin').addEventListener('submit', async function (event) { 
+// ADMIN
+document.getElementById('formularioLoginAdmin').addEventListener('submit', async (event) => {
     event.preventDefault(); // Evita que la página se recargue cuando se envía el formulario.
 
-    // Obtiene los valores que el usuario ingresó en los campos del formulario.
-    let nombreUsuario = document.getElementById('nombreUsuario').value;  
-    let passlogin = document.getElementById('passw').value; 
+    const nombreUsuario = document.getElementById('nombreUsuario').value.trim();
+    const passlogin = document.getElementById('passw').value.trim();
 
-    // Crea un objeto FormData que se utilizará para enviar los datos del formulario al servidor.
-    controlador.cIniciarSesion(nombreUsuario, passlogin);
-
-    // Intenta enviar los datos al servidor mediante una solicitud fetch. 
-    
+    if (nombreUsuario && passlogin) {
+        // Llama al método del controlador para manejar la lógica de inicio de sesión
+        controlador.cIniciarSesion(nombreUsuario, passlogin);
+    } else {
+        console.error('Faltan campos por completar.');
+    }
 });

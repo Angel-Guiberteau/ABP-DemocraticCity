@@ -10,6 +10,9 @@ class MPreguntas{
         $objConexion = new Db();
         $this->conexion= $objConexion->conexion;
     }
+    public function mostrarAniadirPreguntas(){
+        $this->vista = 'aniadirPreguntas';
+    }
     /**
      * Método que permite mostrar las preguntas y respuestas.
      * @param

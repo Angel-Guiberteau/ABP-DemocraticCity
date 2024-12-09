@@ -57,6 +57,14 @@ h1{
     margin-bottom: 3rem;
     text-decoration: underline;
 }
+
+h2{
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: -1px 1px 3px black;
+    text-align: center;
+}
 @media (max-width: 768px) {
     h1{
         font-size: 4rem
@@ -79,6 +87,7 @@ input{
     padding: 1.2rem 0.7rem;
     font-size: 1.5rem;
 }
+
 input[type="text"],
 input[type="password"]{
     width: 90%;
@@ -337,6 +346,208 @@ a{
 }
 .panel3 div img{
     width: 45%;
+}
+
+/* crud pregutnas */
+.botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2rem auto;
+    width: 75%;
+    padding: 1rem;
+}
+.botones button, .botones a{
+    text-align: center;
+    width: 20%;
+    padding: 1.2rem 0.7rem;
+    font-size: 1.5rem;
+    border-radius: 0.5rem; 
+    box-shadow:  -3px 3px 7px black;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    transition: 1.1s;
+    background: linear-gradient(90deg, #56CCF2 0%, #2F80ED 100%);
+}
+.botones button:hover, .botones a:hover{
+    transition: 1.1s;
+    width: 30%;
+    color: black;
+    background: rgb(227,129,80);
+    background: linear-gradient(90deg, rgba(227,129,80,1) 0%, rgba(252,172,137,1) 50%, rgb(243, 162, 128) 100%);
+}
+.botones button:focus, .botones a:focus{
+    transition: 1.1s;
+    width: 30%;
+    color: black;
+    background: rgb(227,129,80);
+    background: linear-gradient(90deg, rgba(227,129,80,1) 0%, rgba(252,172,137,1) 50%, rgb(243, 162, 128) 100%);
+}
+details{
+    margin-bottom: 2rem;
+}
+summary {
+    margin: 0 auto;
+    padding: 2rem;
+    width: 75%;
+    border-radius: 1em; 
+    box-shadow: -3px 3px 7px black;
+    border: none;
+    color: #0e221f;
+    font-weight: bold;
+    font-size: 1.7rem;
+    text-align: left;
+    margin-top: 2rem;
+    list-style-type: disc;
+}
+
+details:nth-of-type(even) > summary {
+    background: -webkit-linear-gradient(90deg, #419889, #8EBBA7, #A5E2C7);
+    background: linear-gradient(90deg, #419889, #8EBBA7, #A5E2C7);
+}
+
+details:nth-of-type(odd) > summary {
+    background: -webkit-linear-gradient(90deg, #A5E2C7, #8EBBA7, #419889);
+    background: linear-gradient(90deg, #A5E2C7, #8EBBA7, #419889);
+}
+
+.summaryContainer{
+    width: 75%;
+    margin: 0 auto;
+    background-color: #00000043;
+    padding: 1rem;  
+}
+
+
+table{
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: -3px 3px 7px black;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-align: left;
+    margin-top: 2rem;
+}
+
+th, td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.center{
+    text-align: center;
+}
+
+table tr:nth-child(1) > td:nth-child(1){ 
+    width: 15%;
+    vertical-align: middle;
+}
+
+table tr:nth-child(1) > td:nth-child(2){
+    vertical-align: middle;
+}
+
+.blanco{
+    color: white;
+}
+td{
+    border: 1px solid #00000050;
+    border-radius: 100px;
+}
+.botonesPreguntas{
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    margin: 0 auto;
+    background-color: #00000043;
+    padding: 1rem; 
+}
+.botonesPreguntas .boton{
+    width: 20%;
+}
+
+/* AÑADIR PREGUNTAS */
+.formularioAniadirPreguntas div{
+    display: flex;
+}
+
+/* Estilos para los campos con error */
+input.error {
+    border: 2px solid red; /* Borde rojo para campos con error */
+}
+
+/* Estilos para los mensajes de validación */
+.validacionPregunta,
+.validacionRespuesta1,
+.validacionRespuesta2,
+.validacionRespuesta3,
+.validacionRespuesta4,
+.validacionEducacion1,
+.validacionSanidad1,
+.validacionSeguridad1,
+.validacionEconomia1,
+.validacionEducacion2,
+.validacionSanidad2,
+.validacionSeguridad2,
+.validacionEconomia2,
+.validacionEducacion3,
+.validacionSanidad3,
+.validacionSeguridad3,
+.validacionEconomia3,
+.validacionEducacion4,
+.validacionSanidad4,
+.validacionSeguridad4,
+.validacionEconomia4 {
+    color: red; /* Color rojo para el texto de los errores */
+    font-size: 2em; /* Tamaño de fuente más pequeño */
+    font-weight: bold; /* Texto en negrita */
+    margin-top: 5px; /* Espaciado superior */
+    display: none; /* Ocultar los mensajes por defecto */
+}
+
+/* Estilo para el botón deshabilitado */
+#registroAdmin:disabled {
+    background-color: #ccc; /* Fondo gris cuando el botón está deshabilitado */
+    cursor: not-allowed; /* Cursor de no permitido */
+}
+
+/* Estilo para el botón habilitado */
+#registroAdmin {
+    background-color: #4CAF50; /* Fondo verde cuando el botón está habilitado */
+    color: white; /* Color del texto en blanco */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+#registroAdmin:hover {
+    background-color: #45a049; /* Fondo verde más oscuro al pasar el ratón */
+}
+
+/* Estilo para los campos con error */
+input.error {
+    border: 2px solid red; /* Borde rojo para campos con error */
+}
+
+/* Estilo para los mensajes de error */
+div.validacion {
+    color: red;
+    font-size: 12px;
+    display: none;
 }
 
 /* crud pregutnas */

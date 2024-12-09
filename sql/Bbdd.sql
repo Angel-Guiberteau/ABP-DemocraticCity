@@ -6,7 +6,7 @@ CREATE TABLE Administradores (
     idUsuario TINYINT UNSIGNED AUTO_INCREMENT,
     nombreUsuario VARCHAR(50) NOT NULL,
     passAdmin VARCHAR(100) NOT NULL,
-    superAdmin VARCHAR(100) NOT NULL,
+    superAdmin char(1) NOT NULL,
     CONSTRAINT pk_admin PRIMARY KEY (idUsuario),
     CONSTRAINT csu_admin UNIQUE (nombreUsuario)
 );
