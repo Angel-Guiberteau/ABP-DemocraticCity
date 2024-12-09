@@ -10,6 +10,10 @@ class CPreguntas{
     public function mostrarAniadirPreguntas(){
         $this->vista = 'aniadirPreguntas';
     }
+    public function mostrarModificarPreguntas(){
+        $this->vista = 'modificarPreguntas';
+    }
+    
     public function cMostrarPreguntasyRespuestas(){
         $this->vista = 'gestionPreguntas';
         $preguntas=$this->objMPreguntas->mMostrarPreguntasyRespuestas();
@@ -23,9 +27,29 @@ class CPreguntas{
         $this->vista = 'aniadirPreguntas';
         $preguntas=$this->objMPreguntas->mAniadirPreguntas($datos);
         if($preguntas){
-            return true;
+            header("Location: index.php?c=Preguntas&m=mostrarAniadirPreguntas&operacion=correcto");
+            exit;
+
+        }else{
+            header("Location: index.php?c=Preguntas&m=mostrarAniadirPreguntas&operacion=INCORRECTO");        }
+    } 
+
+    public function cModificarPregunta($datos){
+        $this->vista = 'modificarPregunta';
+        if($pregunta = $this->objMPreguntas->mModificarPregunta($datos['idPregunta'])){
+            return $pregunta;
         }else{
             return false;
         }
-    } 
+
+    }
+    public function cGuardarModificacionPregunta($datos){
+        if($this->objMPreguntas->mGuardarModificacionPregunta($datos)){
+            $preguntas = $this->cMostrarPreguntasyRespuestas();
+            return $preguntas;
+        }else{
+            return false;
+        }
+
+    }
 }

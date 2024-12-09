@@ -59,7 +59,10 @@
                             }
                             echo '<div class="botonesPreguntas">';
                                 echo '<a class="boton" href="">Eliminar</a> ';
-                                echo '<a class="boton" href="">Modificar</a> ';
+                                echo '<form action="index.php?c=Preguntas&m=cModificarPregunta" method="POST">';
+                                echo '<input type="number" value="'.$pregunta['idPregunta'].'" hidden name="idPregunta">';
+                                echo '<input type="submit" class="boton" value="Modificar">';
+                                echo '</form>';
                             echo '</div>';
                         echo '</details>';
 
