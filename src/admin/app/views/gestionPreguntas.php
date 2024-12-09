@@ -25,7 +25,6 @@
                 ?>
                 <a href="index.php?c=Usuarios&m=mostrarPanelSuper">Panel Admin</a>
                 <a href="index.php?c=Preguntas&m=mostrarAniadirPreguntas">Añadir preguntas</a>
-                <button>Buscar</button>
             </section>
             <section>
 
