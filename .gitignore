@@ -9,7 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
-src/php/config/configDB.php
+src/game/app/config/configDB.php
+src/admin/app/config/configDB.php
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

@@ -2,28 +2,28 @@ import { CImagenes } from "../controllers/cImagenes";
 document.getElementById("formularioImagenes").addEventListener("submit", async (event) => {
     event.preventDefault(); // Evitar que el formulario se envíe.
 
-    const inputFile = document.getElementById("imagenes");
-    const file = inputFile.files[0]; // Obtener el primer archivo.
+    const imagen = document.getElementById("imagenes");
+    const archivo = imagen.files[0]; // Obtener el primer archivo.
 
     // Comprobamos si se ha seleccionado un archivo.
-    if (!file) {
+    if (!archivo) {
         alert("Por favor, selecciona una imagen.");
         return;
     }
 
     // Validar formato de imagen (jpg, png).
-    const allowedFormats = ["image/jpeg", "image/png"];
-    if (!allowedFormats.includes(file.type)) {
+    const formato = ["image/jpeg", "image/png"];
+    if (!formato.includes(archivo.type)) {
         alert("El archivo debe ser una imagen JPG o PNG.");
         return;
     }
 
     // Crear un nuevo nombre para la imagen
-    const newFileName = "imagen_" + new Date().getTime() + "." + file.name.split(".").pop();
+    const nombreNuevo = "imagen_" + new Date().getTime() + "." + archivo.name.split(".").pop();
 
     // Crear un objeto FormData para enviar el archivo al servidor.
     const formData = new FormData();
-    formData.append("imagen", file, newFileName); // Añadir el archivo con el nuevo nombre.
+    formData.append("imagen", archivo, nombreNuevo); // Añadir el archivo con el nuevo nombre.
 
     // Enviar el archivo al servidor usando fetch.
     try {
