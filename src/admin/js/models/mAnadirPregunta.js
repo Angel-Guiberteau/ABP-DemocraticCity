@@ -3,8 +3,6 @@ export class MAnadirPregunta {
 
     async mAnadirPregunta(formData) {
         try {
-            alert('modelo');
-
             const response = await fetch('index.php?c=Preguntas&m=cAniadirPreguntas', {
                 method: 'POST',
                 body: formData,

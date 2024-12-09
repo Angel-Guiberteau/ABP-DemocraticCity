@@ -27,17 +27,24 @@ class CPreguntas{
         }
     } 
     public function cAniadirPreguntas($datos){
-        $preguntas=$this->objMPreguntas->mAniadirPreguntas($datos);
-        if($preguntas){
-            $this->vista = '';
-            echo 'correcto';
-            return true;
-
+        if($this->cComprobarDatos($datos)){
+            $preguntas=$this->objMPreguntas->mAniadirPreguntas($datos);
+            if($preguntas){
+                $this->vista = '';
+                echo 'correcto';
+                return true;
+    
+            }else{
+                $this->vista = '';
+                echo 'incorrecto';
+                return false;
+            }
         }else{
             $this->vista = '';
             echo 'incorrecto';
             return false;
         }
+        
     } 
 
     public function cModificarPregunta($datos){
@@ -50,21 +57,45 @@ class CPreguntas{
 
     }
     public function cGuardarModificacionPregunta($datos){
-        if($this->objMPreguntas->mGuardarModificacionPregunta($datos)){
-            $preguntas = $this->cMostrarPreguntasyRespuestas();
-            return $preguntas;
+        if($this->cComprobarDatos($datos)){
+            if($this->objMPreguntas->mGuardarModificacionPregunta($datos)){
+                $preguntas = $this->cMostrarPreguntasyRespuestas();
+                return $preguntas;
+            }else{
+                return false;
+            }
         }else{
             return false;
         }
+        
 
     }
     public function cEliminarPregunta($datos){
-        if($this->objMPreguntas->mEliminarPregunta($datos['idPregunta'])){
-            $preguntas = $this->cMostrarPreguntasyRespuestas();
-            return $preguntas;
+        if($this->cComprobarDatos($datos)){
+            if($this->objMPreguntas->mEliminarPregunta($datos['idPregunta'])){
+                $preguntas = $this->cMostrarPreguntasyRespuestas();
+                return $preguntas;
+            }else{
+                $preguntas = $this->cMostrarPreguntasyRespuestas();
+                return false;
+            }
         }else{
-            $preguntas = $this->cMostrarPreguntasyRespuestas();
             return false;
         }
+        
     }
+    public function cComprobarDatos($datos) {
+        if (empty($datos) || !is_array($datos)) {
+            return false;
+        }
+
+        foreach ($datos as $clave => $valor) {
+            if (!isset($valor) || trim($valor) === '') {
+                return false;
+            }
+        }
+    
+        return true;
+    }
+    
 }
