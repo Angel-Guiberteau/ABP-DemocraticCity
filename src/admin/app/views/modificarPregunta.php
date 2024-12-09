@@ -33,36 +33,10 @@
                     $contador++; // Incrementar para la siguiente respuesta
                 }
             ?>
-
-                
-                    
-                    
-                    
-                    
-                
-                <!-- <input type="text" placeholder="Respuesta B" name="respuesta2" id="respuesta2">
-                <div>
-                    <input type="number" placeholder="Educación" name="educacion2" id="educacion2">
-                    <input type="number" placeholder="Sanidad" name="sanidad2" id="sanidad2">
-                    <input type="number" placeholder="Seguridad" name="seguridad2" id="seguridad2">
-                    <input type="number" placeholder="Economía" name="economia2" id="economia2">
-                </div>
-                <input type="text" placeholder="Respuesta C" name="respuesta3" id="respuesta3">
-                <div>
-                    <input type="number" placeholder="Educación" name="educacion3" id="educacion3">
-                    <input type="number" placeholder="Sanidad" name="sanidad3" id="sanidad3">
-                    <input type="number" placeholder="Seguridad" name="seguridad3" id="seguridad3">
-                    <input type="number" placeholder="Economía" name="economia3" id="economia3">
-                </div>
-                <input type="text" placeholder="Respuesta D" name="respuesta4" id="respuesta4">
-                <div>
-                    <input type="number" placeholder="Educación" name="educacion4" id="educacion4">
-                    <input type="number" placeholder="Sanidad" name="sanidad4" id="sanidad4">
-                    <input type="number" placeholder="Seguridad" name="seguridad4" id="seguridad4">
-                    <input type="number" placeholder="Economía" name="economia4" id="economia4">
-                </div> -->
-                <input type="submit" class="boton" value="Añadir">
+                <input type="submit" class="boton" value="Modificar">
                 <p><a href="index.php?c=Usuarios&m=mostrarPanelSuper">Panel Admin</a></p>
+                <p><a href="index.php?c=Preguntas&m=cMostrarPreguntasyRespuestas">Volver atras</a></p>
+
             </form>
             <div class="alcaldes">
                 <div><img src="img/alcalde1.png" alt=""></div>

@@ -10,9 +10,6 @@ class MPreguntas{
         $objConexion = new Db();
         $this->conexion= $objConexion->conexion;
     }
-    public function mostrarAniadirPreguntas(){
-        $this->vista = 'aniadirPreguntas';
-    }
     /**
      * Método que permite mostrar las preguntas y respuestas.
      * @param
@@ -146,17 +143,14 @@ class MPreguntas{
     }
     public function mGuardarModificacionPregunta($datos){
         try {
-            // Inicia una transacción para asegurar consistencia en la base de datos
             $this->conexion->beginTransaction();
     
-            // Actualizar el texto de la pregunta
             $sqlPregunta = "UPDATE Preguntas SET texto = :texto WHERE idPregunta = :idPregunta";
             $stmtPregunta = $this->conexion->prepare($sqlPregunta);
             $stmtPregunta->bindValue(':texto', $datos['pregunta'], PDO::PARAM_STR);
             $stmtPregunta->bindValue(':idPregunta', $datos['idPregunta'], PDO::PARAM_INT);
             $stmtPregunta->execute();
     
-            // Actualizar las respuestas asociadas
             $sqlRespuestas = "UPDATE Respuestas 
                 SET respuesta = :respuesta, educacion = :educacion, sanidad = :sanidad, 
                     seguridad = :seguridad, economia = :economia 
@@ -164,7 +158,6 @@ class MPreguntas{
     
             $stmtRespuestas = $this->conexion->prepare($sqlRespuestas);
     
-            // Asumimos que hay un máximo de 4 respuestas y los datos tienen un formato coherente
             $respuestas = [
                 ['letra' => 'a', 'respuesta' => $datos['respuesta1'], 'educacion' => $datos['educacion1'], 'sanidad' => $datos['sanidad1'], 'seguridad' => $datos['seguridad1'], 'economia' => $datos['economia1']],
                 ['letra' => 'b', 'respuesta' => $datos['respuesta2'], 'educacion' => $datos['educacion2'], 'sanidad' => $datos['sanidad2'], 'seguridad' => $datos['seguridad2'], 'economia' => $datos['economia2']],
@@ -183,7 +176,6 @@ class MPreguntas{
                 $stmtRespuestas->execute();
             }
     
-            // Confirmar los cambios
             $this->conexion->commit();
             return true;
     
@@ -191,6 +183,26 @@ class MPreguntas{
             // Revertir la transacción si ocurre un error
             $this->conexion->rollBack();
             error_log("Error al modificar la pregunta: " . $e->getMessage());
+            return false;
+        }
+    }
+    public function mEliminarPregunta($idPregunta){
+        try{
+            $this->conexion->beginTransaction();
+            $sqlPreguntas='DELETE FROM Preguntas WHERE Preguntas.idPregunta = :idPregunta;';
+            $stmtPreguntas = $this->conexion->prepare($sqlPreguntas);
+            $stmtPreguntas->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
+            $stmtPreguntas->execute();
+
+            $sqlRespuesta='DELETE FROM Respuestas WHERE Respuestas.idPregunta = :idPregunta;';
+            $stmtRespuesta = $this->conexion->prepare($sqlRespuesta);
+            $stmtRespuesta->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
+            $stmtRespuesta->execute();
+            $this->conexion->commit();
+            return true; 
+        }catch (PDOException $e) {
+            $this->conexion->rollBack();
+            error_log("Error en la consulta: " . $e->getMessage());
             return false;
         }
     }

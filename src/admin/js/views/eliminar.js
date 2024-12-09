@@ -1,23 +1,36 @@
-import { CEliminar } from '../controllers/cEliminar.js';
-const controlador = new CAnadirPregunta();
-
-// Configuración de eventos al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modalEliminar');
+    const confirmarEliminar = document.getElementById('confirmarEliminar');
+    const cancelarEliminar = document.getElementById('cancelarEliminar');
+    let formSeleccionado = null;
 
-    // Configuración del evento para enviar el formulario
-    document.getElementById('formularioAniadirPreguntas').addEventListener('submit', async (event) => {
-        
-        event.preventDefault(); // Evita recargar la página
+    // Muestra el modal al hacer clic en un botón "Eliminar"
+    document.querySelectorAll('.eliminar').forEach(boton => {
+        boton.addEventListener('click', (e) => {
+            e.preventDefault();
+            formSeleccionado = e.target.closest('form');
+            modal.style.display = 'flex';
+        });
+    });
 
-        const formulario = document.getElementById('formularioAniadirPreguntas'); // Obtener el formulario
-        const formData = new FormData(formulario); 
+    // Cierra el modal sin eliminar
+    cancelarEliminar.addEventListener('click', () => {
+        modal.style.display = 'none';
+        formSeleccionado = null;
+    });
 
-        // Validar el formulario antes de enviarlo
-        if (formulario.checkValidity()) {
-            // Llamar al controlador para gestionar los datos del formulario
-            controlador.procesarFormulario(formData);
-        } else {
-            console.error('Por favor, asegúrese de completar todos los campos requeridos.'); // Mostrar mensaje si faltan campos
+    // Confirma la eliminación
+    confirmarEliminar.addEventListener('click', () => {
+        if (formSeleccionado) {
+            formSeleccionado.submit();
+        }
+    });
+
+    // Cierra el modal si se hace clic fuera de él
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            formSeleccionado = null;
         }
     });
 });

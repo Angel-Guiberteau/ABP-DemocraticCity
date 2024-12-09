@@ -12,7 +12,6 @@ export class MAnadirPregunta {
 
             if (response.ok) {
                 const result = await response.text(); 
-                alert(result);
 
                 if (result === 'correcto') {
                     window.location.href = "index.php?c=Preguntas&m=mostrarAniadirPreguntas&operacion=correcto";

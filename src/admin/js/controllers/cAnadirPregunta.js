@@ -20,7 +20,6 @@ export class CAnadirPregunta {
     }
 
     async procesarFormulario(formData) {
-        alert('controlador');
         try {
             // Aquí puedes realizar validaciones adicionales si es necesario
             const resultado = await this.modelo.mAnadirPregunta(formData);

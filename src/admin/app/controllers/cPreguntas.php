@@ -58,4 +58,13 @@ class CPreguntas{
         }
 
     }
+    public function cEliminarPregunta($datos){
+        if($this->objMPreguntas->mEliminarPregunta($datos['idPregunta'])){
+            $preguntas = $this->cMostrarPreguntasyRespuestas();
+            return $preguntas;
+        }else{
+            $preguntas = $this->cMostrarPreguntasyRespuestas();
+            return false;
+        }
+    }
 }

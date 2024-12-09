@@ -58,10 +58,14 @@
                                 echo '</div>';
                             }
                             echo '<div class="botonesPreguntas">';
-                                echo '<a class="boton" href="">Eliminar</a> ';
-                                echo '<form action="index.php?c=Preguntas&m=cModificarPregunta" method="POST">';
-                                echo '<input type="number" value="'.$pregunta['idPregunta'].'" hidden name="idPregunta">';
-                                echo '<input type="submit" class="boton" value="Modificar">';
+                                echo '<form class="sinnada2" action="index.php?c=Preguntas&m=cEliminarPregunta" method="POST" id="formEliminar">';
+                                    echo '<input type="number" value="'.$pregunta['idPregunta'].'" hidden name="idPregunta">';
+                                    echo '<button type="button" class="boton eliminar" data-id="'.$pregunta['idPregunta'].'">Eliminar</button>';
+                                echo '</form>';
+                            
+                                echo '<form  class="sinnada" action="index.php?c=Preguntas&m=cModificarPregunta" method="POST">';
+                                    echo '<input type="number" value="'.$pregunta['idPregunta'].'" hidden name="idPregunta">';
+                                    echo '<input type="submit" class="boton" value="Modificar">';
                                 echo '</form>';
                             echo '</div>';
                         echo '</details>';
@@ -76,6 +80,17 @@
             ?>
 
             </section>
+            
         </main>
+        <div id="modalEliminar" class="modal">
+            <div class="modal-content">
+                <h2>¿Estás seguro de que quieres eliminar esta pregunta?</h2>
+                <div class="modal-buttons">
+                    <button id="confirmarEliminar" class="boton">Sí, eliminar</button>
+                    <button id="cancelarEliminar" class="boton boton-cancelar">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <script type="module" src="js/views/eliminar.js"></script>
     </body>
 </html>
