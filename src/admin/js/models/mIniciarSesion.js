@@ -10,7 +10,6 @@ export class MIniciarSesion {
             // Verifica si la respuesta del servidor es buena .
             if(response.ok) {
                 const result = await response.text(); // Lee la respuesta que el servidor envía como texto.
-                alert(result);
                 // Si la respuesta es "Usuario autenticado correctamente", muestra el mensaje y redirige.
                 if (result=='correcto') {
                     window.location.href = "index.php?c=Usuarios&m=mostrarPanel"; 
