@@ -1,5 +1,7 @@
-import { CAnadirPregunta } from '../controllers/cAnadirPregunta.js';
-const controlador = new CAnadirPregunta();
+
+import { CModificarPregunta } from '../controllers/cModificarPregunta.js';
+const controlador = new CModificarPregunta();
+
 // Validar campos del formulario
 function validarCampo(input) {
     const valor = input.value.trim(); // Eliminar espacios en blanco
@@ -31,7 +33,7 @@ function validarCampo(input) {
 
     // Mostrar mensaje de error o limpiar mensaje anterior
     const divError = document.querySelector(`.validacion${idCampo.charAt(0).toUpperCase() + idCampo.slice(1)}`); // Buscar el div de error correspondiente
-    const botonRegistrar = document.getElementById('aniadirPregunta'); // Botón de registro
+    const botonRegistrar = document.getElementById('modificarPregunta'); // Botón de registro
 
     if (mensajeError) {
         divError.style.display = 'block'; // Mostrar mensaje de error
@@ -74,11 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Configuración del evento para enviar el formulario
-    document.getElementById('formularioAniadirPreguntas').addEventListener('submit', async (event) => {
+    document.getElementById('formularioModificarPregunta').addEventListener('submit', async (event) => {
         
         event.preventDefault(); // Evita recargar la página
 
-        const formulario = document.getElementById('formularioAniadirPreguntas'); // Obtener el formulario
+        const formulario = document.getElementById('formularioModificarPregunta'); // Obtener el formulario
         const formData = new FormData(formulario); 
 
         // Validar el formulario antes de enviarlo

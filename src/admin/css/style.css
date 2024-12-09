@@ -753,3 +753,7 @@ td{
     background-color: grey;
     color: white;
 }
+
+#aniadirPregunta{
+    cursor: not-allowed;
+}

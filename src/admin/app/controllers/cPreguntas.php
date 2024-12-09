@@ -60,11 +60,17 @@ class CPreguntas{
         if($this->cComprobarDatos($datos)){
             if($this->objMPreguntas->mGuardarModificacionPregunta($datos)){
                 $preguntas = $this->cMostrarPreguntasyRespuestas();
+                $this->vista = '';
+                echo 'correcto';
                 return $preguntas;
             }else{
+                $this->vista = '';
+                echo 'incorrecto';
                 return false;
             }
         }else{
+            $this->vista = '';
+            echo 'incorrecto';
             return false;
         }
         
