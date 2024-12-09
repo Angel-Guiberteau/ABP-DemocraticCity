@@ -1,5 +1,6 @@
 // controllers/cAnadirPregunta.js
 import { MAnadirPregunta } from '../models/mAnadirPregunta.js';
+
 export class CAnadirPregunta {
     modelo;
     constructor() {
