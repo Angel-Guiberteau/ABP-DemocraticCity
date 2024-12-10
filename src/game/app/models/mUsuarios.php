@@ -7,7 +7,6 @@ class MUsuarios{
     private $conexion;
     function __construct(){
         require_once 'db.php';
-        $this->codError = '0';
         $objConexion = new Db();
         $this->conexion= $objConexion->conexion;
     }
@@ -36,11 +35,6 @@ class MUsuarios{
             return false;
         }
     }
-    /**
-     * Método que permite registrar nuevos Admin (Solo puede hacerlo un SUPERAdmin)
-     * @param
-     */
-
     /**
      * Método que permite e inicio de sesión de los usuarios.
      * @param
@@ -73,9 +67,4 @@ class MUsuarios{
             return false;
         }
     }
-    /**
-     * Método que permite el inicio de sesión de los administradores ya sean generales o SUPER.
-     * @param
-     * @return
-     */
 }

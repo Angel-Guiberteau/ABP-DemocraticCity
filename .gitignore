@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.configDB.php
 src/admin/app/config
 src/game/app/config
 

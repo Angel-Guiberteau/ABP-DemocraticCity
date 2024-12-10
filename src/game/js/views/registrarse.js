@@ -72,27 +72,21 @@ const controlador = new CRegistrarse();
     verificarCampo('#passw', '.passwUsuarioValidacion');
     verificarCampo('#rpassw', '.rpasswUsuarioValidacion');
     repetirPassw('#passw', '#rpassw', '.rpasswUsuarioValidacion');
-    verificarCampoBoton('#nombre','#passw','#rpassw','#registroAdmin');
     verificarCampoBoton('#nombre','#passw','#rpassw','#registroUser');
 
 
+    document.getElementById('formularioRegistro').addEventListener('submit', async function (event){
+
+        event.preventDefault(); // Evita que la página se recargue cuando se envía el formulario.
     
-/**
- * Este método permite registrar mediante asincronía. 
- */
-document.getElementById('formularioRegistroAdmin').addEventListener('submit', async function (event){
-
-    event.preventDefault(); // Evita que la página se recargue cuando se envía el formulario.
-
-    // Obtiene los valores que el usuario ingresó en los campos del formulario.
-
-    let nombreUsuario = document.getElementById('nombre').value;
-    let passlogin = document.getElementById('passw').value;
-    let passlogin2 = document.getElementById('rpassw').value;
-
+        // Obtiene los valores que el usuario ingresó en los campos del formulario.
     
-    controlador.cRegistrarse(nombreUsuario, passw, rpassw);
-    //Enviar los datos al servidor mediantes fetch.
-
+        let nombreUsuario = document.getElementById('nombre').value;
+        let passlogin = document.getElementById('passw').value;
+        let passlogin2 = document.getElementById('rpassw').value;
     
+        controlador.cRegistrarse(nombreUsuario, passlogin, passlogin2);
 });
+
+
+

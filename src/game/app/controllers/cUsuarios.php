@@ -31,7 +31,7 @@ class CUsuarios{
             }
         }else{
             $this->vista = '';
-            echo $this->objMUsuario->codError;
+            echo 'INCORRECTO';
             return false;
         }
     }

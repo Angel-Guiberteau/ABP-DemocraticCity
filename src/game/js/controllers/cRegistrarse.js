@@ -11,5 +11,6 @@ export class CRegistrarse {
         formData.append('passw', passw); 
         formData.append('rpassw', rpassw); 
         this.modelo.mRegistrarse(formData);
+        
     }
 }

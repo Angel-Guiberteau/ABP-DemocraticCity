@@ -2,16 +2,15 @@ export class MRegistrarse {
     constructor() {}
     async mRegistrarse(formData){
         try{
-            const response = await fetch('index.php?c=Usuarios&m=registrarAdm',{ //CAMBIAR SERVIDOR
+            const response = await fetch('index.php?c=Usuarios&m=registrar',{ //CAMBIAR SERVIDOR
                 method: 'POST', //Usamos post para enviar datos
                 body: formData, //Enviamos datos en el body de la solicitud
             });
     
             if(response.ok){
                 const result = await response.text();
-                alert(result);
                 if(result == 'correcto'){
-                    window.location.href = "index.php?c=Usuarios&m=registrarAdmin&registro=correcto";
+                    window.location.href = "index.php?c=Usuarios&m=predeterminada";
                     // document.querySelector('.registroIncorrecto').style.display = 'inline';
                 }else{
                     const error = document.querySelector('.registrarseIncorrecto');
