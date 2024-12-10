@@ -219,6 +219,7 @@ a{
     width: 80%;
 }
 
+
 #mostrarpassw{
     margin: 0 auto;
     display: flex;
@@ -345,4 +346,116 @@ a{
     font-size: 1.5rem;
     text-decoration: none;
     color: var(--Font-color-light);
+}
+
+/* Modal crear sala */
+#modalCrearSala {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo más suave */
+    backdrop-filter: blur(5px); /* Desenfoque del fondo */
+}
+
+.modal-content {
+    background-color: #0c0c0c83;
+    margin: 15% auto; /* 15% desde arriba y centrado */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Sombra */
+}
+
+#crearSalaForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: transparent;
+    text-align: center;
+}
+
+#crearSalaForm label {
+    padding: 0.5rem;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    outline: none;
+    width: 100%;
+}
+
+#crearSalaForm button{
+    margin: auto;
+}
+
+.close{
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.close:hover{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Sala de espera de la sala */
+
+.tituloSala{
+    text-align: center;
+    font-size: 5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: -1px 1px 3px black;
+    margin: 1rem 0;
+}
+
+.valorSala{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--Font-color-light);
+    text-shadow: -1px 1px 3px black;
+    margin: 1rem 0;
+}
+
+.enlacesSala{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.enlacesSala a{
+    width: 30%;
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #56CCF2 0%, #2F80ED 100%);
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: -3px 3px 7px #000000dc;
+    transition: 0.3s;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.enlacesSala a:hover{
+    background: rgb(227,129,80);
+    background: linear-gradient(90deg, rgba(227,129,80,1) 0%, rgba(252,172,137,1) 50%, rgb(243, 162, 128) 100%);
+    color: black;
+    transition: 0.3s;
 }
