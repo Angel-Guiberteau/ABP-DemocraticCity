@@ -36,10 +36,18 @@
             </a>
         </nav>
         <div>
-            <h1 id="tituloJuego">AngelCity</h1>
+            <?php
+                if(isset($_SESSION['nombreCiudad'])){
+                    echo "<h1 id='tituloJuego'>".$_SESSION['nombreCiudad']."</h1>";
+                }
+            ?>
             <div class="botones-inicio">
                 <h2 class="tituloSala">Código de la sala</h2>
-                <h3 class="valorSala">123456</h3>
+                <?php
+                    if(isset($_SESSION['codSala'])){
+                        echo "<h3 class='valorSala'>".$_SESSION['codSala']."</h3>";
+                    }
+                ?>
                 <h2 class="tituloSala">Jugadores actuales</h2>
                 <h3 class="valorSala">12</h3>
                 <div class="enlacesSala">

@@ -40,6 +40,7 @@ class CUsuarios{
             return false;
         }
     }
+    
 
     public function inicio($datos){
         if($this->comprobarDatosIni($datos)){

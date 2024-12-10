@@ -35,6 +35,7 @@ class MUsuarios{
             return false;
         }
     }
+    
     /**
      * Método que permite e inicio de sesión de los usuarios.
      * @param

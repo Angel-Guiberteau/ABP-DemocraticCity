@@ -60,7 +60,7 @@
             <form id="crearSalaForm">
                 <label for="nombreCiudad">Introduce el nombre de la ciudad</label>
                 <?php
-                    echo '<input type="number" hidden id="idUsuario" name="idUsuario" value="'.$_SESSION['idUsuario'].'">';
+                    echo '<input type="number" hidden id="idAnfitrion" name="idAnfitrion" value="'.$_SESSION['idUsuario'].'">';
                 ?>
                 <input type="text" id="nombreCiudad" name="nombreCiudad" required>
                 <button type="submit" class="boton">Crear</button>
@@ -81,7 +81,9 @@
         </div>
     </div>
 
-    <script type="module" src="js/views/crearSala.js"></script>
     <script type="module" src="js/views/unirseSala.js"></script>
+    <script type="module" src="js/views/crearSala.js"></script>
+    <script type="module" src="js/controllers/cPartida.js"></script>
+    <script type="module" src="js/models/mPartida.js"></script>
 </body>
 </html>

@@ -29,6 +29,11 @@
         $_SESSION['idUsuario']= $datos['idUsuario'];
         $_SESSION['nombreUsuario']= $datos['nombreUsuario'];
     }
+    if(isset($datos['codSala'])){
+        $_SESSION['codSala']= $datos['codSala'];
+        $_SESSION['idAnfitrion']= $datos['idAnfitrion'];
+        $_SESSION['nombreCiudad']= $datos['nombreCiudad'];
+    }
     
     if($objControlador->vista != '')
         require_once RUTA_VISTAS.$objControlador->vista.'.php';

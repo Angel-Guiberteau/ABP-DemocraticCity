@@ -1,3 +1,5 @@
+import { CPartida } from '../controllers/cPartida.js';
+const controlador = new CPartida();
 document.addEventListener("DOMContentLoaded", () => {
     // Referencias a los elementos del DOM
     const modalCrearSala = document.getElementById("modalCrearSala");
@@ -29,8 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Recoge los datos del formulario (si son necesarios)
         const nombreCiudad = document.getElementById("nombreCiudad").value;
+        const idAnfitrion = document.getElementById("idAnfitrion").value;
+        alert('vista');
+        controlador.cCrearSala(nombreCiudad, idAnfitrion);
+
+
 
         // Redirige a la página con los datos (puedes ajustar la URL)
-        window.location.href = `index.php?c=Partida&m=mostrarSala`;
     });
 });
