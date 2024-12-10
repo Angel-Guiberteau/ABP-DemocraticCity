@@ -1,5 +1,6 @@
 import { CAnadirPregunta } from '../controllers/cAnadirPregunta.js';
 const controlador = new CAnadirPregunta();
+
 // Validar campos del formulario
 function validarCampo(input) {
     const valor = input.value.trim(); // Eliminar espacios en blanco
@@ -86,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Llamar al controlador para gestionar los datos del formulario
             controlador.procesarFormulario(formData);
         } else {
-            console.error('Por favor, asegúrese de completar todos los campos requeridos.'); // Mostrar mensaje si faltan campos
+            alert('Por favor, asegúrese de completar todos los campos requeridos.'); // Mostrar mensaje si faltan campos
         }
     });
 });
