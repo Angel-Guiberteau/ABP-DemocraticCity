@@ -20,9 +20,9 @@
         <div>
             <h1 id="tituloJuego">Democratic City</h1>
             <div class="botones-inicio">
-                <a href="index.php?c=Usuarios&m=mostrarInicioJuego" class="boton">Jugar</a>
-                <a href="#" class="boton">Ranking</a>
-                <a href="#" class="boton">Manual de juego</a>
+                <a href="#" class="boton">Crear Sala</a>
+                <a href="#" class="boton">Unirse a una sala</a>
+                <a href="index.php?c=Usuarios&m=mostrarInicio" class="enlace">Volver al inicio</a>
             </div>
             <div class="alcaldes">
                 <div><img src="img/alcalde1.png" alt=""></div>

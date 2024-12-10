@@ -17,6 +17,10 @@ class CUsuarios{
         $this->vista = 'inicio';
     }
 
+    public function mostrarInicioJuego(){
+        $this->vista = 'inicioJuego';
+    }
+
     public function registrar($datos){
         if($this->comprobarDatosReg($datos)){
             $datos["passw"] = $this->cifrarPassword($datos["passw"]);
