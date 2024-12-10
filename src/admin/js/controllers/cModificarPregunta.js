@@ -1,10 +1,10 @@
 // controllers/cAnadirPregunta.js
-import { MAnadirPregunta } from '../models/mAnadirPregunta.js';
+import { MModificarPregunta } from '../models/mModificarPregunta.js';
 
-export class CAnadirPregunta {
+export class CModificarPregunta {
     modelo;
     constructor() {
-        this.modelo = new MAnadirPregunta();
+        this.modelo = new MModificarPregunta();
     }
 
     async validarPregunta(pregunta) {
@@ -23,7 +23,7 @@ export class CAnadirPregunta {
     async procesarFormulario(formData) {
         try {
             // Aquí puedes realizar validaciones adicionales si es necesario
-            const resultado = await this.modelo.mAnadirPregunta(formData);
+            const resultado = await this.modelo.mModificarPregunta(formData);
             if (resultado.success) {
                 console.log('Pregunta añadida con éxito');
             } else {

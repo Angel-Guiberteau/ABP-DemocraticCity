@@ -16,24 +16,30 @@
         </div>
         <div>
             <h1>Modificar pregunta</h1>
-            <form id="formularioModificarPregunta" action="index.php?c=Preguntas&m=cGuardarModificacionPregunta" method="POST">
+            <form id="formularioModificarPregunta">
             <?php
                 echo '<input type="number" placeholder="Introduce la pregunta" name="idPregunta" id="idPregunta" value="'.$datos['idPregunta'].'" hidden>';
+                echo '<div class="validacionPregunta"></div>';
                 echo '<input type="text" placeholder="Introduce la pregunta" name="pregunta" id="pregunta" value="'.$datos['texto'].'">';
                 
                 $contador = 1; // Contador para nombres e IDs únicos
                 foreach ($datos['respuestas'] as $respuesta) {
+                    echo '<div class="validacionRespuesta'.$contador.'"></div>';
                     echo ' <input type="text" placeholder="Respuesta '.$contador.'" name="respuesta'.$contador.'" id="respuesta'.$contador.'" value="'.$respuesta['respuesta'].'">';
                     echo '<div>';
+                    echo '<div class="validacionEducacion'.$contador.'"></div>';
                     echo '<input type="number" placeholder="Educación" name="educacion'.$contador.'" id="educacion'.$contador.'" value="'.$respuesta['educacion'].'">';
+                    echo '<div class="validacionSanidad'.$contador.'"></div>';
                     echo '<input type="number" placeholder="Sanidad" name="sanidad'.$contador.'" id="sanidad'.$contador.'" value="'.$respuesta['sanidad'].'">';
+                    echo '<div class="validacionSeguridad'.$contador.'"></div>';
                     echo '<input type="number" placeholder="Seguridad" name="seguridad'.$contador.'" id="seguridad'.$contador.'" value="'.$respuesta['seguridad'].'">';
+                    echo '<div class="validacionEconomia'.$contador.'"></div>';
                     echo '<input type="number" placeholder="Economía" name="economia'.$contador.'" id="economia'.$contador.'" value="'.$respuesta['economia'].'">';
                     echo '</div>';
                     $contador++; // Incrementar para la siguiente respuesta
                 }
             ?>
-                <input type="submit" class="boton" value="Modificar">
+                <input type="submit" class="boton" value="Modificar" id="modificarPregunta">
                 <p><a href="index.php?c=Usuarios&m=mostrarPanelSuper">Panel Admin</a></p>
                 <p><a href="index.php?c=Preguntas&m=cMostrarPreguntasyRespuestas">Volver atras</a></p>
 
@@ -45,7 +51,9 @@
             
         </div>
     </main>
-    
+    <script type="module" src="js/views/modificarPregunta.js"></script>
+    <script type="module" src="js/controllers/cModificarPregunta.js"></script>
+    <script type="module" src="js/models/mModificarPregunta.js"></script>
     <!-- <script src="js/musica.js"></script> -->
 </body>
 </html>
