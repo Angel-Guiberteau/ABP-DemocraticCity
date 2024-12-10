@@ -349,7 +349,7 @@ a{
 }
 
 /* Modal crear sala */
-#modalCrearSala {
+#modalCrearSala, #modalUnirseSala {
     display: none; /* Oculto por defecto */
     position: fixed;
     z-index: 1000;
@@ -372,7 +372,7 @@ a{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Sombra */
 }
 
-#crearSalaForm {
+#crearSalaForm, #unirseSalaForm {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -380,7 +380,7 @@ a{
     text-align: center;
 }
 
-#crearSalaForm label {
+#crearSalaForm label, #unirseSalaForm label {
     padding: 0.5rem;
     font-size: 2rem;
     border-radius: 0.5rem;
@@ -390,7 +390,7 @@ a{
     width: 100%;
 }
 
-#crearSalaForm button{
+#crearSalaForm button, #unirseSalaForm button {
     margin: auto;
 }
 

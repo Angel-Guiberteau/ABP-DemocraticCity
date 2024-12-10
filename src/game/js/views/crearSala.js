@@ -1,35 +1,36 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("modalCrearSala");
-    const openModalButton = document.getElementById("crearSalaButton");
-    const closeModalButton = document.getElementById("closeModal");
+    // Referencias a los elementos del DOM
+    const modalCrearSala = document.getElementById("modalCrearSala");
+    const openModalCrearSalaButton = document.getElementById("crearSalaButton");
+    const closeModalCrearSalaButton = document.getElementById("closeModalCrearSala");
     const crearSalaForm = document.getElementById("crearSalaForm");
 
-    // Abrir el modal
-    openModalButton.addEventListener("click", (e) => {
-        e.preventDefault(); // Evitar el comportamiento por defecto
-        modal.style.display = "block";
+    // Abrir el modal al hacer clic en el botón "Crear Sala"
+    openModalCrearSalaButton.addEventListener("click", (e) => {
+        e.preventDefault(); // Evita el comportamiento por defecto del enlace
+        modalCrearSala.style.display = "block"; // Muestra el modal
     });
 
-    // Cerrar el modal
-    closeModalButton.addEventListener("click", () => {
-        modal.style.display = "none";
+    // Cerrar el modal al hacer clic en el botón "Cerrar"
+    closeModalCrearSalaButton.addEventListener("click", () => {
+        modalCrearSala.style.display = "none"; // Oculta el modal
     });
 
-    // Cerrar modal al hacer clic fuera
+    // Cerrar el modal al hacer clic fuera del contenido del modal
     window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.style.display = "none";
+        if (e.target === modalCrearSala) {
+            modalCrearSala.style.display = "none"; // Oculta el modal
         }
     });
 
-    // Redirigir al enviar el formulario
+    // Manejo del envío del formulario
     crearSalaForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const nombreSala = document.getElementById("nombreSala").value;
-        if (nombreSala.trim()) {
-            window.location.href = `index.php?c=Usuarios&m=mostrarSala&nombreSala=${encodeURIComponent(nombreSala)}`;
-        }
+        e.preventDefault(); // Evita el envío por defecto
+
+        // Recoge los datos del formulario (si son necesarios)
+        const nombreCiudad = document.getElementById("nombreCiudad").value;
+
+        // Redirige a la página con los datos (puedes ajustar la URL)
+        window.location.href = `index.php?c=Partida&m=mostrarSala`;
     });
 });
-  

@@ -21,11 +21,14 @@
     // if($_SERVER['REQUEST_METHOD']==='POST')// Compueba se ha enviado un $_POST y realiza una cosa u otra en funcion de lo que necesite.
     //     if(method_exists($objControlador, $_GET['m']))$datos = $objControlador->{$_GET['m']}($_POST);
     // else
-        if(method_exists($objControlador, $_GET['m'])){
-            $datos = $objControlador->{$_GET['m']}($_POST);
-        }
+    if(method_exists($objControlador, $_GET['m'])){
+        $datos = $objControlador->{$_GET['m']}($_POST);
+    }
 
-    if(isset($datos['usuario']))$_SESSION = $datos;
+    if(isset($datos['idUsuario'])){
+        $_SESSION['idUsuario']= $datos['idUsuario'];
+        $_SESSION['nombreUsuario']= $datos['nombreUsuario'];
+    }
     
     if($objControlador->vista != '')
         require_once RUTA_VISTAS.$objControlador->vista.'.php';

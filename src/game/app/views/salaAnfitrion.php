@@ -53,19 +53,5 @@
             </div>
         </div>
     </main>
-
-    <!-- Modal -->
-    <div id="modalCrearSala" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
-            <h1>Crear Sala</h1>
-            <form id="crearSalaForm">
-                <label for="nombreSala">Introduce el nombre de la ciudad</label>
-                <input type="text" id="nombreSala" name="nombreSala" required>
-                <button type="submit" class="boton">Crear</button>
-            </form>
-        </div>
-    </div>
-    <script type="module" src="js/views/crearSala.js"></script>
 </body>
 </html>
