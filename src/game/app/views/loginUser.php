@@ -25,7 +25,7 @@
                 <p class="passwUsuarioValidacion">Introduce una contraseña correcta</p>
                 <input type="password" placeholder="Contraseña" name="passw" id="passw">
                 <label id="mostrarpassw">
-                    <input id="verPassw" type="checkbox" onclick="mostrarPassw()">
+                    <input id="verPassw" type="checkbox" >
                     Mostrar contraseña
                 </label>
                 

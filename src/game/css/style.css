@@ -175,6 +175,12 @@ a{
         margin: 0 auto;
     }
 }
+@media (orientation: portrait){
+    .alcaldes{
+        width: 50%;
+        margin: 0 auto;
+    }
+}
 #parrafoNombreUsuario{
     font-size: 2rem;
     color: black;
@@ -391,12 +397,21 @@ a{
 
 .modal-content {
     background-color: #0c0c0c83;
-    margin: 15% auto; /* 15% desde arriba y centrado */
+    margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 40%; 
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Sombra */
+}
+@media (max-width: 1280px) {
+    .modal-content {
+        width: 70%; 
+        font-size: 1rem
+    }
+    .modal-content h1{
+        font-size: 3rem;
+    }
 }
 
 #crearSalaForm, #unirseSalaForm {
@@ -446,6 +461,7 @@ a{
     margin: 1rem 0;
 }
 
+
 .valorSala{
     text-align: center;
     font-size: 3rem;
@@ -454,7 +470,14 @@ a{
     text-shadow: -1px 1px 3px black;
     margin: 1rem 0;
 }
-
+@media (max-width: 768px) {
+    .tituloSala{
+        font-size: 3.5rem;
+    }
+    .valorSala{
+        font-size: 2.3rem;
+    }
+}
 .enlacesSala{
     display: flex;
     flex-direction: column;

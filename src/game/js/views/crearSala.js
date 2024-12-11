@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Abrir el modal al hacer clic en el botón "Crear Sala"
     openModalCrearSalaButton.addEventListener("click", (e) => {
         e.preventDefault(); // Evita el comportamiento por defecto del enlace
-        modalCrearSala.style.display = "block"; // Muestra el modal
+        modalCrearSala.style.display = "flex"; // Muestra el modal
     });
 
     // Cerrar el modal al hacer clic en el botón "Cerrar"

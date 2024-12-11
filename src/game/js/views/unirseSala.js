@@ -8,7 +8,7 @@ const unirseSalaForm = document.getElementById('unirseSalaForm');
 
 // Abrir modal
 unirseSalaButton.addEventListener('click', () => {
-    modalUnirseSala.style.display = 'block';
+    modalUnirseSala.style.display = 'flex';
 });
 
 // Cerrar modal
