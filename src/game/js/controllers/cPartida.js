@@ -25,4 +25,11 @@ export class CPartida {
         formData.append('idUsuario', idUsuario); 
         this.modelo.mUnirseSala(formData);
     }
+
+    cMostrarJugadores(idPartida){
+        let formData = new FormData();
+        formData.append('idPartida', idPartida); 
+        let result = this.modelo.mMostrarJugadores(formData);
+        return result;
+    }
 }

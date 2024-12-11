@@ -92,5 +92,31 @@ class MPartida{
             return false;
         }
     }
+
+    function mMostrarJugadores($datos){
+        try{
+            
+            $sql = "SELECT Usuarios.nombreUsuario FROM Partidas
+            INNER JOIN Usuarios_partidas ON Partidas.idPartida = Usuarios_partidas.idPartida
+            INNER JOIN Usuarios ON Usuarios_partidas.idUsuario = Usuarios.idUsuario
+            WHERE Partidas.idPartida = :idPartida";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_INT);
+            $stmt->execute();
+
+            $array = [];
+
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $array[] = $row['nombreUsuario'];
+            } 
+            return $array;
+
+        }
+        catch(Exception $e){
+            error_log("Error al mostrar jugadores: " . $e->getMessage());
+            return false;
+        }
+    }
     
 }

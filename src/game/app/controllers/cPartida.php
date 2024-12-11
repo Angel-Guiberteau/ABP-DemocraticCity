@@ -63,6 +63,20 @@ class CPartida{
         }
     }
 
+    function cMostrarJugadores($datos){
+        $this->vista = '';
+        if($nombreJugadores = $this->objMPartida->mMostrarJugadores($datos)){
+            $this->vista = '';
+            echo json_encode($nombreJugadores);
+            exit;
+        }
+        else{
+            $this->vista = '';
+            echo 'incorrecto';
+            exit;
+        }
+    }
+
     function generarCodigoAleatorio($longitud = 6) {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $codigo = substr(str_shuffle($caracteres), 0, $longitud);
