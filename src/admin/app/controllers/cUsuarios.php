@@ -10,6 +10,10 @@ class CUsuarios{
     public function mostrarAdminRegistro(){
         $this->vista = 'registrarAdmin';
     }
+    public function mostrarHasheo(){
+        $this->vista = 'hasheo';
+    }
+
     public function mostrarInicioSesionAdmin(){
         $this->vista = 'loginAdmin';
     }

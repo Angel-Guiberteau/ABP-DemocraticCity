@@ -7,6 +7,9 @@ class CPartida{
         $this->objMPartida = new MPartida();
     }
 
+    public function mostrarSalaUsuario(){
+        $this->vista = 'salaUsuario';
+    }
     public function mostrarSalaAnfitrion(){
         $this->vista = 'salaAnfitrion';
     }
@@ -15,11 +18,10 @@ class CPartida{
         $this->vista = '';
         $codigoSala = $this->generarCodigoAleatorio(6);
         $datos['codSala'] = $codigoSala;
-        if($this->objMPartida->mCrearSala($datos)){
+        if($datoPartida = $this->objMPartida->mCrearSala($datos)){
             $this->vista = '';
             echo 'correcto';
-            return $datos;
-
+            return $datoPartida;
         }
         else{
             $this->vista = '';
@@ -47,10 +49,25 @@ class CPartida{
         }
 
     }
+    function cUnirseSala($datos){
+        $this->vista = '';
+        if($datosPartidas = $this->objMPartida->mUnirseSala($datos)){
+            $this->vista = '';
+            echo 'correcto';
+            return $datosPartidas;
+        }
+        else{
+            $this->vista = '';
+            echo 'incorrecto';
+            exit;
+        }
+    }
 
     function generarCodigoAleatorio($longitud = 6) {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $codigo = substr(str_shuffle($caracteres), 0, $longitud);
         return $codigo;
     }
+
+    
 }

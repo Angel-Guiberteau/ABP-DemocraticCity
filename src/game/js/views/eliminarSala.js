@@ -3,7 +3,7 @@ import { CPartida } from '../controllers/cPartida.js';
 const controlador = new CPartida();
 
 // Hacer que la función esté disponible globalmente
-window.eliminarSala = function (codSala, idAnfitrion) {
+window.eliminarSala = function (idPartida) {
 
-    controlador.cEliminarSala(codSala, idAnfitrion);
+    controlador.cEliminarSala(idPartida);
 };

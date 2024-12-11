@@ -11,38 +11,86 @@ class MPartida{
         $this->conexion= $objConexion->conexion;
     }
     public function mCrearSala($datos){
+        
         try{
+            $this->conexion->beginTransaction();
             $sql = "INSERT INTO Partidas (nombreCiudad, idAnfitrion, vEducacion, vSanidad, vSeguridad, vEconomia, codSala, puntuacion) VALUES (:nombreCiudad, :idAnfitrion, 5,5,5,5, :codigoSala, 0)";
         
-            $stmt = $this->conexion->prepare($sql);
+            $stmtInsert = $this->conexion->prepare($sql);
     
-            $stmt->bindValue(':nombreCiudad', $datos['nombreCiudad'], PDO::PARAM_STR);
-            $stmt->bindValue(':idAnfitrion', $datos['idAnfitrion'], PDO::PARAM_INT);
-            $stmt->bindValue(':codigoSala', $datos['codSala'], PDO::PARAM_STR);
+            $stmtInsert->bindValue(':nombreCiudad', $datos['nombreCiudad'], PDO::PARAM_STR);
+            $stmtInsert->bindValue(':idAnfitrion', $datos['idAnfitrion'], PDO::PARAM_INT);
+            $stmtInsert->bindValue(':codigoSala', $datos['codSala'], PDO::PARAM_STR);
             
-            $stmt->execute();
-            return true;
+            $stmtInsert->execute();
+
+            $sql2 = "SELECT * FROM Partidas WHERE nombreCiudad = :nombreCiudad AND idAnfitrion = :idAnfitrion AND codSala = :codigoSala";
+
+            $stmtSelect = $this->conexion->prepare($sql2);
+
+            $stmtSelect->bindValue(':nombreCiudad', $datos['nombreCiudad'], PDO::PARAM_STR);
+            $stmtSelect->bindValue(':idAnfitrion', $datos['idAnfitrion'], PDO::PARAM_INT);
+            $stmtSelect->bindValue(':codigoSala', $datos['codSala'], PDO::PARAM_STR);
+            
+            $stmtSelect->execute();
+
+            $this->conexion->commit();
+
+            return $stmtSelect->fetch(PDO::FETCH_ASSOC);
+
+
         }catch(Exception $e){
+            error_log($e->getMessage());
+            $this->conexion->rollBack();
             return false;
         }
-        
-
     }
     public function mEliminarSala($datos){
         try{
-            $sql = "DELETE FROM Partidas WHERE codSala = :codSala AND idAnfitrion = :idAnfitrion";
+            $sql = "DELETE FROM Partidas WHERE idPartida = :idPartida";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bindValue(':codSala', $datos['codSala'], PDO::PARAM_STR);
-            $stmt->bindValue(':idAnfitrion', $datos['idAnfitrion'], PDO::PARAM_INT);
+            $stmt->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_STR);
             $stmt->execute();
             return $stmt->rowCount() > 0;
 
         }catch(Exception $e){
             error_log("Error al eliminar sala: " . $e->getMessage());
-            
             return false;
         }
+    }
 
+    public function mUnirseSala($datos){
+        try{
+            $this->conexion->beginTransaction();
+
+            $sql = "SELECT * FROM Partidas WHERE codSala = :codSala";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':codSala', $datos['codSala'], PDO::PARAM_STR);
+            $stmt->execute();
+
+            $datosPartidas = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if($datosPartidas){
+                
+                $sql2 = "INSERT INTO Usuarios_partidas (idUsuario, idPartida) VALUES (:idUsuario, :idPartida)";
+                $stmt2 = $this->conexion->prepare($sql2);
+                $stmt2->bindValue(':idUsuario', $datos['idUsuario'], PDO::PARAM_INT);
+                $stmt2->bindValue(':idPartida', $datosPartidas['idPartida'], PDO::PARAM_INT);
+                $stmt2->execute();
+                $this->conexion->commit();
+                
+            }
+            else
+                return false;
+            
+
+            return $datosPartidas;
+        }
+        catch(Exception $e){
+            $this->conexion->rollBack();
+            error_log("Error al unirse a la sala: " . $e->getMessage());
+            return false;
+        }
     }
     
 }

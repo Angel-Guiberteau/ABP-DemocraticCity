@@ -13,3 +13,16 @@ VALUES (1, 'd', 'Colegio', 2, 0,0,0);
 
 SELECT * from Preguntas INNER JOIN Respuestas ON Preguntas.idPregunta = Respuestas.idPregunta;
 
+
+
+DROP TABLE IF EXISTS Respuestas;
+DROP TABLE IF EXISTS Partidas_preguntas;
+DROP TABLE IF EXISTS Preguntas;
+DROP TABLE IF EXISTS Partidas_logros;
+DROP TABLE IF EXISTS Logros;
+DROP TABLE IF EXISTS Edificios;
+DROP TABLE IF EXISTS Usuarios_partidas;
+DROP TABLE IF EXISTS Partidas;
+DROP TABLE IF EXISTS Usuarios;
+DROP TABLE IF EXISTS Administradores;
+DROP TABLE IF EXISTS Multimedia;

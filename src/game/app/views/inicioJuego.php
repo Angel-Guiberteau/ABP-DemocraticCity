@@ -74,6 +74,9 @@
             <span class="close" id="closeModalUnirseSala">&times;</span>
             <h1>Unirse a Sala</h1>
             <form id="unirseSalaForm">
+                <?php
+                    echo '<input type="number" hidden id="idUsuario" name="idUsuario" value="'.$_SESSION['idUsuario'].'">';
+                ?>
                 <label for="codigoSala">Introduce el código de la sala</label>
                 <input type="text" id="codigoSala" name="codigoSala" required>
                 <button type="submit" class="boton">Unirse</button>

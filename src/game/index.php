@@ -30,9 +30,15 @@
         $_SESSION['nombreUsuario']= $datos['nombreUsuario'];
     }
     if(isset($datos['codSala'])){
+        $_SESSION['idPartida']= $datos['idPartida'];
         $_SESSION['codSala']= $datos['codSala'];
         $_SESSION['idAnfitrion']= $datos['idAnfitrion'];
         $_SESSION['nombreCiudad']= $datos['nombreCiudad'];
+        $_SESSION['vEducacion']= $datos['vEducacion'];
+        $_SESSION['vSanidad']= $datos['vSanidad'];
+        $_SESSION['vSeguridad']= $datos['vSeguridad'];
+        $_SESSION['vEconomia']= $datos['vEconomia'];
+        $_SESSION['puntuacion']= $datos['puntuacion'];
     }
     
     if($objControlador->vista != '')

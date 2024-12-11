@@ -6,17 +6,23 @@ export class CPartida {
     }
 
     cCrearSala(nombreCiudad, idAnfitrion) {
-        alert();
         let formData = new FormData(); 
         formData.append('nombreCiudad', nombreCiudad); 
         formData.append('idAnfitrion', idAnfitrion); 
 
         this.modelo.mCrearSala(formData);        
     }
-    cEliminarSala(codSala, idAnfitrion){
+    cEliminarSala(idPartida){
+        let formData = new FormData();
+        formData.append('idPartida', idPartida); 
+        this.modelo.mEliminarSala(formData);
+    }
+    cUnirseSala(codSala, idUsuario){
+        alert('controlador');
+
         let formData = new FormData();
         formData.append('codSala', codSala); 
-        formData.append('idAnfitrion', idAnfitrion); 
-        this.modelo.mEliminarSala(formData);
+        formData.append('idUsuario', idUsuario); 
+        this.modelo.mUnirseSala(formData);
     }
 }

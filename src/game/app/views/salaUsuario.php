@@ -52,9 +52,8 @@
                 <h3 class="valorSala">12</h3>
                 <div class="enlacesSala">
                     <?php
-                        echo '<button class="boton" onclick="eliminarSala(\'' . $_SESSION['idPartida'] . '\')">Salir de la sala</button>';
+                        echo '<button class="boton" onclick="eliminarSala(\'' . $_SESSION['codSala'] . '\', \'' . $_SESSION['idAnfitrion'] . '\')">Salir de la sala</button>';
                     ?>
-                    <a href="" class="enlace">Comenzar partida</a>
                 </div>
             </div>
             <div class="alcaldes">
