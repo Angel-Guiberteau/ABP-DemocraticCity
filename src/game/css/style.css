@@ -203,9 +203,12 @@ a{
 
 }
 
-.icons a:visited{
+.icons svg a:visited{
     color: black;
     
+}
+.icons svg{
+    color: black;
 }
 .icons a, .icons a svg{
     color: black;
