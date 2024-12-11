@@ -28,7 +28,20 @@ class MPartida{
         
 
     }
-    public function mMostrarSala($datos){
+    public function mEliminarSala($datos){
+        try{
+            $sql = "DELETE FROM Partidas WHERE codSala = :codSala AND idAnfitrion = :idAnfitrion";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':codSala', $datos['codSala'], PDO::PARAM_STR);
+            $stmt->bindValue(':idAnfitrion', $datos['idAnfitrion'], PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->rowCount() > 0;
+
+        }catch(Exception $e){
+            error_log("Error al eliminar sala: " . $e->getMessage());
+            
+            return false;
+        }
 
     }
     

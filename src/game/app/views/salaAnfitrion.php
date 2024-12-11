@@ -51,7 +51,9 @@
                 <h2 class="tituloSala">Jugadores actuales</h2>
                 <h3 class="valorSala">12</h3>
                 <div class="enlacesSala">
-                    <a href="index.php?c=Usuarios&m=mostrarInicio" class="enlace">Salir de la sala</a>
+                    <?php
+                        echo '<button class="boton" onclick="eliminarSala(\'' . $_SESSION['codSala'] . '\', \'' . $_SESSION['idAnfitrion'] . '\')">Salir de la sala</button>';
+                    ?>
                     <a href="" class="enlace">Comenzar partida</a>
                 </div>
             </div>
@@ -61,5 +63,8 @@
             </div>
         </div>
     </main>
+    <script type="module" src="js/views/eliminarSala.js"></script>
+    <script type="module" src="js/controllers/cPartida.js"></script>
+    <script type="module" src="js/models/mPartida.js"></script>
 </body>
 </html>

@@ -33,6 +33,21 @@ class CPartida{
         
     }
 
+    public function cEliminarSala($datos){
+        $this->vista = '';
+        if($this->objMPartida->mEliminarSala($datos)){
+            $this->vista = '';
+            echo 'correcto';
+            exit;
+        }
+        else{
+            $this->vista = '';
+            echo 'incorrecto';
+            exit;
+        }
+
+    }
+
     function generarCodigoAleatorio($longitud = 6) {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $codigo = substr(str_shuffle($caracteres), 0, $longitud);

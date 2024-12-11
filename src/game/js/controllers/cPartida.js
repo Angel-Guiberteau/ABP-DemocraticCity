@@ -6,13 +6,17 @@ export class CPartida {
     }
 
     cCrearSala(nombreCiudad, idAnfitrion) {
+        alert();
         let formData = new FormData(); 
         formData.append('nombreCiudad', nombreCiudad); 
         formData.append('idAnfitrion', idAnfitrion); 
-        alert('controlador');
 
-        this.modelo.mCrearSala(formData);
-
-        
+        this.modelo.mCrearSala(formData);        
+    }
+    cEliminarSala(codSala, idAnfitrion){
+        let formData = new FormData();
+        formData.append('codSala', codSala); 
+        formData.append('idAnfitrion', idAnfitrion); 
+        this.modelo.mEliminarSala(formData);
     }
 }

@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Recoge los datos del formulario (si son necesarios)
         const nombreCiudad = document.getElementById("nombreCiudad").value;
         const idAnfitrion = document.getElementById("idAnfitrion").value;
-        alert('vista');
         controlador.cCrearSala(nombreCiudad, idAnfitrion);
 
 
