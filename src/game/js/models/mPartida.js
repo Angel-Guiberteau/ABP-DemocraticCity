@@ -152,8 +152,7 @@ export class MPartida {
                 if (result=='correcto') {
                     alert('El anfitrión ha abandonado la sala. REEDIRIGIENDO...');  
                     window.location.href = "index.php?c=Usuarios&m=mostrarInicioJuego"; 
-                } else {
-                    alert('El anfitrión ha abandonado la sala. REEDIRIGIENDO...');                }  
+                } 
             } else {
                 alert('El anfitrión ha abandonado la sala. REEDIRIGIENDO...');
             }
