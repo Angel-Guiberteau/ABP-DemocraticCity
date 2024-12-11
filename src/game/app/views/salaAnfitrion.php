@@ -65,9 +65,15 @@
                 ?>
                 <div class="enlacesSala">
                     <?php
-                        echo '<button class="boton" onclick="eliminarSala(\'' . $_SESSION['idPartida'] . '\')">Salir de la sala</button>';
+                        echo '<button class="boton" onclick="mostrarJugadores()">Actualizar jugadores</button>';
                     ?>
-                    <a href="" class="enlace">Comenzar partida</a>
+                    <div>
+                        <?php
+                            echo '<button class="boton" onclick="eliminarSala(\'' . $_SESSION['idPartida'] . '\')">Salir de la sala</button>';
+                        ?>
+                        <button class="boton">Comenzar partida</button>
+                    </div>
+                    
                 </div>
             </div>
             <div class="alcaldes">

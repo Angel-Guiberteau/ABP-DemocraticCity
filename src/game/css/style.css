@@ -132,7 +132,6 @@ form .registrarseIncorrecto, form .nombreUsuarioValidacion, form .passwUsuarioVa
 }
 
 .boton{
-    width: 100%;
     background-color: #32CD32;
     background: linear-gradient(90deg, #56CCF2 0%, #2F80ED 100%);
     padding: 1.2rem 0.7rem;
@@ -430,15 +429,23 @@ a{
 
 .enlacesSala{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
     margin: 1rem 0;
     width: 100%;
 }
+.enlacesSala div{
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 2rem;
+    align-items: center;
+}
 
 .enlacesSala a{
-    width: 30%;
     text-decoration: none;
     color: white;
     font-size: 2rem;

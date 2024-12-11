@@ -94,8 +94,11 @@ export class MPartida {
                  // Inicializa una variable para acumular los nombres
                     if(result != 'incorrecto'){
                         let jugadoresHTML = '';
-                        result.forEach(nombreJugador => {
-                            jugadoresHTML += nombreJugador + ' - ';
+                        result.forEach((nombreJugador, index) => {
+                            jugadoresHTML += nombreJugador;
+                            if (index < result.length - 1) {
+                                jugadoresHTML += ' - ';
+                            }
                         });
                         parrafoJugadores.innerHTML = jugadoresHTML;
                     }else{

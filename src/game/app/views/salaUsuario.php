@@ -37,6 +37,7 @@
         </nav>
         <div>
             <?php
+                echo '<input type="hidden" id="idPartida" value="'.$_SESSION['idPartida'].'">';
                 if(isset($_SESSION['nombreCiudad'])){
                     echo "<h1 id='tituloJuego'>".$_SESSION['nombreCiudad']."</h1>";
                 }
@@ -49,11 +50,26 @@
                     }
                 ?>
                 <h2 class="tituloSala">Jugadores actuales</h2>
-                <h3 class="valorSala">12</h3>
+                <?php
+                    echo '<p id="nombreJugadores" class="valorSala">';
+                    if(isset($datos))
+                    {
+                        foreach($datos as $dato)
+                        {
+                            echo $dato['nombreUsuario']." - ";
+                        }
+                    }
+                    echo "</p>";
+                ?>
                 <div class="enlacesSala">
                     <?php
-                        echo '<button class="boton" onclick="eliminarUsuarioPartida(\'' . $_SESSION['idUsuario'] . '\')">Salir de la sala</button>';
+                        echo '<button class="boton" onclick="mostrarJugadores()">Actualizar jugadores</button>';
                     ?>
+                    <div>
+                        <?php
+                            echo '<button class="boton" onclick="eliminarUsuarioPartida(\'' . $_SESSION['idUsuario'] . '\')">Salir de la sala</button>';
+                        ?>
+                    </div>
                 </div>
             </div>
             <div class="alcaldes">
@@ -62,6 +78,7 @@
             </div>
         </div>
     </main>
+    <script type="module" src="js/views/mostrarJugadores.js"></script>
     <script type="module" src="js/views/eliminarUsuarioPartida.js"></script>
     <script type="module" src="js/controllers/cPartida.js"></script>
     <script type="module" src="js/models/mPartida.js"></script>
