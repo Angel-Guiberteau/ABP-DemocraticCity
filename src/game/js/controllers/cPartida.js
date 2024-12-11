@@ -34,4 +34,10 @@ export class CPartida {
         formData.append('idUsuario', idUsuario); 
         this.modelo.mEliminarUsuarioPartida(formData);
     }
+    cSalaEliminada(idPartida, idUsuario){
+        let formData = new FormData(); 
+        formData.append('idPartida', idPartida); 
+        formData.append('idUsuario', idUsuario); 
+        this.modelo.mSalaEliminada(formData);
+    }
 }

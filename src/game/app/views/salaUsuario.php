@@ -37,11 +37,13 @@
         </nav>
         <div>
             <?php
-                echo '<input type="hidden" id="idPartida" value="'.$_SESSION['idPartida'].'">';
+                echo '<input type="hidden" id="idPartidaOculto" value="'.$_SESSION['idPartida'].'">';
+                echo '<input type="hidden" id="idUsuarioOculto" value="'.$_SESSION['idUsuario'].'">';
                 if(isset($_SESSION['nombreCiudad'])){
                     echo "<h1 id='tituloJuego'>".$_SESSION['nombreCiudad']."</h1>";
                 }
             ?>
+            <p class="resultadoMensaje" style="display: block; color: black;"></p>
             <div class="botones-inicio">
                 <h2 class="tituloSala">Código de la sala</h2>
                 <?php
@@ -65,7 +67,7 @@
                     <?php
                         echo '<button class="boton" onclick="mostrarJugadores()">Actualizar jugadores</button>';
                     ?>
-                    <div>
+
                         <?php
                             echo '<button class="boton" onclick="eliminarUsuarioPartida(\'' . $_SESSION['idUsuario'] . '\')">Salir de la sala</button>';
                         ?>

@@ -140,4 +140,25 @@ export class MPartida {
             resultado.style.color = 'red';
         }
     }
+
+    async mSalaEliminada(formData){
+        try {
+            const response = await fetch('index.php?c=Partida&m=cComprobarPartidaEliminada', {
+                method: 'POST',  
+                body: formData,  
+            });
+            if(response.ok) {
+                const result = await response.text();                
+                if (result=='correcto') {
+                    alert('El anfitrión ha abandonado la sala. REEDIRIGIENDO...');  
+                    window.location.href = "index.php?c=Usuarios&m=mostrarInicioJuego"; 
+                } else {
+                    alert('El anfitrión ha abandonado la sala. REEDIRIGIENDO...');                }  
+            } else {
+                alert('El anfitrión ha abandonado la sala. REEDIRIGIENDO...');
+            }
+            
+        } catch (error) {
+        }
+    }
 }

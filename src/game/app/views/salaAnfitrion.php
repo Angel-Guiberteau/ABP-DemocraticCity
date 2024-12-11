@@ -38,7 +38,7 @@
         <div>
             <?php
             
-                echo '<input type="hidden" id="idPartida" value="'.$_SESSION['idPartida'].'">';
+                echo '<input type="hidden" id="idPartidaOculto" value="'.$_SESSION['idPartida'].'">';
 
                 if(isset($_SESSION['nombreCiudad'])){
                     echo "<h1 id='tituloJuego'>".$_SESSION['nombreCiudad']."</h1>";

@@ -120,6 +120,22 @@ class MPartida{
         }
     }
 
+    function mComprobarPartidaEliminada($datos){
+        try{
+            $sql = "SELECT * FROM Usuarios_partidas WHERE idPartida = :idPartida AND idUsuario = :idUsuario";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_INT);
+            $stmt->bindValue(':idUsuario', $datos['idUsuario'], PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->rowCount() < 1;
+        }
+        catch(Exception $e){
+            error_log("Error al comprobar partida eliminada: " . $e->getMessage());
+            return false;
+        }
+    }
+
     function mEliminarUsuarioPartida($datos){
         try{
             $sql = "DELETE FROM Usuarios_partidas WHERE idUsuario = :idUsuario";
