@@ -1,4 +1,5 @@
-//import { CImagenes } from "../controllers/cImagenes";
+import { CImagenes } from "../controllers/cImagenes";
+const objCImagenes = new CImagenes();
 document.getElementById("formularioImagenes").addEventListener("submit", async (event) => {
     event.preventDefault(); // Evitar que el formulario se envíe.
     alert("Entra en la vista de JS");

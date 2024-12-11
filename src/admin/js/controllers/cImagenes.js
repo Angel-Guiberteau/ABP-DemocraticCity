@@ -1,5 +1,8 @@
 import { MImagenes } from "../models/mImagenes";
 export class CImagenes{
-    constructor(){}
+    objMImagenes;
+    constructor(){
+        this.objMImagenes = new MImagenes();
+    }
     
 }
