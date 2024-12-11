@@ -82,7 +82,7 @@ export class MPartida {
         }
     }
 
-    async mMostrarJugadores(formData){
+    async mMostrarJugadores(formData, parrafoJugadores){
         try {
             const response = await fetch('index.php?c=Partida&m=cMostrarJugadores', {
                 method: 'POST',  
@@ -91,10 +91,39 @@ export class MPartida {
             
             if(response.ok) {
                 const result = await response.json();
-                alert(result);
+                 // Inicializa una variable para acumular los nombres
+                    if(result != 'incorrecto'){
+                        let jugadoresHTML = '';
+                        result.forEach(nombreJugador => {
+                            jugadoresHTML += nombreJugador + ' - ';
+                        });
+                        parrafoJugadores.innerHTML = jugadoresHTML;
+                    }else{
+                        let jugadoresHTML = '';
+                        parrafoJugadores.innerHTML = 'No hay jugadores en la sala';
+                    }
+                
+            } else {
+                alert('Algo salio mal');
+            }
+            
+        } catch (error) {  // Si ocurre un error al hacer la solicitud al servidor.
+            console.error('Error:', error);  // Muestra el error en la consola para depuración.
+            document.getElementById('resultado').innerText = 'Error de conexión.';  // Muestra un mensaje de error al usuario.
+            resultado.style.color = 'red';
+        }
+    }
+    async mEliminarUsuarioPartida(formData){
 
-                if (result!='incorrecto') {
-                    return result;
+        try {
+            const response = await fetch('index.php?c=Partida&m=cEliminarUsuarioPartida', {
+                method: 'POST',  
+                body: formData,  
+            });
+            if(response.ok) {
+                const result = await response.text();                
+                if (result=='correcto') {
+                    window.location.href = "index.php?c=Usuarios&m=mostrarInicioJuego"; 
                 } else {
                     alert('Algo salio mal');//NO QUIERO REEDIRECCIONAR SINO PONER UN PARRAFO CON UN ERROR
                 }  

@@ -1,5 +1,6 @@
 export class MIniciarSesion {
     constructor() {}
+    
     async mIniciarSesion(formData){
         try {
             const response = await fetch('index.php?c=Usuarios&m=inicioAdm', {

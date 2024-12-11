@@ -67,7 +67,21 @@ class CPartida{
         $this->vista = '';
         if($nombreJugadores = $this->objMPartida->mMostrarJugadores($datos)){
             $this->vista = '';
-            echo json_encode($nombreJugadores);
+            echo json_encode($nombreJugadores, true);
+            exit;
+        }
+        else{
+            $this->vista = '';
+            echo json_encode('incorrecto');
+            exit;
+        }
+    }
+
+    function cEliminarUsuarioPartida($datos){
+        $this->vista = '';
+        if($this->objMPartida->mEliminarUsuarioPartida($datos)){
+            $this->vista = '';
+            echo 'correcto';
             exit;
         }
         else{

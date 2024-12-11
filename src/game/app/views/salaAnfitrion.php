@@ -53,7 +53,7 @@
                 ?>
                 <h2 class="tituloSala">Jugadores actuales</h2>
                 <?php
-                    echo '<p id="nombreJugadores">';
+                    echo '<p id="nombreJugadores" class="valorSala">';
                     if(isset($datos))
                     {
                         foreach($datos as $dato)

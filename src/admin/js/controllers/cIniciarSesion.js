@@ -1,4 +1,5 @@
 import { MIniciarSesion } from '../models/mIniciarSesion.js';
+
 export class CIniciarSesion {
     modelo;
     constructor() {

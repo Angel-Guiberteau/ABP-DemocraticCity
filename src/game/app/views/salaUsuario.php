@@ -52,7 +52,7 @@
                 <h3 class="valorSala">12</h3>
                 <div class="enlacesSala">
                     <?php
-                        echo '<button class="boton" onclick="eliminarSala(\'' . $_SESSION['codSala'] . '\', \'' . $_SESSION['idAnfitrion'] . '\')">Salir de la sala</button>';
+                        echo '<button class="boton" onclick="eliminarUsuarioPartida(\'' . $_SESSION['idUsuario'] . '\')">Salir de la sala</button>';
                     ?>
                 </div>
             </div>
@@ -62,7 +62,7 @@
             </div>
         </div>
     </main>
-    <script type="module" src="js/views/eliminarSala.js"></script>
+    <script type="module" src="js/views/eliminarUsuarioPartida.js"></script>
     <script type="module" src="js/controllers/cPartida.js"></script>
     <script type="module" src="js/models/mPartida.js"></script>
 </body>

@@ -18,18 +18,20 @@ export class CPartida {
         this.modelo.mEliminarSala(formData);
     }
     cUnirseSala(codSala, idUsuario){
-        alert('controlador');
-
         let formData = new FormData();
         formData.append('codSala', codSala); 
         formData.append('idUsuario', idUsuario); 
         this.modelo.mUnirseSala(formData);
     }
 
-    cMostrarJugadores(idPartida){
+    cMostrarJugadores(idPartida, parrafoJugadores){
         let formData = new FormData();
         formData.append('idPartida', idPartida); 
-        let result = this.modelo.mMostrarJugadores(formData);
-        return result;
+        let result = this.modelo.mMostrarJugadores(formData, parrafoJugadores);
+    }
+    cEliminarUsuarioPartida(idUsuario){
+        let formData = new FormData(); 
+        formData.append('idUsuario', idUsuario); 
+        this.modelo.mEliminarUsuarioPartida(formData);
     }
 }

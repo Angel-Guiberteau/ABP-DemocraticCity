@@ -19,7 +19,6 @@ closeModalUnirseSala.addEventListener('click', () => {
 // Manejar envío del formulario
 unirseSalaForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('vista');
     const codSala = document.getElementById('codigoSala').value;
     const idUsuario = document.getElementById('idUsuario').value;
     controlador.cUnirseSala(codSala, idUsuario);

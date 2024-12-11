@@ -60,6 +60,7 @@ class MPartida{
     }
 
     public function mUnirseSala($datos){
+        
         try{
             $this->conexion->beginTransaction();
 
@@ -115,6 +116,21 @@ class MPartida{
         }
         catch(Exception $e){
             error_log("Error al mostrar jugadores: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    function mEliminarUsuarioPartida($datos){
+        try{
+            $sql = "DELETE FROM Usuarios_partidas WHERE idUsuario = :idUsuario";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idUsuario', $datos['idUsuario'], PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return true;
+        }
+        catch(Exception $e){
+            error_log("Error al eliminar usuario de la partida: " . $e->getMessage());
             return false;
         }
     }
