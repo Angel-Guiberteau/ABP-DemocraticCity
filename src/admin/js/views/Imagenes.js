@@ -1,8 +1,10 @@
-import { CImagenes } from "../controllers/cImagenes";
+//import { CImagenes } from "../controllers/cImagenes";
 document.getElementById("formularioImagenes").addEventListener("submit", async (event) => {
     event.preventDefault(); // Evitar que el formulario se envíe.
+    alert("Entra en la vista de JS");
 
     const imagen = document.getElementById("imagenes");
+    console.log(imagen);
     const archivo = imagen.files[0]; // Obtener el primer archivo.
 
     // Comprobamos si se ha seleccionado un archivo.
