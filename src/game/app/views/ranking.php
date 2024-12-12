@@ -60,9 +60,7 @@
             </div>
         </div>
     </main>
-
     <script src="js/views/musica.js"></script>
     <script src="js/views/decirNombre.js"></script>
-
 </body>
 </html>

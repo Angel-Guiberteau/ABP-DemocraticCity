@@ -14,7 +14,7 @@ class MPartida{
         
         try{
             $this->conexion->beginTransaction();
-            $sql = "INSERT INTO Partidas (nombreCiudad, idAnfitrion, vEducacion, vSanidad, vSeguridad, vEconomia, codSala, puntuacion) VALUES (:nombreCiudad, :idAnfitrion, 5,5,5,5, :codigoSala, 0)";
+            $sql = "INSERT INTO Partidas (nombreCiudad, idAnfitrion, vEducacion, vSanidad, vSeguridad, vEconomia, codSala, puntuacion, empezada) VALUES (:nombreCiudad, :idAnfitrion, 5,5,5,5, :codigoSala, 0, 'n')";
         
             $stmtInsert = $this->conexion->prepare($sql);
     
@@ -64,9 +64,10 @@ class MPartida{
         try{
             $this->conexion->beginTransaction();
 
-            $sql = "SELECT * FROM Partidas WHERE codSala = :codSala";
+            $sql = "SELECT * FROM Partidas WHERE codSala = :codSala AND empezada = :valor";
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindValue(':codSala', $datos['codSala'], PDO::PARAM_STR);
+            $stmt->bindValue(':valor', 'n', PDO::PARAM_STR);
             $stmt->execute();
 
             $datosPartidas = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -135,6 +136,24 @@ class MPartida{
             return false;
         }
     }
+    function mComprobarPartidaEmpezada($datos){
+        try{
+            $sql = "SELECT * FROM Partidas WHERE idPartida=:idPartida AND empezada = :valor";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_INT);
+            $stmt->bindValue(':valor', 's', PDO::PARAM_STR);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0)
+                return true;
+            else
+                return false;
+        }
+        catch(Exception $e){
+            error_log("Error al comprobar partida eliminada: " . $e->getMessage());
+            return false;
+        }
+    }
 
     function mEliminarUsuarioPartida($datos){
         try{
@@ -147,6 +166,25 @@ class MPartida{
         }
         catch(Exception $e){
             error_log("Error al eliminar usuario de la partida: " . $e->getMessage());
+            return false;
+        }
+    }
+
+
+    function mEmpezarPartida($datos){
+        try{
+            $sql = "UPDATE Partidas SET empezada = 's' WHERE idPartida = :idPartida";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_INT);
+            $stmt->execute();
+            
+            if ($stmt->rowCount() > 0)
+                return true;
+            else
+                return false;
+        }
+        catch(Exception $e){
+            error_log("Error al empezar partida: " . $e->getMessage());
             return false;
         }
     }

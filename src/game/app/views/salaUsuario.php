@@ -86,6 +86,7 @@
     </div>
     
     <script type="module" src="js/views/musica.js"></script>
+    <script type="module" src="js/views/partidaEmpezada.js"></script>
     <script type="module" src="js/views/mostrarJugadores.js"></script>
     <script type="module" src="js/views/eliminarUsuarioPartida.js"></script>
     <script type="module" src="js/controllers/cPartida.js"></script>

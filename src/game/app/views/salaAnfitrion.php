@@ -66,7 +66,7 @@
                         <?php
                             echo '<button class="boton" onclick="eliminarSala(\'' . $_SESSION['idPartida'] . '\')">Salir de la sala</button>';
                         ?>
-                        <button class="boton">Comenzar partida</button>
+                        <button class="boton" id="comenzarPartida">Comenzar partida</button>
                     </div>
                     
                 </div>
@@ -77,6 +77,7 @@
             </div>
         </div>
     </main>
+    <script type="module" src="js/views/empezarPartida.js"></script>
     <script type="module" src="js/views/musica.js"></script>
     <script type="module" src="js/views/mostrarJugadores.js"></script>
     <script type="module" src="js/views/eliminarSala.js"></script>

@@ -14,6 +14,14 @@ class CPartida{
         $this->vista = 'salaAnfitrion';
     }
 
+    public function mostrarJuegoAnfitrion(){
+        $this->vista = 'juegoAnfitrion';
+    }
+
+    public function mostrarJuegoUsuario(){
+        $this->vista = 'juegoUser';
+    }
+
     public function cCrearSala($datos){
         $this->vista = '';
         $codigoSala = $this->generarCodigoAleatorio(6);
@@ -52,12 +60,10 @@ class CPartida{
     function cUnirseSala($datos){
         $this->vista = '';
         if($datosPartidas = $this->objMPartida->mUnirseSala($datos)){
-            $this->vista = '';
             echo 'correcto';
             return $datosPartidas;
         }
         else{
-            $this->vista = '';
             echo 'incorrecto';
             exit;
         }
@@ -100,6 +106,29 @@ class CPartida{
         }
         else{
             $this->vista = '';
+            echo 'incorrecto';
+            exit;
+        }
+    }
+    function cComprobarPartidaEmpezada($datos){
+        $this->vista = '';
+        if($this->objMPartida->mComprobarPartidaEmpezada($datos)){
+            echo 'correcto';
+            exit;
+        }
+        else{
+            echo 'incorrecto';
+            exit;
+        }
+    }
+
+    function cEmpezarPartida($datos){
+        $this->vista = '';
+        if($this->objMPartida->mEmpezarPartida($datos)){
+            echo 'correcto';
+            exit;
+        }
+        else{
             echo 'incorrecto';
             exit;
         }

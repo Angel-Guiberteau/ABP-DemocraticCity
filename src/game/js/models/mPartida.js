@@ -64,10 +64,13 @@ export class MPartida {
                 const result = await response.text();
                 if(result.trim() == 'correcto')
                     window.location.href = "index.php?c=Partida&m=mostrarSalaUsuario";
-                else{
+                else
+                {
+                    parrafo.innerHTML = 'Código de sala incorrecto o sala ya comenzada';
                     parrafo.style.display = 'block';
-                    parrafo.innerHTML = 'La sala no se ha encontrado';
-                }
+                }    
+
+
             } else {
                 alert('Algo salio mal');
             }
@@ -139,7 +142,6 @@ export class MPartida {
     }
 
     async mSalaEliminada(formData, modal) {
-        console.log('modelo');
         
         try {
             // Realizamos la solicitud fetch para comprobar si la partida ha sido eliminada
@@ -147,7 +149,6 @@ export class MPartida {
                 method: 'POST',
                 body: formData,
             });
-            console.log('fetchHecho');
             
             if (response.ok) {
                 const result = await response.text();
@@ -157,9 +158,50 @@ export class MPartida {
                     modal.style.display = 'flex';
                 } 
     
-                // Aquí podrías redirigir a otra página, si es necesarioo la sala. REEDIRIGIENDO...');
-                // Aquí podrías redirigir a otra página, si es necesario
-                window.location.href = "index.php?c=Usuarios&m=mostrarInicioJuego";
+            }
+            
+        } catch (error) {
+            console.error('Error al comprobar la eliminación de la sala', error);
+        }
+    }
+    async mSalaEmpezada(formData) {        
+        console.log('modelo');
+
+        try {
+            // Realizamos la solicitud fetch para comprobar si la partida ha sido eliminada
+            const response = await fetch('index.php?c=Partida&m=cComprobarPartidaEmpezada', {
+                method: 'POST',
+                body: formData,
+            });
+            
+            if (response.ok) {
+                const result = await response.text();
+                console.log(result);
+
+                if (result.trim() === 'correcto') {
+                    window.location.href = "index.php?c=Partida&m=mostrarJuegoUsuario";
+                }
+            }
+            
+        } catch (error) {
+            console.error('Error al comprobar la eliminación de la sala', error);
+        }
+    }
+    async mEmpezarPartida(formData) {        
+        try {
+            // Realizamos la solicitud fetch para comprobar si la partida ha sido eliminada
+            const response = await fetch('index.php?c=Partida&m=cEmpezarPartida', {
+                method: 'POST',
+                body: formData,
+            });
+            
+            if (response.ok) {
+                const result = await response.text();
+                if (result.trim() === 'correcto') {
+                    window.location.href = "index.php?c=Partida&m=mostrarJuegoAnfitrion";
+                }else{
+                    alert('Upss... Hubo un error al iniciar la partida');
+                }
             }
             
         } catch (error) {

@@ -634,3 +634,96 @@ a{
     color: rgb(8, 204, 8);
     font-size: 1.8rem;
 }
+/* Juego */
+#bodyJuego{
+    background-image: url();
+    background-position: none;
+    background-size: none;
+    background-repeat: none;
+    min-height: 100vh;
+    backdrop-filter: blur(0px);
+    background-color: #fad8ac;
+    overflow: hidden;
+
+    /* display: flow-root; */
+}
+#juego{
+width: 100%;
+display: grid;
+grid-template-rows: 5vh 30vh 58vh;
+gap: 5px;
+margin: 5px auto 0 auto;
+
+}
+
+.preguntas{
+width: 100%;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+font-size: 1.7rem;
+}
+.preguntas>div:nth-child(1){
+width: 75%;
+padding: 1rem;
+margin: 0 auto 1rem auto;
+background-color: white;
+border: 1px solid black;
+border-radius: 50px;
+}
+.respuestas {
+width: 60%;
+display: grid;
+grid-template-columns: repeat(2, 1fr); /* Dos columnas con igual ancho */
+gap: 10px; /* Espaciado entre las respuestas */
+}
+
+.respuestas button {
+background-color: white;
+text-align: center;
+padding: 10px;
+border: 1px solid black;
+border-radius: 5px;
+}
+.medidores{
+display: flex;
+flex-direction: row;
+width: 60%;
+justify-content: space-evenly;
+align-items: center;
+margin: 1rem  0 auto;
+}
+.mapa{
+width: 100%;
+background-image: url(../img/mapaJuego.png);
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+position: relative;
+z-index: 1;
+}
+#edificio1{
+width: 100%;
+height: 100%;
+background-image: url(../img/comisaria.png);
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+position: absolute;
+top: 0;
+left: 0;
+z-index: 2;
+}
+#edificio2{
+width: 100%;
+height: 100%;
+background-image: url(../img/colegio.png);
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+position: absolute;
+top: 0;
+left: 0;
+/* display: none; */
+}

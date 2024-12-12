@@ -43,5 +43,19 @@ export class CPartida {
         // Llamamos al modelo para verificar si la sala ha sido eliminada
         this.modelo.mSalaEliminada(formData, modal);
     }
+    cSalaEmpezada(idPartida) {
+        console.log('controlador');
+
+        let formData = new FormData();
+        formData.append('idPartida', idPartida);                
+        // Llamamos al modelo para verificar si la sala ha sido eliminada
+        this.modelo.mSalaEmpezada(formData);
+    }
+    cEmpezarPartida(idPartida) {
+        let formData = new FormData();
+        formData.append('idPartida', idPartida);                
+        // Llamamos al modelo para verificar si la sala ha sido eliminada
+        this.modelo.mEmpezarPartida(formData);
+    }
     
 }
