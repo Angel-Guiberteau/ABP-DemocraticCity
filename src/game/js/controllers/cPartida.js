@@ -57,5 +57,14 @@ export class CPartida {
         // Llamamos al modelo para verificar si la sala ha sido eliminada
         this.modelo.mEmpezarPartida(formData);
     }
+    cMostrarPregunta(idPartida) {
+        alert('controlador');
+
+        let formData = new FormData();
+        formData.append('idPartida', idPartida);                
+        // Llamamos al modelo para verificar si la sala ha sido eliminada
+        let data = this.modelo.mMostrarPregunta(formData);
+        return data;
+    }
     
 }

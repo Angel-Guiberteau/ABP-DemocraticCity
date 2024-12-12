@@ -208,6 +208,26 @@ export class MPartida {
             console.error('Error al comprobar la eliminación de la sala', error);
         }
     }
+    async mMostrarPregunta(formData) {   
+        alert('modelo');
+        try {
+            // Realizamos la solicitud fetch para comprobar si la partida ha sido eliminada
+            const response = await fetch('index.php?c=Partida&m=cMostrarPreguntas', {
+                method: 'POST',
+                body: formData,
+                
+            });
+            
+            if (response.ok) {
+                const result = await response.json();
+                console.log(JSON.stringify(result, null, 2)); // Muestra el resultado de manera legible
+                return result;
+            }
+            
+        } catch (error) {
+            console.error('jklsdahfkjasdhkj', error);
+        }
+    }
     
     
 }

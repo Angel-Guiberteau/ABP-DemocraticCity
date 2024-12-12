@@ -140,4 +140,18 @@ class CPartida{
         return $codigo;
     }
 
+    function cMostrarPreguntas($datos){
+        
+        $this->vista = '';
+
+        if($preguntas = $this->objMPartida->mMostrarPreguntas($datos)){
+            echo json_encode($preguntas);
+            exit;
+        }
+        else{
+            echo 'incorrecto';
+            return false;
+        }
+    }
+
 }

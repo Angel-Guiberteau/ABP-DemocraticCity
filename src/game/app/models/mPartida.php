@@ -188,5 +188,71 @@ class MPartida{
             return false;
         }
     }
+
+    function mMostrarPreguntas($datos){
+
+        $this->conexion->beginTransaction();
+
+        try {
+            
+            $sql = "SELECT * FROM Preguntas WHERE idPregunta NOT IN (SELECT idPregunta FROM Partidas_preguntas WHERE idPartida = :idPartida) ORDER BY RAND() LIMIT 1;";
+        
+            // Preparar y ejecutar la consulta
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_INT);
+            $stmt->execute();
+            $pregunta = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if($pregunta){
+                    $sqlRespuestas = "SELECT * FROM Respuestas WHERE idPregunta = :idPregunta;";
+                    $stmt2 = $this->conexion->prepare($sqlRespuestas);
+                    $stmt2->bindValue(':idPregunta', $pregunta['idPregunta'], PDO::PARAM_INT);
+                    $stmt2->execute();
+                    $respuestas = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+            }
+            
+            if ($respuestas) {
+
+                $sql2 = "INSERT INTO Partidas_preguntas (idPartida, idPregunta) VALUES (:idPartida, :idPregunta);";
+                $stmt3 = $this->conexion->prepare($sql2);
+                $stmt3->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_INT);
+                $stmt3->bindValue(':idPregunta', $pregunta['idPregunta'], PDO::PARAM_INT);
+                $stmt3->execute();
+        
+                // Confirmar la transacción
+                $this->conexion->commit();
+                
+                $resultado = [
+                    "pregunta" => $pregunta["texto"],
+                    "respuestas" => []
+                ];
+
+                foreach ($respuestas as $respuesta) {
+                    $resultado["respuestas"][] = [
+                        "letra" => $respuesta["letraRespuesta"],
+                        "texto" => $respuesta["respuesta"],
+                        "educacion" => $respuesta["educacion"],
+                        "sanidad" => $respuesta["sanidad"],
+                        "seguridad" => $respuesta["seguridad"],
+                        "economia" => $respuesta["economia"],
+                        "idEdificio" => $respuesta["idEdificio"]
+                    ];
+                }
+
+                return $resultado; // Devuelve la pregunta con sus respuestas
+                
+            } else {
+                // No hay preguntas disponibles, revertir transacción
+                $this->conexion->rollBack();
+                return false; // Indica que no hay preguntas disponibles
+            }
+        } catch (Exception $e) {
+            error_log("ERROR JODERa: " . $e->getMessage());
+            // Revertir la transacción en caso de error
+            $this->conexion->rollBack();
+            throw new Exception("Error al realizar la consulta: " . $e->getMessage());
+        }
+        
+    }
     
 }

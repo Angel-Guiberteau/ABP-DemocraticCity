@@ -643,14 +643,13 @@ a{
     min-height: 100vh;
     backdrop-filter: blur(0px);
     background-color: #fad8ac;
-    overflow: hidden;
 
     /* display: flow-root; */
 }
 #juego{
 width: 100%;
 display: grid;
-grid-template-rows: 5vh 30vh 58vh;
+grid-template-rows: 5vh auto;
 gap: 5px;
 margin: 5px auto 0 auto;
 
@@ -695,35 +694,30 @@ align-items: center;
 margin: 1rem  0 auto;
 }
 .mapa{
-width: 100%;
-background-image: url(../img/mapaJuego.png);
-background-size: contain;
-background-repeat: no-repeat;
-background-position: center;
-position: relative;
-z-index: 1;
+    margin-top: 2.6rem;
+    background-image: url("../img/mapaJuego.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    height: 600px;
+    z-index: 16;
+    /* background-color: #32CD32; */
 }
-#edificio1{
-width: 100%;
-height: 100%;
-background-image: url(../img/comisaria.png);
-background-size: contain;
-background-repeat: no-repeat;
-background-position: center;
-position: absolute;
-top: 0;
-left: 0;
-z-index: 2;
+#edificio1, #edificio2, #edificio3, #edificio4, #edificio5, 
+#edificio6, #edificio7, #edificio8, #edificio9, #edificio10, 
+#edificio11, #edificio12, #edificio13, #edificio14, #edificio15, 
+#edificio16 {
+    width: 100%;
+    height: 600px;
+    display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
-#edificio2{
-width: 100%;
-height: 100%;
-background-image: url(../img/colegio.png);
-background-size: contain;
-background-repeat: no-repeat;
-background-position: center;
-position: absolute;
-top: 0;
-left: 0;
-/* display: none; */
-}
+
