@@ -7,6 +7,7 @@ export class CIniciarSesion {
 
     cIniciarSesion(nombreUsuario, passlogin) {
         let formData = new FormData(); 
+
         formData.append('usuario', nombreUsuario); 
         formData.append('passw', passlogin); 
         this.modelo.mIniciarSesion(formData);

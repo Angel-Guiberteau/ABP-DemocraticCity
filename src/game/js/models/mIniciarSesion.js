@@ -1,17 +1,35 @@
 export class MIniciarSesion {
     constructor() {}
     async mIniciarSesion(formData){
+
         try {
-            const response = await fetch('index.php?c=Partida&m=cCrearSala', {
-                method: 'POST',  // Usamos el método POST para enviar los datos.
-                body: formData,  // Enviamos los datos en el cuerpo de la solicitud.
+            const response = await fetch('index.php?c=Usuarios&m=inicio', {
+                method: 'POST',
+                body: formData,
             });
-            return response;
-            // Verifica si la respuesta del servidor es buena .
-            
-        } catch (error) {  // Si ocurre un error al hacer la solicitud al servidor.
-            console.error('Error:', error);  // Muestra el error en la consola para depuración.
-            document.getElementById('resultado').innerText = 'Error de conexión.';  // Muestra un mensaje de error al usuario.
+    
+            if(response.ok) {
+                const result = await response.text();
+    
+                if (result=='correcto') {
+                    window.location.href = "index.php?c=Usuarios&m=mostrarInicio";
+                } else {
+                    const error = document.querySelector('.loginIncorrecto');
+                    if(result == 'PasswIncorrecta'){
+                        error.innerHTML = 'Contraseña incorrecta';
+                    }else{
+                        error.innerHTML = 'Error inesperado';
+                    }
+                    document.querySelector('.loginIncorrecto').style.display = 'inline'; 
+                }
+            } else {
+                let error = document.querySelector('.loginIncorrecto');
+                error.innerHTML = 'ERROR AL CONECTAR CON EL SERVIDOR. Inténtelo de nuevo más tarde.'
+                error.style.display = 'inline'; ;
+            }
+        } catch (error) {
+            console.error('Error:', error); 
+            document.getElementById('resultado').innerText = 'Error de conexión.';
             resultado.style.color = 'red';
         }
     }

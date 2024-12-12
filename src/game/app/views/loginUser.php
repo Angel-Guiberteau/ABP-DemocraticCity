@@ -19,6 +19,15 @@
         <div>
             <h1>Iniciar sesión</h1>
             <form id="formularioLoginUser">
+                <?php
+                    if(isset($_GET['op'])){
+                        echo '<div>';
+                        if($_GET['op']=='registroExitoso'){
+                            echo '<p>Registro realizado correctamente</p>';
+                        }
+                        echo '</div>';
+                    }
+                ?>
                 <p class="loginIncorrecto"></p>
                 <p class="nombreUsuarioValidacion">Introduce un nombre de usuario correcto</p>
                 <input type="text" placeholder="Nombre de usuario" name="usuario" id="nombreUsuario">
