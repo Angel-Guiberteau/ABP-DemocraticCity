@@ -206,9 +206,7 @@ a{
     align-items: center;
     justify-content: center;
     
-
 }
-
 .icons svg a:visited{
     color: black;
     
@@ -220,6 +218,8 @@ a{
     color: black;
     margin: 0 0rem 0 1rem;
 }
+
+
 
 /* Página de inicio */
 .inicio{
@@ -517,3 +517,54 @@ a{
     color: black;
     transition: 0.3s;
 }
+
+
+/* RANKING */
+.tituloRanking{
+    text-decoration: none;
+}
+.king{
+    color: rgb(239, 232, 26);
+}
+.ranking{
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    
+    font-weight: 700;
+}
+
+.ranking tr{
+    font-size: 1.5rem;
+    text-shadow: -1px 2px 5px black;
+
+}
+.ranking tr td{
+    height: 3.5rem;
+}
+.ranking tr:hover{
+    transition: 1s;
+    font-size: 1.7rem;
+}
+
+.ranking tr:nth-child(1){
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+    font-size: 3rem;
+    height: 4rem;
+}
+.ranking tr:nth-child(2){
+    text-shadow: rgb(239, 232, 26);
+}
+.ranking tr:nth-child(3){
+    color: rgb(222, 221, 192);
+}
+
+
+/* Mensajes personalizador */
+.exitoso p{
+    color: rgb(8, 204, 8);
+    font-size: 1.8rem;
+}
+

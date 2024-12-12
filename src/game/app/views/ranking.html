@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
     <audio src="audio/musicaInicio.mp3" preload="auto" id="audio"></audio>
@@ -15,9 +15,7 @@
             <div>
                 <button><svg  xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
                 </button>
-                <?php
-                    echo '<p id="parrafoNombreUsuario" onclick="hablarNombre()">'.$_SESSION['nombreUsuario'].'</p>';
-                ?>
+                
             </div>
     
             <div>
@@ -32,15 +30,38 @@
         
         </nav>
         <div>
-            <h1 id="tituloJuego">Democratic City</h1>
+            <h1 id="tituloJuego" class="tituloRanking">Ran<span class="king">king</span></h1>
             <div class="botones-inicio">
-                <a href="index.php?c=Usuarios&m=mostrarInicioJuego" class="boton">Jugar</a>
-                <a href="#" class="boton">Ranking</a>
-                <a href="#" class="boton">Manual de juego</a>
+                <table class="ranking">
+                    <tr>
+                        <td>Ciudad</td>
+                        <td>Años aguantados</td>
+                    </tr>
+                    <tr>
+                        <td>FernandoCity</td>
+                        <td>18 años</td>
+                    </tr>
+                    <tr>
+                        <td>AngelCity</td>
+                        <td>12 años</td>
+                    </tr>
+                    <tr>
+                        <td>Juaking</td>
+                        <td>7 años</td>
+                    </tr>
+                    <tr>
+                        <td>IsmaelCity</td>
+                        <td>5 años</td>
+                    </tr>
+                    <tr>
+                        <td>DualCity</td>
+                        <td>1 año</td>
+                    </tr>
+                </table>
             </div>
             <div class="alcaldes">
-                <div><img src="img/alcalde1.png" alt=""></div>
-                <div><img src="img/alcalde2.png" alt=""></div>
+                <div><img src="../../img/alcalde1.png" alt=""></div>
+                <div><img src="../../img/alcalde2.png" alt=""></div>
             </div>
         </div>
     </main>

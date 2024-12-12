@@ -21,7 +21,7 @@
             <form id="formularioLoginUser">
                 <?php
                     if(isset($_GET['op'])){
-                        echo '<div>';
+                        echo '<div class="exitoso">';
                         if($_GET['op']=='registroExitoso'){
                             echo '<p>Registro realizado correctamente</p>';
                         }
@@ -50,6 +50,6 @@
     <script type="module" src="js/views/iniciarSesion.js"></script>
     <script type="module" src="js/controllers/cIniciarSesion.js"></script>
     <script type="module" src="js/models/mIniciarSesion.js"></script>
-    <!-- <script src="js/musica.js"></script> -->
+    <script src="js/views/musica.js"></script>
 </body>
 </html>

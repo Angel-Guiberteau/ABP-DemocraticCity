@@ -10,7 +10,7 @@ export class MRegistrarse {
                 const result = await response.text();
 
                 if(result == 'correcto'){
-                    window.location.href = "index.php?c=Usuarios&m=predeterminada";
+                    window.location.href = "index.php?c=Usuarios&m=predeterminada&op=registroExitoso";
                     // document.querySelector('.registroIncorrecto').style.display = 'inline';
                 }else{
                     const error = document.querySelector('.registrarseIncorrecto');

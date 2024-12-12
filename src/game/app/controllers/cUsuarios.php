@@ -20,6 +20,9 @@ class CUsuarios{
     public function mostrarInicioJuego(){
         $this->vista = 'inicioJuego';
     }
+    public function mostrarRanking(){
+        $this->vista = 'ranking';
+    }
 
 
     public function registrar($datos){

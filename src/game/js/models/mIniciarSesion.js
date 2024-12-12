@@ -18,7 +18,7 @@ export class MIniciarSesion {
                     if(result == 'PasswIncorrecta'){
                         error.innerHTML = 'Contraseña incorrecta';
                     }else{
-                        error.innerHTML = 'Error inesperado';
+                        error.innerHTML = 'Usuario o contraseña incorrecto';
                     }
                     document.querySelector('.loginIncorrecto').style.display = 'inline'; 
                 }
