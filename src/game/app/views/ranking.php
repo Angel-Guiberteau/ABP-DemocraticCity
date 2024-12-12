@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="../../css/reset.css">
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <audio src="audio/musicaInicio.mp3" preload="auto" id="audio"></audio>
@@ -31,37 +31,32 @@
         </nav>
         <div>
             <h1 id="tituloJuego" class="tituloRanking">Ran<span class="king">king</span></h1>
-            <div class="botones-inicio">
+            <div class="ranking-container">
                 <table class="ranking">
                     <tr>
                         <td>Ciudad</td>
-                        <td>Años aguantados</td>
+                        <td>Puntuación</td>
                     </tr>
+                    <?php
+                        if($datos){
+                            foreach($datos as $index => $valor){
+                                echo '<tr>';
+                                    echo '<td>'.$index.'</td>';
+                                    echo '<td>'.$valor.' años</td>';
+                                echo '</tr>';
+                            }
+                        }else{
+                            echo '<p>No hay salas activas</p>';
+                        }
+                    ?>
                     <tr>
-                        <td>FernandoCity</td>
-                        <td>18 años</td>
-                    </tr>
-                    <tr>
-                        <td>AngelCity</td>
-                        <td>12 años</td>
-                    </tr>
-                    <tr>
-                        <td>Juaking</td>
-                        <td>7 años</td>
-                    </tr>
-                    <tr>
-                        <td>IsmaelCity</td>
-                        <td>5 años</td>
-                    </tr>
-                    <tr>
-                        <td>DualCity</td>
-                        <td>1 año</td>
+                        <td colspan="2"><a href="index.php?c=Usuarios&m=mostrarInicio" class="enlace">Volver al inicio</a></td>
                     </tr>
                 </table>
-            </div>
+            </div>    
             <div class="alcaldes">
-                <div><img src="../../img/alcalde1.png" alt=""></div>
-                <div><img src="../../img/alcalde2.png" alt=""></div>
+                <div><img src="img/alcalde1.png" alt=""></div>
+                <div><img src="img/alcalde2.png" alt=""></div>
             </div>
         </div>
     </main>

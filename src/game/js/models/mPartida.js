@@ -21,7 +21,6 @@ export class MPartida {
             }
             
         } catch (error) {  // Si ocurre un error al hacer la solicitud al servidor.
-           
         }
     }
 
@@ -151,14 +150,14 @@ export class MPartida {
             console.log('fetchHecho');
             
             if (response.ok) {
-                const result = await response.text(); // Asegúrate de que `result` esté declarado
+                const result = await response.text();
                                 
                 // Si la respuesta es 'correcto', mostramos el modal
                 if (result.trim() === 'correcto') {
                     modal.style.display = 'flex';
                 } 
-            } else {
-                console.error('El anfitrión ha abandonado la sala. REEDIRIGIENDO...');
+    
+                // Aquí podrías redirigir a otra página, si es necesarioo la sala. REEDIRIGIENDO...');
                 // Aquí podrías redirigir a otra página, si es necesario
                 window.location.href = "index.php?c=Usuarios&m=mostrarInicioJuego";
             }

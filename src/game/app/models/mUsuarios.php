@@ -70,4 +70,30 @@ class MUsuarios{
             return false;
         }
     }
+
+    /**
+     * Método que permite mostrar el ranking de los usuarios.
+     * @param
+     */
+
+    public function mMostrarRanking(){
+
+        try{
+            $sql = 'SELECT nombreCiudad, puntuacion FROM Partidas ORDER BY puntuacion DESC LIMIT 5;';
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute();
+
+            $array = [];
+
+            while($fila = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $array[$fila['nombreCiudad']] = $fila['puntuacion'];
+            }
+
+            return $array;
+
+        }catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 }

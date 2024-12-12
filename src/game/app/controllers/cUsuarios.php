@@ -61,6 +61,17 @@ class CUsuarios{
         return false;
     }
 
+    public function cMostrarRanking(){
+    
+        $this->vista = 'Ranking';
+
+        if($datos = $this->objMUsuario->mMostrarRanking())
+            return $datos;  
+        else
+            return false;
+
+    }
+
     private function comprobarDatosIni($datos){
         if(empty($datos) || empty($datos["usuario"]) || empty($datos["passw"]))
             return false;
@@ -84,4 +95,8 @@ class CUsuarios{
     private function cifrarPassword($password){
         return password_hash($password, PASSWORD_DEFAULT);
     }
+
+
+    
+
 }
