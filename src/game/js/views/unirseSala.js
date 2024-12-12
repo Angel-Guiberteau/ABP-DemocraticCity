@@ -14,6 +14,8 @@ unirseSalaButton.addEventListener('click', () => {
 // Cerrar modal
 closeModalUnirseSala.addEventListener('click', () => {
     modalUnirseSala.style.display = 'none';
+    const parrafo = document.getElementById('errorModal');
+    parrafo.style.display = 'none';
 });
 
 // Manejar envío del formulario
@@ -21,5 +23,6 @@ unirseSalaForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const codSala = document.getElementById('codigoSala').value;
     const idUsuario = document.getElementById('idUsuario').value;
-    controlador.cUnirseSala(codSala, idUsuario);
+    const parrafo = document.getElementById('errorModal');
+    controlador.cUnirseSala(codSala, idUsuario, parrafo);
 });

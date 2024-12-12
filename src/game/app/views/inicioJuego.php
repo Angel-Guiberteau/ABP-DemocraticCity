@@ -66,6 +66,7 @@
         <div class="modal-content">
             <span class="close" id="closeModalUnirseSala">&times;</span>
             <h1>Unirse a Sala</h1>
+            <p id="errorModal"></p>
             <form id="unirseSalaForm">
                 <?php
                     echo '<input type="number" hidden id="idUsuario" name="idUsuario" value="'.$_SESSION['idUsuario'].'">';
@@ -76,6 +77,7 @@
             </form>
         </div>
     </div>
+    <!-- Modal para Sala expirada -->
 
     <script type="module" src="js/views/musica.js"></script>
     <script type="module" src="js/views/unirseSala.js"></script>

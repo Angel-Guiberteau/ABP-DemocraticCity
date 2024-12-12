@@ -9,12 +9,19 @@ window.eliminarUsuarioPartida = function (idUsuario) {
 
 const idPartida = document.getElementById('idPartidaOculto').value;
 const idUsuario = document.getElementById('idUsuarioOculto').value; 
+let modal = document.getElementById('modalSalaExpirada');
+let botonSE = document.getElementById('botonSalaExpirada');
 
 function salaEliminada() {
     setInterval(() => {
-        controlador.cSalaEliminada(idPartida, idUsuario);
+        controlador.cSalaEliminada(idPartida, idUsuario, modal);
     }, 3000);
 }
+
+botonSE.addEventListener('click', () => { 
+    window.location.href = "index.php?c=Usuarios&m=mostrarInicioJuego";  
+});
+
 
 // Asigna la función al objeto global `window`
 window.mostrarJugadores = mostrarJugadores;

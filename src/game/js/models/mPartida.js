@@ -8,7 +8,7 @@ export class MPartida {
             });
             if(response.ok) {
                 const result = await response.text();
-                if (result=='correcto') {
+                if (result.trim()=='correcto') {
                     window.location.href = "index.php?c=Partida&m=mostrarSalaAnfitrion"; 
                 } else {
                     alert('algo salio mal');//NO QUIERO REEDIRECCIONAR SINO PONER UN PARRAFO CON UN ERROR
@@ -21,9 +21,7 @@ export class MPartida {
             }
             
         } catch (error) {  // Si ocurre un error al hacer la solicitud al servidor.
-            console.error('Error:', error);  // Muestra el error en la consola para depuración.
-            document.getElementById('resultado').innerText = 'Error de conexión.';  // Muestra un mensaje de error al usuario.
-            resultado.style.color = 'red';
+           
         }
     }
 
@@ -38,7 +36,7 @@ export class MPartida {
             if(response.ok) {
                 const result = await response.text();
                 
-                if (result=='correcto') {
+                if (result.trim() =='correcto') {
 
                     window.location.href = "index.php?c=Usuarios&m=mostrarInicio"; 
                 } else {
@@ -57,7 +55,7 @@ export class MPartida {
             resultado.style.color = 'red';
         }
     }
-    async mUnirseSala(formData){
+    async mUnirseSala(formData, parrafo){
         try {
             const response = await fetch('index.php?c=Partida&m=cUnirseSala', {
                 method: 'POST',  
@@ -65,12 +63,12 @@ export class MPartida {
             });           
             if(response.ok) {
                 const result = await response.text();
-
-                if (result=='correcto') {
-                    window.location.href = "index.php?c=Partida&m=mostrarSalaUsuario"; 
-                } else {
-                    alert('Algo salio mal');//NO QUIERO REEDIRECCIONAR SINO PONER UN PARRAFO CON UN ERROR
-                }  
+                if(result.trim() == 'correcto')
+                    window.location.href = "index.php?c=Partida&m=mostrarSalaUsuario";
+                else{
+                    parrafo.style.display = 'block';
+                    parrafo.innerHTML = 'La sala no se ha encontrado';
+                }
             } else {
                 alert('Algo salio mal');
             }
@@ -125,7 +123,7 @@ export class MPartida {
             });
             if(response.ok) {
                 const result = await response.text();                
-                if (result=='correcto') {
+                if (result.trim()=='correcto') {
                     window.location.href = "index.php?c=Usuarios&m=mostrarInicioJuego"; 
                 } else {
                     alert('Algo salio mal');//NO QUIERO REEDIRECCIONAR SINO PONER UN PARRAFO CON UN ERROR
@@ -141,23 +139,34 @@ export class MPartida {
         }
     }
 
-    async mSalaEliminada(formData){
+    async mSalaEliminada(formData, modal) {
+        console.log('modelo');
+        
         try {
+            // Realizamos la solicitud fetch para comprobar si la partida ha sido eliminada
             const response = await fetch('index.php?c=Partida&m=cComprobarPartidaEliminada', {
-                method: 'POST',  
-                body: formData,  
+                method: 'POST',
+                body: formData,
             });
-            if(response.ok) {
-                const result = await response.text();                
-                if (result=='correcto') {
-                    alert('El anfitrión ha abandonado la sala. REEDIRIGIENDO...');  
-                    window.location.href = "index.php?c=Usuarios&m=mostrarInicioJuego"; 
+            console.log('fetchHecho');
+            
+            if (response.ok) {
+                const result = await response.text(); // Asegúrate de que `result` esté declarado
+                                
+                // Si la respuesta es 'correcto', mostramos el modal
+                if (result.trim() === 'correcto') {
+                    modal.style.display = 'flex';
                 } 
             } else {
-                alert('El anfitrión ha abandonado la sala. REEDIRIGIENDO...');
+                console.error('El anfitrión ha abandonado la sala. REEDIRIGIENDO...');
+                // Aquí podrías redirigir a otra página, si es necesario
+                window.location.href = "index.php?c=Usuarios&m=mostrarInicioJuego";
             }
             
         } catch (error) {
+            console.error('Error al comprobar la eliminación de la sala', error);
         }
     }
+    
+    
 }

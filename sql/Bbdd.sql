@@ -24,7 +24,8 @@ CREATE TABLE Usuarios (
     passUsuario VARCHAR(255) NOT NULL,
     idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_usuario PRIMARY KEY (idUsuario),
-    CONSTRAINT fk_usuario FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
+    CONSTRAINT fk_usuario FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia),
+    CONSTRAINT csu_usuario UNIQUE (nombreUsuario)
 );
 
 CREATE TABLE Partidas (

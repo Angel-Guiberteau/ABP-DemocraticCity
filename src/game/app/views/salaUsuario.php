@@ -74,6 +74,17 @@
         </div>
     </div>
 </main>
+
+    <!-- MODAL -->
+
+    <div id="modalSalaExpirada">
+        <div class="modal-content">
+            <h1>La sala ha expirado</h1>
+            <p>La sala a la que intentas unirte ha expirado, por favor, intenta unirte a otra sala</p>
+            <button id="botonSalaExpirada" class="boton" onclick="salaEliminada()">Salir</button>
+        </div>
+    </div>
+    
     <script type="module" src="js/views/musica.js"></script>
     <script type="module" src="js/views/mostrarJugadores.js"></script>
     <script type="module" src="js/views/eliminarUsuarioPartida.js"></script>

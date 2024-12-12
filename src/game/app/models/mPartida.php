@@ -1,4 +1,4 @@
-<?php
+    <?php
 /**
  * Esta clase permite la total funcionalidad de todos los procesos de los usuarios y administradores, sea inicio de sesión o registro.
  */
