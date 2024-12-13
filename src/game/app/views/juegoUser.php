@@ -46,12 +46,21 @@
     <!-- MODAL INICIO JUEGO -->
     <div id="modalInicioJuego">
         <div class="modal-content">
-            <span class="close" id="closeModalInicioJuego">&times;</span>
             <?php
                 echo '<h1>Bienvenido a '.$_SESSION['nombreCiudad'].'</h1>';
             ?>
             <div id="cModalInicioJuego">
             <p>Esperando Anfitrión...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalEsperarVotos">
+        <div class="modal-content">
+            <h1>Has respondido</h1>
+            <div id="cModalEsperarVotos">
+            <p id="respuestaEsperarVotos"></p>
+            <p>Esperando los demas votos...</p>
             </div>
         </div>
     </div>

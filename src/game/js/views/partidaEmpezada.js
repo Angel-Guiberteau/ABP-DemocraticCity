@@ -7,10 +7,8 @@ const idPartida = document.getElementById('idPartidaOculto').value;
 
 function salaEmpezada() {
     setInterval(() => {
-        console.log('vista');
         controlador.cSalaEmpezada(idPartida);
-        console.log('-----------------------------------------------');
-    }, 3000);
+    }, 2500);
 }
 
 window.salaEmpezada = salaEmpezada;

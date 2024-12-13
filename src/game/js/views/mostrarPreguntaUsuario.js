@@ -21,14 +21,9 @@ for (let i = 1; i <= 16; i++) {
 function mostrarPreguntaUsuario(){
     setInterval(()=>{
         controlador.cMostrarPreguntaUsuario(idPartida, pregunta, respuesta1, respuesta2, respuesta3, respuesta4, modalInicioJuego);
-    }, 5000);
+    }, 1000);
     
 }
-
-// Cerrar modal
-closeModalInicioJuego.addEventListener('click', () => {
-    modalInicioJuego.style.display = 'none';
-});
 
 function cerrarModal(){
     modalInicioJuego.style.display = 'none';
@@ -36,19 +31,32 @@ function cerrarModal(){
 
 mostrarPreguntaUsuario();
 
-function enviarVoto(letraElegida){
+function enviarVoto(letraElegida, textoRespuesta){
     controlador.cEnviarVoto(letraElegida,idPartida, nombreCiudad);
+    respuesta1.disabled = true;
+    respuesta2.disabled = true;
+    respuesta3.disabled = true;
+    respuesta4.disabled = true;
+    mostrarModalEsperar(textoRespuesta);
+}
+function mostrarModalEsperar(textoRespuesta) {
+    document.getElementById('respuestaEsperarVotos').innerHTML = textoRespuesta;
+    document.getElementById('modalEsperarVotos').style.display = 'flex';
 }
 
 respuesta1.addEventListener('click', () =>{
-    enviarVoto('A');
+    const textoBoton = respuesta1.innerHTML;
+    enviarVoto('A', textoBoton);
 });
 respuesta2.addEventListener('click', () =>{
-    enviarVoto('B');
+    const textoBoton = respuesta2.innerHTML;
+    enviarVoto('B', textoBoton);
 });
 respuesta3.addEventListener('click', () =>{
-    enviarVoto('C');
+    const textoBoton = respuesta3.innerHTML;
+    enviarVoto('C', textoBoton);
 });
 respuesta4.addEventListener('click', () =>{
-    enviarVoto('D');
+    const textoBoton = respuesta4.innerHTML;
+    enviarVoto('D', textoBoton);
 });

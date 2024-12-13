@@ -111,7 +111,7 @@ input[type="checkbox"]{
 }
 
 
-form p, #modalInicioJuego p{
+form p, #modalInicioJuego p, #modalEsperarVotos p{
     margin: 1rem 0;
     color: #FFFFFF; /* Blanco para destacar */
     text-shadow: -1px 1px 3px rgba(0, 0, 0, 1); /* Sombra para mayor visibilidad */
@@ -382,7 +382,7 @@ a{
 }
 
 /* Modal crear sala */
-#modalCrearSala, #modalUnirseSala, #modalInicioJuego {
+#modalCrearSala, #modalUnirseSala, #modalInicioJuego, #modalEsperarVotos {
     display: none; /* Oculto por defecto */
     position: fixed;
     z-index: 1000;
@@ -399,7 +399,7 @@ a{
     display: flex;
 }
 
-#cModalInicioJuego{
+#cModalInicioJuego, #cModalEsperarVotos{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -736,4 +736,6 @@ margin: 1rem  0 auto;
     padding: .5rem 0;
     width: 100%;
 }
-
+#respuestaEsperarVotos{
+    font-size: 2rem;
+}
