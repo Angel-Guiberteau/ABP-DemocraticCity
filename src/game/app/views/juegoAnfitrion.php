@@ -29,10 +29,10 @@
                     echo '<button id="respuesta4"></button>';
                 echo '</div>';
                 echo '<div class="medidores">';
-                    echo '<button id="economia">Economia: 5</button>';
-                    echo '<button id="sanidad">Sanidad: 5</button>';
-                    echo '<button id="seguridad">Seguridad: 5</button>';
-                    echo '<button id="educacion">Educación: 5</button>';
+                    echo '<button id="economia" disabled>Economia: 5</button>';
+                    echo '<button id="sanidad" disabled>Sanidad: 5</button>';
+                    echo '<button id="seguridad" disabled>Seguridad: 5</button>';
+                    echo '<button id="educacion" disabled>Educación: 5</button>';
                 echo '</div>';
             ?>
             <div class="cBotonPregunta">
@@ -73,9 +73,8 @@
                 <button>Educación: 5</button>
             </div> -->
         </div>
-        
     </div>
-    <script type="module" src="js/views/mostrarPregunta.js"></script>
+    <script type="module" src="js/views/mostrarPreguntaAnfitrion.js"></script>
     <script type="module" src="js/controllers/cPartida.js"></script>
     <script type="module" src="js/models/mPartida.js"></script>
     <!-- <script src="js/views/musica.js"></script> -->

@@ -254,5 +254,74 @@ class MPartida{
         }
         
     }
+
+    function mMostrarPreguntasUsuario($datos){
+
+        $this->conexion->beginTransaction();
+
+        try{
+
+            $sql = "SELECT idPregunta FROM Partidas_preguntas WHERE idPartida = :idPartida ORDER BY lastAdded DESC LIMIT 1;";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_INT);
+            $stmt->execute();
+            $idPregunta = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if($idPregunta)
+            {
+                $sql2 = "SELECT * FROM Preguntas
+                        WHERE Preguntas.idPregunta = :idPregunta;";
+                $stmt2 = $this->conexion->prepare($sql2);
+                $stmt2->bindValue(':idPregunta', $idPregunta['idPregunta'], PDO::PARAM_INT);
+                $stmt2->execute();
+                $pregunta = $stmt2->fetch(PDO::FETCH_ASSOC);
+            }
+
+            if($pregunta)
+            {
+
+                $sql3 = "SELECT * FROM Respuestas WHERE idPregunta = :idPregunta;";
+                $stmt3 = $this->conexion->prepare($sql3);
+                $stmt3->bindValue(':idPregunta', $idPregunta['idPregunta'], PDO::PARAM_INT);
+                $stmt3->execute();
+                $respuestas = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+
+                
+
+                $resultado = [
+                    "pregunta" => $pregunta["texto"], 
+                    "respuestas" => []
+                    
+                ];
+    
+                foreach ($respuestas as $respuesta) {
+                    $resultado["respuestas"][] = [
+                        "letra" => $respuesta["letraRespuesta"],
+                        "texto" => $respuesta["respuesta"],
+                        "educacion" => $respuesta["educacion"],
+                        "sanidad" => $respuesta["sanidad"],
+                        "seguridad" => $respuesta["seguridad"],
+                        "economia" => $respuesta["economia"],
+                        "idEdificio" => $respuesta["idEdificio"]
+                    ];
+                }
+            }
+        
+            $this->conexion->commit();
+
+            return $resultado; // Devuelve la pregunta con sus respuestas
+
+
+        } catch (Exception $e) {
+            error_log("ERROR JODERa: " . $e->getMessage());
+            // Revertir la transacción en caso de error
+            $this->conexion->rollBack();
+            throw new Exception("Error al realizar la consulta: " . $e->getMessage());
+            
+        }
+
+
+    }
     
 }

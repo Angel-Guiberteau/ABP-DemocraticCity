@@ -147,6 +147,19 @@ class CPartida{
             return false;
         }
     }
+    function cMostrarPreguntasUsuario($datos){
+        
+        $this->vista = '';
+
+        if($preguntas = $this->objMPartida->mMostrarPreguntasUsuario($datos)){
+            echo json_encode($preguntas);
+            exit;
+        }
+        else{
+            echo 'incorrecto';
+            return false;
+        }
+    }
     
     function generarCodigoAleatorio($longitud = 6) {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

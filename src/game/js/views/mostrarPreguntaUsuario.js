@@ -14,6 +14,11 @@ for (let i = 1; i <= 16; i++) {
     edificios['edificio' + i] = document.getElementById('edificio' + i);
 }
 
-document.getElementById('mostrarPregunta').addEventListener('click', ()=>{
-    controlador.cMostrarPregunta(idPartida, pregunta, respuesta1, respuesta2, respuesta3, respuesta4);
-})
+function mostrarPreguntaUsuario(){
+    setInterval(()=>{
+        controlador.cMostrarPreguntaUsuario(idPartida, pregunta, respuesta1, respuesta2, respuesta3, respuesta4);
+    }, 5000);
+    
+}
+
+mostrarPreguntaUsuario();
