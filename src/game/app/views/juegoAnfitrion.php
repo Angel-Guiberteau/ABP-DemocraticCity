@@ -35,9 +35,6 @@
                     echo '<button id="educacion" disabled>Educación: 5</button>';
                 echo '</div>';
             ?>
-            <div class="cBotonPregunta">
-                <button id="mostrarPregunta" class="boton">Mostrar pregunta</button>
-            </div>
             <div class="mapa">
                 <div id="edificio1"></div>
                 <div id="edificio2"></div>
@@ -56,25 +53,23 @@
                 <div id="edificio15"></div>
                 <div id="edificio16"></div>
             </div>
-
-            <!-- <div>
-                <p>Anfitrión Pregunta</p>
-            </div>
-            <div class="respuestas">
-                <button>Respuesta 1</button>
-                <button>Respuesta 2</button>
-                <button>Respuesta 3</button>
-                <button>Respuesta 4</button>
-            </div> -->
-            <!-- <div class="medidores">
-                <button>Economía: 5</button>
-                <button>Sanidad: 5</button>
-                <button>Seguridad: 5</button>
-                <button>Educación: 5</button>
-            </div> -->
         </div>
     </div>
-    <script type="module" src="js/views/mostrarPreguntaAnfitrion.js"></script>
+
+    <!-- MODAL INICIO JUEGO -->
+    <div id="modalInicioJuego">
+        <div class="modal-content">
+            <span class="close" id="closeModalInicioJuego">&times;</span>
+            <?php
+                echo '<h1>Bienvenido a '.$_SESSION['nombreCiudad'].'</h1>';
+            ?>
+            <div id="cModalInicioJuego">
+                <button id="mostrarPregunta" class="boton">Iniciar Juego</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/views/inicioPartidaAnfitrion.js"></script>
     <script type="module" src="js/controllers/cPartida.js"></script>
     <script type="module" src="js/models/mPartida.js"></script>
     <!-- <script src="js/views/musica.js"></script> -->

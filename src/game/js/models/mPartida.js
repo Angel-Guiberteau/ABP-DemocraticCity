@@ -231,7 +231,7 @@ export class MPartida {
             console.error('jklsdahfkjasdhkj', error);
         }
     }
-    async mMostrarPreguntaUsuario(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4) {   
+    async mMostrarPreguntaUsuario(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4, modalInicioJuego) {   
         try {
             const response = await fetch('index.php?c=Partida&m=cMostrarPreguntasUsuario', {
                 method: 'POST',
@@ -247,10 +247,11 @@ export class MPartida {
                 respuesta2.textContent = `${data.respuestas[1].letra}: ${data.respuestas[1].texto}`; // Respuesta B
                 respuesta3.textContent = `${data.respuestas[2].letra}: ${data.respuestas[2].texto}`; // Respuesta C
                 respuesta4.textContent = `${data.respuestas[3].letra}: ${data.respuestas[3].texto}`; // Respuesta D
+                modalInicioJuego.style.display = 'none';
             }
             
         } catch (error) {
-            console.error('jklsdahfkjasdhkj', error);
+            console.error('esperando pregunta', error);
         }
     }
     

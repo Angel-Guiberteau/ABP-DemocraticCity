@@ -382,7 +382,7 @@ a{
 }
 
 /* Modal crear sala */
-#modalCrearSala, #modalUnirseSala {
+#modalCrearSala, #modalUnirseSala, #modalInicioJuego {
     display: none; /* Oculto por defecto */
     position: fixed;
     z-index: 1000;
@@ -393,6 +393,17 @@ a{
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.6); /* Fondo más suave */
     backdrop-filter: blur(5px); /* Desenfoque del fondo */
+}
+
+#modalInicioJuego{
+    display: flex;
+}
+
+#cModalInicioJuego{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-content {
@@ -725,3 +736,4 @@ margin: 1rem  0 auto;
     padding: .5rem 0;
     width: 100%;
 }
+
