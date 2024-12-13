@@ -134,12 +134,6 @@ class CPartida{
         }
     }
 
-    function generarCodigoAleatorio($longitud = 6) {
-        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $codigo = substr(str_shuffle($caracteres), 0, $longitud);
-        return $codigo;
-    }
-
     function cMostrarPreguntas($datos){
         
         $this->vista = '';
@@ -153,5 +147,13 @@ class CPartida{
             return false;
         }
     }
+    
+    function generarCodigoAleatorio($longitud = 6) {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $codigo = substr(str_shuffle($caracteres), 0, $longitud);
+        return $codigo;
+    }
+
+    
 
 }

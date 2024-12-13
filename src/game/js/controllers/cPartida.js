@@ -57,14 +57,12 @@ export class CPartida {
         // Llamamos al modelo para verificar si la sala ha sido eliminada
         this.modelo.mEmpezarPartida(formData);
     }
-    cMostrarPregunta(idPartida) {
-        alert('controlador');
+    cMostrarPregunta(idPartida, pregunta, respuesta1, respuesta2, respuesta3, respuesta4) {
 
         let formData = new FormData();
         formData.append('idPartida', idPartida);                
         // Llamamos al modelo para verificar si la sala ha sido eliminada
-        let data = this.modelo.mMostrarPregunta(formData);
-        return data;
+        this.modelo.mMostrarPregunta(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4);
     }
     
 }

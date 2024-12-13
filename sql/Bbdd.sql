@@ -92,7 +92,7 @@ CREATE TABLE Partidas_preguntas(
     idPartida SMALLINT UNSIGNED,
     idPregunta TINYINT UNSIGNED,
     CONSTRAINT pk_partida_pregunta PRIMARY KEY (idPartida, idPregunta),
-    CONSTRAINT fk_partida_partida_pregunta FOREIGN KEY (idPartida) REFERENCES Partidas (idPartida),
+    CONSTRAINT fk_partida_partida_pregunta FOREIGN KEY (idPartida) REFERENCES Partidas (idPartida) ON DELETE CASCADE ON UPDATE CASCADE, 
     CONSTRAINT fk_pregunta_partida_pregunta FOREIGN KEY (idPregunta) REFERENCES Preguntas (idPregunta)
 );
 

@@ -208,8 +208,7 @@ export class MPartida {
             console.error('Error al comprobar la eliminación de la sala', error);
         }
     }
-    async mMostrarPregunta(formData) {   
-        alert('modelo');
+    async mMostrarPregunta(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4) {   
         try {
             // Realizamos la solicitud fetch para comprobar si la partida ha sido eliminada
             const response = await fetch('index.php?c=Partida&m=cMostrarPreguntas', {
@@ -219,9 +218,13 @@ export class MPartida {
             });
             
             if (response.ok) {
-                const result = await response.json();
-                console.log(JSON.stringify(result, null, 2)); // Muestra el resultado de manera legible
-                return result;
+                const result = await response.text();
+                let data = JSON.parse(result);
+                pregunta.innerHTML = data.pregunta;
+                respuesta1.textContent = `${data.respuestas[0].letra}: ${data.respuestas[0].texto}`; // Respuesta A
+                respuesta2.textContent = `${data.respuestas[1].letra}: ${data.respuestas[1].texto}`; // Respuesta B
+                respuesta3.textContent = `${data.respuestas[2].letra}: ${data.respuestas[2].texto}`; // Respuesta C
+                respuesta4.textContent = `${data.respuestas[3].letra}: ${data.respuestas[3].texto}`; // Respuesta D
             }
             
         } catch (error) {

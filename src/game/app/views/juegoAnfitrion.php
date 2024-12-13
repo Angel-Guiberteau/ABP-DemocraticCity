@@ -35,6 +35,9 @@
                     echo '<button id="educacion">Educación: 5</button>';
                 echo '</div>';
             ?>
+            <div class="cBotonPregunta">
+                <button id="mostrarPregunta" class="boton">Mostrar pregunta</button>
+            </div>
             <div class="mapa">
                 <div id="edificio1"></div>
                 <div id="edificio2"></div>

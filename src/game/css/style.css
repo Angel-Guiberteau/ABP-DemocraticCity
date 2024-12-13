@@ -721,3 +721,7 @@ margin: 1rem  0 auto;
     z-index: 1;
 }
 
+.cBotonPregunta{
+    padding: .5rem 0;
+    width: 100%;
+}
