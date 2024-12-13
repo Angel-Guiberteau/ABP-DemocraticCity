@@ -30,5 +30,12 @@
         $_SESSION['id']= $datos['nombreUsuario'];
         $_SESSION['id']= $datos['superAdmin'];
     }
+
+    if(isset($datos['idUsuario'])){
+        $_SESSION['idUsuario']= $datos['idUsuario'];
+        $_SESSION['nombreUsuario']= $datos['nombreUsuario'];
+    }
+
+    
     if($objControlador->vista!='')
         require_once RUTA_VISTAS.$objControlador->vista.'.php';
