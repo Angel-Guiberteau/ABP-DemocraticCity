@@ -10,6 +10,8 @@
 <body id="bodyJuego">
     <?php
         echo '<input type="hidden" id="idPartidaOculto" value="'.$_SESSION['idPartida'].'">';
+        echo '<input type="hidden" id="nombreCiudadOculto" value="'.$_SESSION['nombreCiudad'].'">';
+
     ?>
     <div id="juego">
         <nav class="inicio">

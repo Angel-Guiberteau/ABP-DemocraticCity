@@ -3,6 +3,7 @@ import { CPartida } from '../controllers/cPartida.js';
 const controlador = new CPartida();
 // 1. Muestra la pregunta con las respuestas y una cuenta atrás de 45 segundos o todos los jugadores ya han votado o anfitrion termine las votaciones
 const idPartida = document.getElementById('idPartidaOculto').value;
+const nombreCiudad = document.getElementById('nombreCiudadOculto').value;
 
 const modalInicioJuego = document.getElementById('modalInicioJuego');
 const closeModalInicioJuego= document.getElementById('closeModalInicioJuego');
@@ -28,8 +29,26 @@ function mostrarPreguntaUsuario(){
 closeModalInicioJuego.addEventListener('click', () => {
     modalInicioJuego.style.display = 'none';
 });
+
 function cerrarModal(){
     modalInicioJuego.style.display = 'none';
 }
 
 mostrarPreguntaUsuario();
+
+function enviarVoto(letraElegida){
+    controlador.cEnviarVoto(letraElegida,idPartida, nombreCiudad);
+}
+
+respuesta1.addEventListener('click', () =>{
+    enviarVoto('A');
+});
+respuesta2.addEventListener('click', () =>{
+    enviarVoto('B');
+});
+respuesta3.addEventListener('click', () =>{
+    enviarVoto('C');
+});
+respuesta4.addEventListener('click', () =>{
+    enviarVoto('D');
+});

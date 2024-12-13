@@ -4,6 +4,8 @@ const controlador = new CPartida()
 const modalInicioJuego = document.getElementById('modalInicioJuego');
 const closeModalInicioJuego= document.getElementById('closeModalInicioJuego');
 const idPartida = document.getElementById('idPartidaOculto').value;
+const nombreCiudad = document.getElementById('nombreCiudadOculto').value;
+
 const pregunta = document.getElementById('pregunta');
 const respuesta1 = document.getElementById('respuesta1');
 const respuesta2 = document.getElementById('respuesta2');
@@ -16,7 +18,7 @@ for (let i = 1; i <= 16; i++) {
 
 //Cuando pulse el botón del modal, que muestre la pregunta
 document.getElementById('mostrarPregunta').addEventListener('click', ()=>{
-    controlador.cMostrarPreguntaAnfitrion(idPartida, pregunta, respuesta1, respuesta2, respuesta3, respuesta4);
+    controlador.cMostrarPreguntaAnfitrion(idPartida, nombreCiudad, pregunta, respuesta1, respuesta2, respuesta3, respuesta4);
     cerrarModal();
 });
 

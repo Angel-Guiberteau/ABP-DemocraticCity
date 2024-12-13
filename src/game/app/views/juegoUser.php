@@ -9,7 +9,8 @@
 </head>
 <body id="bodyJuego">
     <?php
-        echo '<input type="hidden" id="idPartidaOculto" value="'.$_SESSION['idPartida'].'">';
+        echo '<input type="hidden"  id="idPartidaOculto" value="'.$_SESSION['idPartida'].'">';
+        echo '<input type="hidden"  id="nombreCiudadOculto" value="'.$_SESSION['nombreCiudad'].'">';
     ?>
     <div id="juego">
         <nav class="inicio">
@@ -23,7 +24,7 @@
                 echo '</div>';
                 // Div donde aparecen las respuestas
                 echo '<div class="respuestas">';
-                    echo '<button id="respuesta1"></button>';
+                    echo '<button id="respuesta1"></button>'; 
                     echo '<button id="respuesta2"></button>';
                     echo '<button id="respuesta3"></button>';
                     echo '<button id="respuesta4"></button>';

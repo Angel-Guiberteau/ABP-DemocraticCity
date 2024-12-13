@@ -57,9 +57,10 @@ export class CPartida {
         // Llamamos al modelo para verificar si la sala ha sido eliminada
         this.modelo.mEmpezarPartida(formData);
     }
-    cMostrarPreguntaAnfitrion(idPartida, pregunta, respuesta1, respuesta2, respuesta3, respuesta4) {
+    cMostrarPreguntaAnfitrion(idPartida, nombreCiudad, pregunta, respuesta1, respuesta2, respuesta3, respuesta4) {
         let formData = new FormData();
         formData.append('idPartida', idPartida);                
+        formData.append('nombreCiudad', nombreCiudad);                
         this.modelo.mMostrarPreguntaAnfitrion(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4);
     }
 
@@ -68,5 +69,11 @@ export class CPartida {
         formData.append('idPartida', idPartida);                
         this.modelo.mMostrarPreguntaUsuario(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4, modalInicioJuego);
     }
-    
+    cEnviarVoto(letraElegida, idPartida, nombreCiudad){
+        let formData = new FormData();
+        formData.append('letraElegida', letraElegida);                
+        formData.append('idPartida', idPartida);                
+        formData.append('nombreCiudad', nombreCiudad);                
+        this.modelo.mEnviarVoto(formData);
+    }
 }

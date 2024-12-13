@@ -11,7 +11,7 @@ export class MPartida {
                 if (result.trim()=='correcto') {
                     window.location.href = "index.php?c=Partida&m=mostrarSalaAnfitrion"; 
                 } else {
-                    alert('algo salio mal');//NO QUIERO REEDIRECCIONAR SINO PONER UN PARRAFO CON UN ERROR
+                    alert('Error al ccrear sala');//NO QUIERO REEDIRECCIONAR SINO PONER UN PARRAFO CON UN ERROR
                 }  
             } else {
                 // Si la respuesta del servidor no fue exitosa dará un error.
@@ -219,7 +219,10 @@ export class MPartida {
             
             if (response.ok) {
                 const result = await response.text();
+                console.log(result);
                 let data = JSON.parse(result);
+                console.log(data);
+                
                 pregunta.innerHTML = data.pregunta;
                 respuesta1.textContent = `${data.respuestas[0].letra}: ${data.respuestas[0].texto}`; // Respuesta A
                 respuesta2.textContent = `${data.respuestas[1].letra}: ${data.respuestas[1].texto}`; // Respuesta B
@@ -228,7 +231,7 @@ export class MPartida {
             }
             
         } catch (error) {
-            console.error('jklsdahfkjasdhkj', error);
+            console.error('Error: ', error);
         }
     }
     async mMostrarPreguntaUsuario(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4, modalInicioJuego) {   
@@ -252,6 +255,23 @@ export class MPartida {
             
         } catch (error) {
             console.error('esperando pregunta', error);
+        }
+    }
+    async mEnviarVoto(formData) {   
+        try {
+            const response = await fetch('index.php?c=Partida&m=cEnviarVoto', {
+                method: 'POST',
+                body: formData,
+                
+            });
+            
+            if (response.ok){
+                const result = await response.text();
+            }
+                
+            
+        } catch (error) {
+            
         }
     }
     

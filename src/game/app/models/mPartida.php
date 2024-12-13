@@ -323,5 +323,17 @@ class MPartida{
 
 
     }
+
+    function mEnviarVoto($datos){
+
+        try{
+
+        }
+        catch(Exception $e){
+            error_log("Error al enviar voto: " . $e->getMessage());
+            return false;
+        }
+
+    }
     
 }
