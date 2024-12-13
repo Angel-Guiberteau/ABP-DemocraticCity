@@ -76,4 +76,18 @@ export class CPartida {
         formData.append('nombreCiudad', nombreCiudad);                
         this.modelo.mEnviarVoto(formData);
     }
+    async cCalcularJugadores(idPartida){
+        let formData = new FormData();
+        formData.append('idPartida', idPartida);                
+        let numeroJugadores = await this.modelo.mCalcularJugadores(formData);
+
+        return numeroJugadores;
+    }
+    async cCalcularVotosRestantes(numJugadores, nombreArchivo){
+        let formData = new FormData();                
+        formData.append('numJugadores', numJugadores);                
+        formData.append('nombreArchivo', nombreArchivo);                
+        let votosRestantes = await this.modelo.mCalcularVotosRestantes(formData);
+        return votosRestantes;
+    }
 }

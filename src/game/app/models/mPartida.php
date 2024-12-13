@@ -324,10 +324,18 @@ class MPartida{
 
     }
 
-    function mEnviarVoto($datos){
+    function mCalcularJugadores($datos){
 
         try{
 
+            $sql = "SELECT COUNT(idPartida) AS numJugadores FROM Usuarios_partidas WHERE idPartida = :idPartida;";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_INT);
+            $stmt->execute();
+
+            $numJugadores = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $numJugadores['numJugadores'];
         }
         catch(Exception $e){
             error_log("Error al enviar voto: " . $e->getMessage());
@@ -335,5 +343,5 @@ class MPartida{
         }
 
     }
-    
+
 }

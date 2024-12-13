@@ -60,6 +60,7 @@
             <h1>Has respondido</h1>
             <div id="cModalEsperarVotos">
             <p id="respuestaEsperarVotos"></p>
+            <p id="votosRestantes"></p>
             <p>Esperando los demas votos...</p>
             </div>
         </div>

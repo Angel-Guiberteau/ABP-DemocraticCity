@@ -207,6 +207,55 @@ class CPartida{
 
     }
 
+
+    function cCalcularJugadores($datos){
+
+        $this->vista = '';
+
+        if($numJugadores = $this->objMPartida->mCalcularJugadores($datos)){
+            echo $numJugadores;
+            exit;
+        }
+        else{
+            echo 'incorrecto';
+            exit;
+        }
+    }
+
+    function cCalularVotosRestantes($datos){
+        
+        $this->vista = '';
+
+        // Ruta al archivo JSON
+        $rutaArchivo = RUTA_JSON.$datos['nombreArchivo'];
+
+        // Leer contenido del archivo antes que decodicar
+        $contenidoJson = file_get_contents($rutaArchivo);
+        // echo $contenidoJson;
+        // Decodificar el contenido del archivo como un array asociativo
+        $datosJson = json_decode($contenidoJson, true);
+        
+        // Sumar los valores del array
+        $totalVotos = 0;
+        $totalVotos += $datosJson['A'];
+        $totalVotos += $datosJson['B'];
+        $totalVotos += $datosJson['C'];
+        $totalVotos += $datosJson['D'];
+
+        if($totalVotos)
+        {
+            echo $totalVotos;
+            exit;
+        }
+        else{
+            echo 'incorrecto';
+            exit;
+        }
+
+
+    }
+
+
     private function generarCodigoAleatorio($longitud = 6) {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $codigo = substr(str_shuffle($caracteres), 0, $longitud);

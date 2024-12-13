@@ -274,6 +274,50 @@ export class MPartida {
             
         }
     }
+    async mCalcularJugadores(formData) {   
+        try {
+            const response = await fetch('index.php?c=Partida&m=cCalcularJugadores', {
+                method: 'POST',
+                body: formData,
+                
+            });
+            
+            if (response.ok){
+                const result = await response.text();
+                
+                if(result){
+                    let numeroJugadores = parseInt(result);
+                    return numeroJugadores;
+                }
+                return false;
+            }
+                
+            
+        } catch (error) {
+            
+        }
+    }
+    async mCalcularVotosRestantes(formData) {   
+        try {
+            const response = await fetch('index.php?c=Partida&m=cCalularVotosRestantes', {
+                method: 'POST',
+                body: formData,
+            });
+            
+            if (response.ok){
+                const result = await response.text();
+                if(result){
+                    let votosRestantes = parseInt(result);
+                    return votosRestantes;
+                }
+                return false;
+            }
+                
+            
+        } catch (error) {
+            
+        }
+    }
     
     
 }
