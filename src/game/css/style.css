@@ -640,6 +640,17 @@ a{
     text-align: center;
 }
 
+/* Parrafo no activas */
+
+#noActivas{
+    color: red;
+    font-size: 2rem;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
 /* Mensajes personalizador */
 .exitoso p{
     color: rgb(8, 204, 8);
