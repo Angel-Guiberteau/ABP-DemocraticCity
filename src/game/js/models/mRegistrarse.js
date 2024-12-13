@@ -6,11 +6,11 @@ export class MRegistrarse {
                 method: 'POST', //Usamos post para enviar datos
                 body: formData, //Enviamos datos en el body de la solicitud
             });
-    
             if(response.ok){
                 const result = await response.text();
+
                 if(result == 'correcto'){
-                    window.location.href = "index.php?c=Usuarios&m=predeterminada";
+                    window.location.href = "index.php?c=Usuarios&m=predeterminada&op=registroExitoso";
                     // document.querySelector('.registroIncorrecto').style.display = 'inline';
                 }else{
                     const error = document.querySelector('.registrarseIncorrecto');

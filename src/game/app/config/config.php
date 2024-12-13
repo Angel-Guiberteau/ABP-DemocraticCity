@@ -10,8 +10,11 @@ define("RUTA_MODELOS", "app/models/m");
 
 define("RUTA_CONFIGS", "app/config/");
 
+define("RUTA_JSON", "app/json/");
+
 // CONTROLADORES y MODELOS
 
 define("CONTROLADOR_USUARIO","Usuarios");
 
 define("METODO_PREDETERMINADO","predeterminada");
+

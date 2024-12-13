@@ -16,25 +16,28 @@ class MUsuarios{
      */
     public function registrar($datos){
         try{
-            // $sql = "INSERT INTO Usuarios(nombreUsuario, passUsuario) VALUES('".$datos['usuario']."', '".$datos["passw"]."');";
             $sql = "INSERT INTO Usuarios(nombreUsuario, passUsuario) VALUES(:usuario, :passw);";
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindValue(':usuario', $datos['usuario'], PDO::PARAM_STR);
             $stmt->bindValue(':passw', $datos['passw'], PDO::PARAM_STR);
 
             $stmt->execute();
-
             return $stmt->rowCount() > 0;
+            
 
         }catch (PDOException $e) {
-            if($e->errorInfo[1] == 1062)
+            error_log($e->getMessage());
+            if($e->errorInfo[1] == 1062){
                 $this->codError = "1062";
-            else
+            }
+                
+            else{
                 $this->codError = "9998";
-            
+            }
             return false;
         }
     }
+    
     /**
      * Método que permite e inicio de sesión de los usuarios.
      * @param
@@ -64,6 +67,32 @@ class MUsuarios{
         }catch (PDOException $e) {
                 $this->codError = "PasswIncorrecta";
 
+            return false;
+        }
+    }
+
+    /**
+     * Método que permite mostrar el ranking de los usuarios.
+     * @param
+     */
+
+    public function mMostrarRanking(){
+
+        try{
+            $sql = 'SELECT nombreCiudad, puntuacion FROM Partidas ORDER BY puntuacion DESC LIMIT 5;';
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute();
+
+            $array = [];
+
+            while($fila = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $array[$fila['nombreCiudad']] = $fila['puntuacion'];
+            }
+
+            return $array;
+
+        }catch (PDOException $e) {
+            error_log($e->getMessage());
             return false;
         }
     }

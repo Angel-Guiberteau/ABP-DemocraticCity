@@ -1,11 +1,8 @@
--- CREATE DATABASE DemocraticCity;
-
-USE DemocraticCity;
 
 CREATE TABLE Administradores (
     idUsuario TINYINT UNSIGNED AUTO_INCREMENT,
-    nombreUsuario VARCHAR(50) NOT NULL,
-    passAdmin VARCHAR(100) NOT NULL,
+    nombreUsuario VARCHAR(255) NOT NULL,
+    passAdmin VARCHAR(255) NOT NULL,
     superAdmin char(1) NOT NULL,
     CONSTRAINT pk_admin PRIMARY KEY (idUsuario),
     CONSTRAINT csu_admin UNIQUE (nombreUsuario)
@@ -14,7 +11,7 @@ CREATE TABLE Administradores (
 CREATE TABLE Multimedia (
     idMultimedia TINYINT UNSIGNED AUTO_INCREMENT,
     nombreMultimedia VARCHAR(50) NOT NULL,
-    ruta VARCHAR(50) NOT NULL,
+    ruta VARCHAR(100) NOT NULL,
     tipo CHAR (1) NOT NULL,
     hash VARCHAR (255) NOT NULL,
     CONSTRAINT pk_multimedia PRIMARY KEY (idMultimedia),
@@ -22,26 +19,29 @@ CREATE TABLE Multimedia (
 );
 
 CREATE TABLE Usuarios (
-    idUsuario TINYINT UNSIGNED AUTO_INCREMENT,
-    nombreUsuario VARCHAR(50) NOT NULL,
-    passUsuario VARCHAR(100) NOT NULL,
+    idUsuario SMALLINT UNSIGNED AUTO_INCREMENT,
+    nombreUsuario VARCHAR(255) NOT NULL,
+    passUsuario VARCHAR(255) NOT NULL,
     idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_usuario PRIMARY KEY (idUsuario),
-    CONSTRAINT fk_usuario FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
+    CONSTRAINT fk_usuario FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia),
+    CONSTRAINT csu_usuario UNIQUE (nombreUsuario)
 );
 
 CREATE TABLE Partidas (
     idPartida SMALLINT UNSIGNED AUTO_INCREMENT,
     codSala CHAR(6) NOT NULL,
     puntuacion TINYINT UNSIGNED NOT NULL,
-    nombreCiudad VARCHAR(50) NOT NULL,
+    nombreCiudad VARCHAR(100) NOT NULL,
     vEducacion TINYINT NOT NULL,
     vSanidad TINYINT NOT NULL,
     vSeguridad TINYINT NOT NULL,
     vEconomia TINYINT NOT NULL,
-    idAnfrition TINYINT UNSIGNED NOT NULL,
+    empezada CHAR(1) NOT NULL,
+    idAnfitrion SMALLINT UNSIGNED NOT NULL,
     CONSTRAINT pk_partida PRIMARY KEY (idPartida),
-    CONSTRAINT fk_partida FOREIGN KEY (idAnfrition) REFERENCES Usuarios (idUsuario),
+    CONSTRAINT fk_partida FOREIGN KEY (idAnfitrion) REFERENCES Usuarios (idUsuario),
+    CONSTRAINT chk_empezada CHECK (empezada IN ('s', 'n')),
     CONSTRAINT chk_vEducacion CHECK (vEducacion BETWEEN -10 AND 10),
     CONSTRAINT chk_vSanidad CHECK (vSanidad BETWEEN -10 AND 10),
     CONSTRAINT chk_vSeguridad CHECK (vSeguridad BETWEEN -10 AND 10),
@@ -50,16 +50,16 @@ CREATE TABLE Partidas (
 
 CREATE TABLE Usuarios_partidas (
     idPartida SMALLINT UNSIGNED,
-    idUsuario TINYINT UNSIGNED,
+    idUsuario SMALLINT UNSIGNED,
     CONSTRAINT pk_usuario_partida PRIMARY KEY (idUsuario, idPartida),
     CONSTRAINT fk_Usuario_usuario_partida FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario),
-    CONSTRAINT fk_Partida_usuario_partida FOREIGN KEY (idPartida) REFERENCES Partidas (idPartida)
+    CONSTRAINT fk_Partida_usuario_partida FOREIGN KEY (idPartida) REFERENCES Partidas (idPartida) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Edificios (
     idEdificio TINYINT UNSIGNED AUTO_INCREMENT,
     nombreEdificio VARCHAR(255) NOT NULL,
-    idMultimedia TINYINT UNSIGNED NOT NULL,
+    idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_edificio PRIMARY KEY (idEdificio),
     CONSTRAINT fk_edificio FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
 );
@@ -67,7 +67,7 @@ CREATE TABLE Edificios (
 CREATE TABLE Logros(
     idLogro TINYINT UNSIGNED AUTO_INCREMENT,
     textoLogro VARCHAR(255) NOT NULL,
-    idMultimedia TINYINT UNSIGNED NOT NULL,
+    idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_logro PRIMARY KEY (idLogro),
     CONSTRAINT fk_logro FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
 );
@@ -83,7 +83,7 @@ CREATE TABLE Partidas_logros(
 CREATE TABLE Preguntas(
     idPregunta TINYINT UNSIGNED AUTO_INCREMENT,
     texto VARCHAR(255) NOT NULL,
-    idMultimedia TINYINT UNSIGNED NOT NULL,
+    idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_pregunta PRIMARY KEY (idPregunta),
     CONSTRAINT fk_pregunta FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
 );
@@ -92,7 +92,7 @@ CREATE TABLE Partidas_preguntas(
     idPartida SMALLINT UNSIGNED,
     idPregunta TINYINT UNSIGNED,
     CONSTRAINT pk_partida_pregunta PRIMARY KEY (idPartida, idPregunta),
-    CONSTRAINT fk_partida_partida_pregunta FOREIGN KEY (idPartida) REFERENCES Partidas (idPartida),
+    CONSTRAINT fk_partida_partida_pregunta FOREIGN KEY (idPartida) REFERENCES Partidas (idPartida) ON DELETE CASCADE ON UPDATE CASCADE, 
     CONSTRAINT fk_pregunta_partida_pregunta FOREIGN KEY (idPregunta) REFERENCES Preguntas (idPregunta)
 );
 
@@ -103,7 +103,8 @@ CREATE TABLE Respuestas(
     sanidad TINYINT NOT NULL,
     seguridad TINYINT NOT NULL,
     economia TINYINT NOT NULL,
-    idEdificio TINYINT UNSIGNED NOT NULL,    
+    idEdificio TINYINT UNSIGNED NULL,    
+    respuesta VARCHAR(255) NOT NULL,
     CONSTRAINT pk_respuesta PRIMARY KEY (idPregunta, letraRespuesta),
     CONSTRAINT fk_respuesta_pregunta FOREIGN KEY (idPregunta) REFERENCES Preguntas (idPregunta)
         ON UPDATE CASCADE 

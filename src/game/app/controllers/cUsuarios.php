@@ -20,6 +20,10 @@ class CUsuarios{
     public function mostrarInicioJuego(){
         $this->vista = 'inicioJuego';
     }
+    public function mostrarRanking(){
+        $this->vista = 'ranking';
+    }
+
 
     public function registrar($datos){
         if($this->comprobarDatosReg($datos)){
@@ -39,6 +43,7 @@ class CUsuarios{
             return false;
         }
     }
+    
 
     public function inicio($datos){
         if($this->comprobarDatosIni($datos)){
@@ -54,6 +59,17 @@ class CUsuarios{
         }
         echo $this->objMUsuario->codError; 
         return false;
+    }
+
+    public function cMostrarRanking(){
+    
+        $this->vista = 'Ranking';
+
+        if($datos = $this->objMUsuario->mMostrarRanking())
+            return $datos;  
+        else
+            return false;
+
     }
 
     private function comprobarDatosIni($datos){
@@ -79,4 +95,8 @@ class CUsuarios{
     private function cifrarPassword($password){
         return password_hash($password, PASSWORD_DEFAULT);
     }
+
+
+    
+
 }

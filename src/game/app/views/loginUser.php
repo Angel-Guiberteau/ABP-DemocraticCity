@@ -19,13 +19,22 @@
         <div>
             <h1>Iniciar sesión</h1>
             <form id="formularioLoginUser">
+                <?php
+                    if(isset($_GET['op'])){
+                        echo '<div class="exitoso">';
+                        if($_GET['op']=='registroExitoso'){
+                            echo '<p>Registro realizado correctamente</p>';
+                        }
+                        echo '</div>';
+                    }
+                ?>
                 <p class="loginIncorrecto"></p>
                 <p class="nombreUsuarioValidacion">Introduce un nombre de usuario correcto</p>
                 <input type="text" placeholder="Nombre de usuario" name="usuario" id="nombreUsuario">
                 <p class="passwUsuarioValidacion">Introduce una contraseña correcta</p>
                 <input type="password" placeholder="Contraseña" name="passw" id="passw">
                 <label id="mostrarpassw">
-                    <input id="verPassw" type="checkbox" onclick="mostrarPassw()">
+                    <input id="verPassw" type="checkbox" >
                     Mostrar contraseña
                 </label>
                 
@@ -41,6 +50,6 @@
     <script type="module" src="js/views/iniciarSesion.js"></script>
     <script type="module" src="js/controllers/cIniciarSesion.js"></script>
     <script type="module" src="js/models/mIniciarSesion.js"></script>
-    <!-- <script src="js/musica.js"></script> -->
+    <script src="js/views/musica.js"></script>
 </body>
 </html>

@@ -111,7 +111,7 @@ input[type="checkbox"]{
 }
 
 
-form p{
+form p, #modalInicioJuego p{
     margin: 1rem 0;
     color: #FFFFFF; /* Blanco para destacar */
     text-shadow: -1px 1px 3px rgba(0, 0, 0, 1); /* Sombra para mayor visibilidad */
@@ -132,7 +132,6 @@ form .registrarseIncorrecto, form .nombreUsuarioValidacion, form .passwUsuarioVa
 }
 
 .boton{
-    width: 100%;
     background-color: #32CD32;
     background: linear-gradient(90deg, #56CCF2 0%, #2F80ED 100%);
     padding: 1.2rem 0.7rem;
@@ -160,6 +159,7 @@ form .registrarseIncorrecto, form .nombreUsuarioValidacion, form .passwUsuarioVa
 a{
     text-decoration: none;
 }
+
 /* Imagenes de abajo en inicio de sesión,  inicio, y registro*/
 .alcaldes{
     width: 30%;
@@ -175,23 +175,51 @@ a{
         margin: 0 auto;
     }
 }
+@media (orientation: portrait){
+    .alcaldes{
+        width: 50%;
+        margin: 0 auto;
+    }
+}
+#parrafoNombreUsuario{
+    font-size: 2rem;
+    color: black;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: -1px 2px 2px white;
+    text-decoration: underline;
+}
 
 /* ----- Páginas especificas ----- */
 /* Inicio de sesión */
 .icons{
+    width: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    margin: 0 auto;
 }
-
-.icons a:visited{
+.icons>div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+}
+.icons svg a:visited{
+    color: black;
+    
+}
+.icons svg{
     color: black;
 }
 .icons a, .icons a svg{
     color: black;
+    margin: 0 0rem 0 1rem;
 }
+
+
 
 /* Página de inicio */
 .inicio{
@@ -217,6 +245,12 @@ a{
 .botones-inicio a{
     text-align: center;
     width: 80%;
+}
+@media (max-width: 769px) {
+    .botones-inicio{
+        padding: 3rem;
+        width: 80%;
+    }
 }
 
 #mostrarpassw{
@@ -346,3 +380,360 @@ a{
     text-decoration: none;
     color: var(--Font-color-light);
 }
+
+/* Modal crear sala */
+#modalCrearSala, #modalUnirseSala, #modalInicioJuego {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo más suave */
+    backdrop-filter: blur(5px); /* Desenfoque del fondo */
+}
+
+#modalInicioJuego{
+    display: flex;
+}
+
+#cModalInicioJuego{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #0c0c0c83;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Sombra */
+}
+@media (max-width: 1280px) {
+    .modal-content {
+        width: 70%; 
+        font-size: 1rem
+    }
+    .modal-content h1{
+        font-size: 3rem;
+    }
+}
+#errorModal{
+    display: none;
+    color: red;
+    font-size: 1.8rem;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+#crearSalaForm, #unirseSalaForm, #modalSalaExpirada {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: transparent;
+    text-align: center;
+}
+
+#crearSalaForm label, #unirseSalaForm label {
+    padding: 0.5rem;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    outline: none;
+    width: 100%;
+}
+
+#crearSalaForm button, #unirseSalaForm button {
+    margin: auto;
+}
+
+#modalSalaExpirada{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo más suave */
+    backdrop-filter: blur(5px); /* Desenfoque del fondo */
+}
+
+#modalSalaExpirada h1{
+    font-size: 5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: -1px 1px 3px black;
+    margin: 1rem 0;
+}
+
+#modalSalaExpirada p{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: rgb(248, 12, 12);
+    text-shadow: -1px 1px 3px black;
+    margin: 2rem 0;
+}
+
+.close{
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.close:hover{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Sala de espera de la sala */
+
+.tituloSala{
+    text-align: center;
+    font-size: 5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: -1px 1px 3px black;
+    margin: 1rem 0;
+}
+
+
+.valorSala{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--Font-color-light);
+    text-shadow: -1px 1px 3px black;
+    margin: 1rem 0;
+}
+@media (max-width: 768px) {
+    .tituloSala{
+        font-size: 3.5rem;
+    }
+    .valorSala{
+        font-size: 2.3rem;
+    }
+}
+.enlacesSala{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    width: 100%;
+}
+.enlacesSala div{
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 2rem;
+    align-items: center;
+}
+
+.enlacesSala a{
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #56CCF2 0%, #2F80ED 100%);
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: -3px 3px 7px #000000dc;
+    transition: 0.3s;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.enlacesSala a:hover{
+    background: rgb(227,129,80);
+    background: linear-gradient(90deg, rgba(227,129,80,1) 0%, rgba(252,172,137,1) 50%, rgb(243, 162, 128) 100%);
+    color: black;
+    transition: 0.3s;
+}
+
+
+/* Estilo general para el ranking */
+.ranking {
+    width: 40%;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    border-collapse: collapse;  /* Asegura que las celdas de la tabla no tengan espacio */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);  /* Sombra suave alrededor de la tabla */
+}
+
+.ranking td, .ranking th {
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil entre celdas */
+}
+
+.ranking tr {
+    font-size: 2.3rem;
+    transition: 0.3s ease;
+    text-shadow: -1px 2px 5px black;
+}
+
+/* Colores de las filas */
+.ranking tr:nth-child(1) {
+    background-color: rgb(39, 39, 39);  /* Fondo oscuro para el primer lugar */
+    color: rgb(255, 255, 255); /* Blanco */
+    text-decoration: underline;
+    font-size: 3.5rem;
+}
+
+.ranking tr:nth-child(2) {
+    background-color: rgba(39, 39, 39, 0.75);  /* Fondo oscuro para el segundo lugar */
+    color: rgb(239, 232, 26); /* Color dorado */
+    text-shadow: 0px 0px 10px rgb(154, 149, 18);
+}
+
+.ranking tr:nth-child(3) {
+    background-color: rgb(39, 39, 39, 0.75);  /* Fondo oscuro para el tercer lugar */
+    color: #e3e4e5; /* Gris claro */
+    text-shadow: 0px 0px 10px black;
+}
+
+.ranking tr:nth-child(4) {
+    background-color: rgba(39, 39, 39, 0.75);  /* Fondo oscuro para el cuarto lugar */
+    color: #cd7f32; /* Color bronce */
+    text-shadow: 0px 0px 10px black;
+}
+
+/* Estilo para las demás filas */
+.ranking tr:nth-child(n+5) {
+    background-color: rgba(60, 60, 60, 0.68);  /* Fondo gris para el resto de las filas */
+    color: white;
+}
+
+/* Hover en las filas */
+.ranking tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);  /* Fondo más claro al pasar el ratón */
+    transform: scale(1.05);  /* Ligera ampliación para resaltar */
+    font-size: 1.7rem;  /* Aumento de tamaño de texto */
+}
+
+/* Espaciado para las celdas */
+.ranking td {
+    padding: 1rem 2rem;
+}
+
+/* Para la primera fila de la tabla que contiene los encabezados */
+.ranking tr:nth-child(1) td {
+    font-size: 3rem; /* Título más grande */
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Mensajes personalizador */
+.exitoso p{
+    color: rgb(8, 204, 8);
+    font-size: 1.8rem;
+}
+/* Juego */
+#bodyJuego{
+    background-image: url();
+    background-position: none;
+    background-size: none;
+    background-repeat: none;
+    min-height: 100vh;
+    backdrop-filter: blur(0px);
+    background-color: #fad8ac;
+
+    /* display: flow-root; */
+}
+#juego{
+width: 100%;
+display: grid;
+grid-template-rows: 5vh auto;
+gap: 5px;
+margin: 5px auto 0 auto;
+
+}
+
+.preguntas{
+width: 100%;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+font-size: 1.7rem;
+}
+.preguntas>div:nth-child(1){
+width: 75%;
+padding: 1rem;
+margin: 0 auto 1rem auto;
+background-color: white;
+border: 1px solid black;
+border-radius: 50px;
+}
+.respuestas {
+width: 60%;
+display: grid;
+grid-template-columns: repeat(2, 1fr); /* Dos columnas con igual ancho */
+gap: 10px; /* Espaciado entre las respuestas */
+}
+
+.respuestas button {
+background-color: white;
+text-align: center;
+padding: 10px;
+border: 1px solid black;
+border-radius: 5px;
+}
+.medidores{
+display: flex;
+flex-direction: row;
+width: 60%;
+justify-content: space-evenly;
+align-items: center;
+margin: 1rem  0 auto;
+}
+.mapa{
+    margin-top: 2.6rem;
+    background-image: url("../img/mapaJuego.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    height: 600px;
+    z-index: 16;
+    /* background-color: #32CD32; */
+}
+#edificio1, #edificio2, #edificio3, #edificio4, #edificio5, 
+#edificio6, #edificio7, #edificio8, #edificio9, #edificio10, 
+#edificio11, #edificio12, #edificio13, #edificio14, #edificio15, 
+#edificio16 {
+    width: 100%;
+    height: 600px;
+    display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.cBotonPregunta{
+    padding: .5rem 0;
+    width: 100%;
+}
+

@@ -11,69 +11,87 @@ const controlador = new CRegistrarse();
         passlogin2.type = checkbox.checked ? "text" : "password";
     }
     window.mostrarPassw = mostrarPassw;
-    function verificarCampo(inputSelector, mensajeSelector) {
-        let input = document.querySelector(inputSelector);
-        let mensaje = document.querySelector(mensajeSelector);
+    //----------------VERIFICAR CAMPOS VACÍOS
+function verificarCampo(inputSelector, mensajeSelector) {
+    const input = document.querySelector(inputSelector);
+    const mensaje = document.querySelector(mensajeSelector);
 
-        if (input && mensaje) {
-            input.addEventListener("blur", function () {
-                mensaje.style.display = input.value.trim() === '' ? 'inline' : 'none';
-            });
+    if (input && mensaje) {
+        input.addEventListener("input", () => {
+            mensaje.style.display = input.value.trim() === '' ? 'inline' : 'none';
+        });
+        input.addEventListener("blur", () => {
+            mensaje.style.display = input.value.trim() === '' ? 'inline' : 'none';
+        });
+    } else {
+        console.warn(`Elementos no encontrados: ${inputSelector} o ${mensajeSelector}`);
+    }
+}
+
+//----------------VERIFICAR CONTRASEÑAS
+function repetirPassw(inputPassw, inputrPassw, mensajeSelector) {
+    const input = document.querySelector(inputPassw);
+    const input2 = document.querySelector(inputrPassw);
+    const mensaje = document.querySelector(mensajeSelector);
+
+    if (input && input2 && mensaje) {
+        const validar = () => {
+            if (input2.value.trim() === '') {
+                mensaje.style.display = 'inline';
+                mensaje.textContent = 'Este campo no puede estar vacío';
+            } else if (input.value !== input2.value) {
+                mensaje.style.display = 'inline';
+                mensaje.textContent = 'Las contraseñas no coinciden';
+            } else {
+                mensaje.style.display = 'none';
+            }
+        };
+
+        input2.addEventListener("input", validar); // Validación en tiempo real
+        input2.addEventListener("blur", validar); // Validación al perder el foco
+    } else {
+        console.warn(`Elementos no encontrados: ${inputPassw}, ${inputrPassw}, o ${mensajeSelector}`);
+    }
+}
+
+//----------------HABILITAR/DESHABILITAR BOTÓN DE ENVÍO
+function actualizarEstadoBoton(inputs, boton) {
+    const allFilled = inputs.every(inputSelector => {
+        const input = document.querySelector(inputSelector);
+        return input && input.value.trim() !== '';
+    });
+
+    const submit = document.querySelector(boton);
+    if (submit) {
+        submit.disabled = !allFilled;
+    } else {
+        console.warn(`Botón no encontrado: ${boton}`);
+    }
+}
+
+function verificarCampoBoton(inputNombre, inputPass, inputRPass, boton) {
+    const inputSelectors = [inputNombre, inputPass, inputRPass];
+
+    inputSelectors.forEach(selector => {
+        const input = document.querySelector(selector);
+        if (input) {
+            input.addEventListener('input', () => actualizarEstadoBoton(inputSelectors, boton)); // Actualiza en tiempo real
+            input.addEventListener('blur', () => actualizarEstadoBoton(inputSelectors, boton));  // Actualiza al perder foco
         }
-    }
-    function repetirPassw(inputPassw, inputrPassw, mensajeSelector){
-        let input = document.querySelector(inputPassw);
-        let input2 = document.querySelector(inputrPassw);
-        let mensaje = document.querySelector(mensajeSelector);
-        if (input && input2 && mensaje) {
-            input2.addEventListener("blur", function (){
-                if(input2.value.trim() === ''){
-                    mensaje.style.display = 'inline';
-                    mensaje.textContent = 'Este campo no puede estar vacío';
-                }else if(input.value != input2.value){
-                    mensaje.style.display = 'inline';
-                    mensaje.textContent = 'Las contraseñas no coinciden';
-                }else{ mensaje.style.display = 'none'; }
-            });
-        }   
-    }
-    function verificarCampoBoton(inputNombre,inputPass,inputRPass,boton){
-        let nombre = document.querySelector(inputNombre);
-        let pass = document.querySelector(inputPass);
-        let rpass = document.querySelector(inputRPass);
-        let botonEnviar = document.querySelector(boton);
-        
-        nombre.addEventListener("blur", function(){
-            if(nombre.value.trim() === '' || pass.value.trim() === '' || rpass.value.trim() === ''){
-                botonEnviar.disabled = true;
-            }else{
-                botonEnviar.disabled = false;
-            }
-        });
+    });
 
-        pass.addEventListener("blur", function(){
-            if(nombre.value.trim() === '' || pass.value.trim() === '' || rpass.value.trim() === ''){
-                botonEnviar.disabled = true;
-            }else{
-                botonEnviar.disabled = false;
-            }
-        });
+    // Verificar estado inicial del botón
+    actualizarEstadoBoton(inputSelectors, boton);
+}
 
-        rpass.addEventListener("blur", function(){
-            if(nombre.value.trim() === '' || pass.value.trim() === '' || rpass.value.trim() === ''){
-                botonEnviar.disabled = true;
-            }else{
-                botonEnviar.disabled = false;
-            }
-        });
-    }
-     // Validaciones de campos
+//----------------EJECUTAR VALIDACIONES
+document.addEventListener('DOMContentLoaded', () => {
     verificarCampo('#nombre', '.nombreUsuarioValidacion');
     verificarCampo('#passw', '.passwUsuarioValidacion');
     verificarCampo('#rpassw', '.rpasswUsuarioValidacion');
     repetirPassw('#passw', '#rpassw', '.rpasswUsuarioValidacion');
-    verificarCampoBoton('#nombre','#passw','#rpassw','#registroUser');
-
+    verificarCampoBoton('#nombre', '#passw', '#rpassw', '#registroUser');
+});
 
     document.getElementById('formularioRegistro').addEventListener('submit', async function (event){
 

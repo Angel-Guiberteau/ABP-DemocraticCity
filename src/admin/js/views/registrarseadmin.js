@@ -11,6 +11,7 @@ const controlador = new CRegistrarse();
         passlogin2.type = checkbox.checked ? "text" : "password";
     }
     window.mostrarPassw = mostrarPassw;
+    
     function verificarCampo(inputSelector, mensajeSelector) {
         let input = document.querySelector(inputSelector);
         let mensaje = document.querySelector(mensajeSelector);

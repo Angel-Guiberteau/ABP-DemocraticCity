@@ -41,5 +41,7 @@
     <script type="module" src="js/views/registrarse.js"></script>
     <script type="module" src="js/controllers/cRegistrarse.js"></script>
     <script type="module" src="js/models/mRegistrarse.js"></script>
+    <script src="js/views/musica.js"></script>
+
 </body>
 </html>
