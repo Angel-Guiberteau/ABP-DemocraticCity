@@ -111,7 +111,7 @@ input[type="checkbox"]{
 }
 
 
-form p{
+form p, #modalInicioJuego p{
     margin: 1rem 0;
     color: #FFFFFF; /* Blanco para destacar */
     text-shadow: -1px 1px 3px rgba(0, 0, 0, 1); /* Sombra para mayor visibilidad */

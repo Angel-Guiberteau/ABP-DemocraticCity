@@ -50,11 +50,11 @@
                 echo '<h1>Bienvenido a '.$_SESSION['nombreCiudad'].'</h1>';
             ?>
             <div id="cModalInicioJuego">
-            <p>Esperando Anfitrión</p>
+            <p>Esperando Anfitrión...</p>
             </div>
         </div>
     </div>
-    
+
     <script type="module" src="js/views/mostrarPreguntaUsuario.js"></script>
     <script type="module" src="js/controllers/cPartida.js"></script>
     <script type="module" src="js/models/mPartida.js"></script>
