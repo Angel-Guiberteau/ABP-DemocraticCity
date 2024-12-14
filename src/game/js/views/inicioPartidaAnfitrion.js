@@ -25,7 +25,9 @@ for (let i = 1; i <= 16; i++) {
 }
 
 /////////////////////////// COMENZAR JUEGO AL MOSTRAR PREGUNTA
-
+async function esperar(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 async function calcularVotosRestantes(){
     let json = await controlador.cCalcularVotosRestantes(numJugadores, nombreArchivoJson, idPregunta);
     return json;
@@ -40,16 +42,16 @@ async function mostrarPreguntaAnfitrion(){
     
 }
 document.getElementById('siguientePregunta').addEventListener('click', async ()=>{
-    ////Esperar 3 segs
+    if(intervaloId)
+        clearInterval(intervaloId);
+    
     document.getElementById('modalEsperarVotos').style.display = 'none';
     document.getElementById('cModalMostrarVotos').style.display = 'flex';
     document.querySelector('.centrarContenido').style.display = 'flex';
     document.querySelector('.none').style.display = 'none';
 
 
-    if(intervaloId)
-        clearInterval(intervaloId);
-
+    
     await dinamicaJuego();
 
 })
@@ -59,7 +61,8 @@ document.getElementById('mostrarPregunta').addEventListener('click', async ()=>{
 async function dinamicaJuego(){
     await mostrarPreguntaAnfitrion();
     cerrarModal();
-    ////Esperar
+    await esperar(3000);
+
     mostrarModalVotosActuales();
 
     intervaloId = setInterval(async () => {
