@@ -92,7 +92,7 @@ document.getElementById('formularioRegistroAdmin').addEventListener('submit', as
     let passlogin2 = document.getElementById('rpassw').value;
 
     
-    controlador.cRegistrarse(nombreUsuario, passw, rpassw);
+    controlador.cRegistrarse(nombreUsuario, passlogin, passlogin2);
     //Enviar los datos al servidor mediantes fetch.
 
     

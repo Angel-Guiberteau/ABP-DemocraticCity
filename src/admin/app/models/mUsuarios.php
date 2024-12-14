@@ -36,40 +36,7 @@ class MUsuarios{
             return false;
         }
     }
-    
-    /**
-     * Método que permite e inicio de sesión de los usuarios.
-     * @param
-     * @return
-     */
-    public function inicio($datos){
-        try{
 
-            $sql='SELECT * from Usuarios where nombreUsuario = :usuario;';
-
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bindValue(':usuario', $datos['usuario'], PDO::PARAM_STR);
-
-            $stmt->execute();
-            if($stmt->rowCount() > 0){
-                $fila = $stmt->fetch(PDO::FETCH_ASSOC);
-                if($datos["usuario"] == $fila['nombreUsuario'] && password_verify($datos["passw"], $fila["passUsuario"])){
-                    return $fila;
-                    $this->codError = 'correcto';
-                } else{
-                    $this->codError = 'PasswIncorrecto';
-                    return false;
-                }
-                    
-            }
-                
-            
-
-        }catch (PDOException $e) {
-            error_log("Error en la consulta: " . $e->getMessage());
-            return false;
-        }
-    }
     /**
      * Método que permite el inicio de sesión de los administradores ya sean generales o SUPER.
      * @param

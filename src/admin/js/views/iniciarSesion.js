@@ -61,8 +61,8 @@ verificarCamposParaBoton('#nombreUsuario', '#passw', '#iniciarSesionAdmin');
 document.getElementById('formularioLoginAdmin').addEventListener('submit', async (event) => {
     event.preventDefault(); // Evita que la página se recargue cuando se envía el formulario.
 
-    const nombreUsuario = document.getElementById('nombreUsuario').value.trim();
-    const passlogin = document.getElementById('passw').value.trim();
+    const nombreUsuario = document.getElementById('nombreUsuario').value;
+    const passlogin = document.getElementById('passw').value;
 
     if (nombreUsuario && passlogin) {
         // Llama al método del controlador para manejar la lógica de inicio de sesión

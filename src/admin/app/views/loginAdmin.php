@@ -19,7 +19,7 @@
             <form id="formularioLoginAdmin">
                 <p class="loginIncorrecto">ERROR AL INICIAR SESION. Introduce un nombre de usuario y contraseña correctos.</p>
                 <p class="nombreUsuarioValidacion">Introduce un nombre de usuario correcto</p>
-                <input type="text" placeholder="Nombre de usuario" name="usuario" id="nombreUsuario">
+                <input type="text" placeholder="Nombre de usuario" name="nombreUsuario" id="nombreUsuario">
                 <p class="passwUsuarioValidacion">Introduce una contraseña correcta</p>
                 <input type="password" placeholder="Contraseña" name="passw" id="passw">
                 <label id="mostrarpassw">

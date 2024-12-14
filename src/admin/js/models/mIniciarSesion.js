@@ -1,6 +1,5 @@
 export class MIniciarSesion {
     constructor() {}
-    
     async mIniciarSesion(formData){
         try {
             const response = await fetch('index.php?c=Usuarios&m=inicioAdm', {
@@ -10,8 +9,7 @@ export class MIniciarSesion {
     
             // Verifica si la respuesta del servidor es buena .
             if(response.ok) {
-                const result = await response.text(); // Lee la respuesta que el servidor envía como texto.
-                // Si la respuesta es "Usuario autenticado correctamente", muestra el mensaje y redirige.
+                const result = await response.text();
                 if (result=='correcto') {
                     window.location.href = "index.php?c=Usuarios&m=mostrarPanel"; 
                     // Cambia la página si la autenticación es exitosa

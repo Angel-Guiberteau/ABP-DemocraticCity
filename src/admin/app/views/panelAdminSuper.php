@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/style.css">
     
 </head>
-<>
     <main>
         <nav class="icons">
             
