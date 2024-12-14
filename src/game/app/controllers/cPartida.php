@@ -236,23 +236,32 @@ class CPartida{
         $datosJson = json_decode($contenidoJson, true);
         
         // Sumar los valores del array
-        $totalVotos = 0;
-        $totalVotos += $datosJson['A'];
-        $totalVotos += $datosJson['B'];
-        $totalVotos += $datosJson['C'];
-        $totalVotos += $datosJson['D'];
-
-        if($totalVotos)
-        {
-            echo $totalVotos;
-            exit;
+        if(isset($datosJson['A'])){
+            $totalVotos = 0;
+            $votosA = $datosJson['A'];
+            $votosB = $datosJson['B'];
+            $votosC = $datosJson['C'];
+            $votosD  = $datosJson['D'];
+            $totalVotos =  $votosA+$votosB+$votosC+$votosD;
+            if($totalVotos == $datos['numJugadores']){
+                unlink($rutaArchivo);
+                $letraMasVotada = $this->comprobarLetraMayorVotada($votosA,$votosB,$votosC,$votosD);
+                $votosLetraMasVotada = $this->comprobarVotosLetraMayorVotada($letraMasVotada,$votosA,$votosB,$votosC,$votosD);
+                $json = [
+                    "letraVotada" => $letraMasVotada,
+                    "numeroVotos" => $votosLetraMasVotada
+                ];
+                file_put_contents($rutaArchivo, json_encode($json, JSON_PRETTY_PRINT));
+                
+            }else{
+                $json = [
+                    "totalVotos" => $totalVotos,
+                ];
+            }
+        }else{
+            $json = json_decode($contenidoJson, true);
         }
-        else{
-            echo 'incorrecto';
-            exit;
-        }
-
-
+        echo json_encode($json);
     }
 
 
@@ -262,8 +271,34 @@ class CPartida{
         return $codigo;
     }
 
-    
+    private function comprobarLetraMayorVotada($votosA,$votosB,$votosC,$votosD){
 
+        $votos = [
+            'A' => $votosA,
+            'B' => $votosB,
+            'C' => $votosC,
+            'D' => $votosD
+        ];
+        $maxVotos = max($votosA, $votosB, $votosC, $votosD);
+
+        // Buscamos la clave (letra) que tiene el valor máximo
+        $letraMasVotada = array_search($maxVotos, $votos);
+        return $letraMasVotada;
+    }   
+    private function comprobarVotosLetraMayorVotada($letraMasVotada,$votosA,$votosB,$votosC,$votosD){
+        switch ($letraMasVotada) {
+            case 'A':
+                return $votosA;
+            case 'B':
+                return $votosB;
+            case 'C':
+                return $votosC;
+            case 'D':
+                return $votosD;
+            default:
+                return 0; // Por si hay algún error
+        }
+    }
     
 
 }

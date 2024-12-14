@@ -87,7 +87,7 @@ export class CPartida {
         let formData = new FormData();                
         formData.append('numJugadores', numJugadores);                
         formData.append('nombreArchivo', nombreArchivo);                
-        let votosRestantes = await this.modelo.mCalcularVotosRestantes(formData);
-        return votosRestantes;
+        let totalVotos = await this.modelo.mCalcularVotosRestantes(formData);
+        return totalVotos;
     }
 }

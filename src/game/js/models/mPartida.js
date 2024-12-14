@@ -297,7 +297,8 @@ export class MPartida {
             
         }
     }
-    async mCalcularVotosRestantes(formData) {   
+    async mCalcularVotosRestantes(formData) {  
+
         try {
             const response = await fetch('index.php?c=Partida&m=cCalularVotosRestantes', {
                 method: 'POST',
@@ -305,17 +306,16 @@ export class MPartida {
             });
             
             if (response.ok){
+                
                 const result = await response.text();
-                if(result){
-                    let votosRestantes = parseInt(result);
-                    return votosRestantes;
-                }
-                return false;
+                console.log('respuesta ' + result)
+                let data = JSON.parse(result);
+                return data;
             }
                 
             
         } catch (error) {
-            
+            console.log('CATCH error')
         }
     }
     

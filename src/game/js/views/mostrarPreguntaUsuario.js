@@ -18,7 +18,7 @@ const controlador = new CPartida();
     const pregunta = document.getElementById('pregunta');
     const respuesta1 = document.getElementById('respuesta1');
     const respuesta2 = document.getElementById('respuesta2');
-    const respuesta3 = document.getElementById('respuesta3');
+    const respuesjsonta3 = document.getElementById('respuesta3');
     const respuesta4 = document.getElementById('respuesta4');
     const edificios = [];
     for (let i = 1; i <= 16; i++) {
@@ -68,7 +68,8 @@ respuesta4.addEventListener('click', () =>{
 /////////////////////////// CALCULAR VOTOS RESTANTES
 
 async function calcularVotosRestantes(){
-    return controlador.cCalcularVotosRestantes(numJugadores, nombreArchivoJson);
+    let prueba = await controlador.cCalcularVotosRestantes(numJugadores, nombreArchivoJson);
+    return prueba;
 }
 
 
@@ -82,16 +83,46 @@ function cerrarModal(){
 /////////////////////////// MOSTRAR MODAL DESPUES DE VOTO
 
 function mostrarModalEsperar(textoRespuesta) {
-    setInterval(async ()=>{
-        votosTotales = await calcularVotosRestantes();
-        document.getElementById('votosRestantes').innerHTML = 'Votos restantes: '+ (numJugadores - votosTotales);
+    setInterval(async () => {
+        // Suponiendo que `calcularVotosRestantes` devuelve un JSON con los votos totales.
+        const json = await calcularVotosRestantes();
+        // Comprobamos el tipo de j
+        if (esTipoVotosJSON(json)) {
+            // Si es el tipo de JSON con votos (A, B, C, D)
+            document.getElementById('votosRestantes').innerHTML = 'Votos restantes: ' + (numJugadores - json.totalVotos);
+            document.getElementById('respuestaEsperarVotos').innerHTML = textoRespuesta;
+            
+        } else if (esTipoLetraVotadaJSON(json)) {
+            let parrafoVotosRestantes = document.getElementById('votosRestantes');
+            let parrafoRespuestaEsperarVotos = document.getElementById('respuestaEsperarVotos');
+            let cargando = document.querySelector('.dot-spinner');
+        
+            parrafoVotosRestantes.style.cssText = 'font-size: 2.5rem; font-weight: 700; color: rgb(221, 215, 37); text-shadow: -1px 1px 3px black;';
+
+            parrafoVotosRestantes.innerHTML = '⭐¡La letra más votada es: ' + json.letraVotada + ' con ' + json.numeroVotos + ' votos!⭐';
+
+            parrafoRespuestaEsperarVotos.innerHTML ='Tu respuesta: '+ textoRespuesta;
+            document.getElementById('esperarVotos').innerHTML = '';
+
+            cargando.style.display = 'none';
+
+        } else {
+            console.log('JSON no reconocido');
+        }
     }, 1000);
-    //Brother piensa antes de hacer las cosas tio...
+
+
+    // Configurar el texto en el modal
     document.getElementById('respuestaEsperarVotos').innerHTML = textoRespuesta;
     document.getElementById('modalEsperarVotos').style.display = 'flex';
 }
 
+// Función para verificar si es el primer tipo de JSON (A, B, C, D)
+function esTipoVotosJSON(json) {
+    return json.hasOwnProperty('totalVotos');
+}
 
-
-
-
+// Función para verificar si es el segundo tipo de JSON (letraVotada, numeroVotos)
+function esTipoLetraVotadaJSON(json) {
+    return json.hasOwnProperty('letraVotada') && json.hasOwnProperty('numeroVotos');
+}

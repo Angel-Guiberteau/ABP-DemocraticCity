@@ -71,6 +71,17 @@
         </div>
     </div>
 
+    <div id="modalEsperarVotos">
+        <div class="modal-content">
+            <h1>Has respondido</h1>
+            <div id="cModalEsperarVotos">
+            <p id="respuestaEsperarVotos"></p>
+            <p id="votosRestantes"></p>
+            <p id="esperarVotos">Esperando los demas votos...</p>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="js/views/inicioPartidaAnfitrion.js"></script>
     <script type="module" src="js/controllers/cPartida.js"></script>
     <script type="module" src="js/models/mPartida.js"></script>
