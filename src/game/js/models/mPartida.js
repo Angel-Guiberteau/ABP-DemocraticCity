@@ -228,6 +228,8 @@ export class MPartida {
                 respuesta2.textContent = `${data.respuestas[1].letra}: ${data.respuestas[1].texto}`; // Respuesta B
                 respuesta3.textContent = `${data.respuestas[2].letra}: ${data.respuestas[2].texto}`; // Respuesta C
                 respuesta4.textContent = `${data.respuestas[3].letra}: ${data.respuestas[3].texto}`; // Respuesta D
+                console.log('idPregunta ' + data.idPregunta)
+                return data.idPregunta;
             }
             
         } catch (error) {
@@ -251,9 +253,16 @@ export class MPartida {
                 respuesta3.textContent = `${data.respuestas[2].letra}: ${data.respuestas[2].texto}`; // Respuesta C
                 respuesta4.textContent = `${data.respuestas[3].letra}: ${data.respuestas[3].texto}`; // Respuesta D
                 modalInicioJuego.style.display = 'none';
+                if(data.idPregunta)
+                    return data.idPregunta;
+                else    
+                    return -100;
+            }else{
+                return -100;
             }
             
         } catch (error) {
+            return -100;
             console.error('esperando pregunta', error);
         }
     }

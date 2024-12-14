@@ -12,23 +12,52 @@ const controlador = new CPartida();
     let numJugadores = await calcularJugadores();
 
     let votosTotales;
+    let idPregunta = -1000;
+
+    let intervaloMostrarPregunta;
+    let intervaloCalcularVotosRestantes;
 
     const modalInicioJuego = document.getElementById('modalInicioJuego');
 
-    const pregunta = document.getElementById('pregunta');
-    const respuesta1 = document.getElementById('respuesta1');
-    const respuesta2 = document.getElementById('respuesta2');
-    const respuesjsonta3 = document.getElementById('respuesta3');
-    const respuesta4 = document.getElementById('respuesta4');
-    const edificios = [];
+    let pregunta = document.getElementById('pregunta');
+    let respuesta1 = document.getElementById('respuesta1');
+    let respuesta2 = document.getElementById('respuesta2');
+    let respuesjsonta3 = document.getElementById('respuesta3');
+    let respuesta4 = document.getElementById('respuesta4');
+    let edificios = [];
     for (let i = 1; i <= 16; i++) {
         edificios['edificio' + i] = document.getElementById('edificio' + i);
     }
 
 /////////////////////////// MOSTRAR PREGUNTAS USUARIO
+let lastIdPregunta = -1000;
 function mostrarPreguntaUsuario(){
-    setInterval(()=>{
-        controlador.cMostrarPreguntaUsuario(idPartida, pregunta, respuesta1, respuesta2, respuesta3, respuesta4, modalInicioJuego);
+    document.getElementById('votosRestantes').style.cssText = '';
+    document.querySelector('.dot-spinner').style.display = 'flex';
+    
+    // Detener el intervalo si ya estaba corriendo
+    if (intervaloMostrarPregunta) {
+        clearInterval(intervaloMostrarPregunta);
+    }
+
+// Variable para controlar el cambio de idPregunta
+    intervaloMostrarPregunta = setInterval(async () => {
+        // Obtener el id de la pregunta desde el controlador
+        idPregunta = await controlador.cMostrarPreguntaUsuario(idPartida, pregunta, respuesta1, respuesta2, respuesta3, respuesta4, modalInicioJuego);
+        
+        // Si el idPregunta es válido y diferente al anterior, detener el intervalo
+        if (idPregunta >= 0 && idPregunta !== lastIdPregunta) {
+            lastIdPregunta = idPregunta;  // Actualizar el idPregunta
+            clearInterval(intervaloMostrarPregunta); // Detener el intervalo al obtener una pregunta válida
+            console.log(`Pregunta cargada correctamente con idPregunta: ${idPregunta}`);
+            document.getElementById('modalEsperarVotos').style.display = 'none';
+            respuesta1.disabled = false;
+            respuesta2.disabled = false;
+            respuesta3.disabled = false;
+            respuesta4.disabled = false;
+        } else {
+            console.log('Esperando una pregunta válida...');
+        }
     }, 1000);
     
 }
@@ -43,6 +72,7 @@ function enviarVoto(letraElegida, textoRespuesta){
     respuesta3.disabled = true;
     respuesta4.disabled = true;
     mostrarModalEsperar(textoRespuesta);
+   
 }
 
 respuesta1.addEventListener('click', () =>{
@@ -68,7 +98,7 @@ respuesta4.addEventListener('click', () =>{
 /////////////////////////// CALCULAR VOTOS RESTANTES
 
 async function calcularVotosRestantes(){
-    let prueba = await controlador.cCalcularVotosRestantes(numJugadores, nombreArchivoJson);
+    let prueba = await controlador.cCalcularVotosRestantes(numJugadores, nombreArchivoJson, idPregunta);
     return prueba;
 }
 
@@ -83,7 +113,7 @@ function cerrarModal(){
 /////////////////////////// MOSTRAR MODAL DESPUES DE VOTO
 
 function mostrarModalEsperar(textoRespuesta) {
-    setInterval(async () => {
+    intervaloCalcularVotosRestantes = setInterval(async () => {
         // Suponiendo que `calcularVotosRestantes` devuelve un JSON con los votos totales.
         const json = await calcularVotosRestantes();
         // Comprobamos el tipo de j
@@ -102,9 +132,12 @@ function mostrarModalEsperar(textoRespuesta) {
             parrafoVotosRestantes.innerHTML = '⭐¡La letra más votada es: ' + json.letraVotada + ' con ' + json.numeroVotos + ' votos!⭐';
 
             parrafoRespuestaEsperarVotos.innerHTML ='Tu respuesta: '+ textoRespuesta;
-            document.getElementById('esperarVotos').innerHTML = '';
+            document.getElementById('esperarVotos').innerHTML = 'Esperando siguiente pregunta...';
 
             cargando.style.display = 'none';
+            clearInterval(intervaloCalcularVotosRestantes);
+            idPregunta= -1000;
+            mostrarPreguntaUsuario();
 
         } else {
             console.log('JSON no reconocido');

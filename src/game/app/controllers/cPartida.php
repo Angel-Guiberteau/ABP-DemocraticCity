@@ -195,8 +195,12 @@ class CPartida{
         $idPartida = (string)$datos['idPartida'];
         $nombreCiudad = (string)$datos['nombreCiudad'];
         $nombreJson = $idPartida.$nombreCiudad. '.json';
-        
         $rutaArchivo = $rutaCarpeta.$nombreJson;
+        if(file_exists($rutaArchivo)){
+            unlink($rutaArchivo);
+        }
+        
+        
         $json = [
             "A" => 0,
             "B" => 0,
@@ -246,16 +250,22 @@ class CPartida{
             if($totalVotos == $datos['numJugadores']){
                 unlink($rutaArchivo);
                 $letraMasVotada = $this->comprobarLetraMayorVotada($votosA,$votosB,$votosC,$votosD);
+                $textoPreguntaMasVotada = $this->objMPartida->mPreguntaMasVotada($datos['idPregunta'], $letraMasVotada);
                 $votosLetraMasVotada = $this->comprobarVotosLetraMayorVotada($letraMasVotada,$votosA,$votosB,$votosC,$votosD);
                 $json = [
                     "letraVotada" => $letraMasVotada,
-                    "numeroVotos" => $votosLetraMasVotada
+                    "numeroVotos" => $votosLetraMasVotada,
+                    "texto" => $textoPreguntaMasVotada
                 ];
                 file_put_contents($rutaArchivo, json_encode($json, JSON_PRETTY_PRINT));
                 
             }else{
                 $json = [
                     "totalVotos" => $totalVotos,
+                    "A" => $datosJson['A'],
+                    "B" => $datosJson['B'],
+                    "C" => $datosJson['C'],
+                    "D" => $datosJson['D']
                 ];
             }
         }else{

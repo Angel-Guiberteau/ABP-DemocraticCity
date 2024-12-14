@@ -406,6 +406,29 @@ a{
     justify-content: center;
 }
 
+#cModalMostrarVotos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.centrarContenido{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}	
+
+.none{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 .modal-content {
     background-color: #0c0c0c83;
     margin: auto;
@@ -751,12 +774,12 @@ margin: 1rem  0 auto;
     font-size: 2rem;
 }
 
-.resultadoVotacion{
+/* .resultadoVotacion{
     font-size: 2rem;
     font-weight: 700;
     color:rgb(221, 215, 37);
     text-shadow: -1px 1px 3px black;
-}
+} */
 
 /* gif cargando */
 

@@ -73,11 +73,30 @@
 
     <div id="modalEsperarVotos">
         <div class="modal-content">
-            <h1>Has respondido</h1>
-            <div id="cModalEsperarVotos">
-            <p id="respuestaEsperarVotos"></p>
-            <p id="votosRestantes"></p>
-            <p id="esperarVotos">Esperando los demas votos...</p>
+            <h1>Esperando Votaciones</h1>
+            <div id="cModalMostrarVotos">
+                <p id="letraA"></p>
+                <p id="letraB"></p>
+                <p id="letraC"></p>
+                <p id="letraD"></p>
+            </div>
+            <div class="centrarContenido">
+                <p id="votosRestantes"></p>
+                <div class="dot-spinner">
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                </div>
+            </div>
+            <div class="centrarContenido none"> 
+                <p id="letraMasVotado"></p>
+                <p id="textoMasVotado"></p>
+                <button class="boton" id="siguientePregunta">Siguiente Preguta</button>
             </div>
         </div>
     </div>

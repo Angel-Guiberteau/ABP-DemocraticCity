@@ -57,17 +57,20 @@ export class CPartida {
         // Llamamos al modelo para verificar si la sala ha sido eliminada
         this.modelo.mEmpezarPartida(formData);
     }
-    cMostrarPreguntaAnfitrion(idPartida, nombreCiudad, pregunta, respuesta1, respuesta2, respuesta3, respuesta4) {
+    async cMostrarPreguntaAnfitrion(idPartida, nombreCiudad, pregunta, respuesta1, respuesta2, respuesta3, respuesta4) {
         let formData = new FormData();
         formData.append('idPartida', idPartida);                
         formData.append('nombreCiudad', nombreCiudad);                
-        this.modelo.mMostrarPreguntaAnfitrion(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4);
+
+        let idPregunta = await this.modelo.mMostrarPreguntaAnfitrion(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4);
+        return idPregunta;
     }
 
-    cMostrarPreguntaUsuario(idPartida, pregunta, respuesta1, respuesta2, respuesta3, respuesta4, modalInicioJuego){
+    async cMostrarPreguntaUsuario(idPartida, pregunta, respuesta1, respuesta2, respuesta3, respuesta4, modalInicioJuego){
         let formData = new FormData();
         formData.append('idPartida', idPartida);                
-        this.modelo.mMostrarPreguntaUsuario(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4, modalInicioJuego);
+        let idPregunta = await this.modelo.mMostrarPreguntaUsuario(formData, pregunta, respuesta1, respuesta2, respuesta3, respuesta4, modalInicioJuego);
+        return idPregunta;
     }
     cEnviarVoto(letraElegida, idPartida, nombreCiudad){
         let formData = new FormData();
@@ -83,10 +86,11 @@ export class CPartida {
 
         return numeroJugadores;
     }
-    async cCalcularVotosRestantes(numJugadores, nombreArchivo){
+    async cCalcularVotosRestantes(numJugadores, nombreArchivo, idPregunta){
         let formData = new FormData();                
         formData.append('numJugadores', numJugadores);                
         formData.append('nombreArchivo', nombreArchivo);                
+        formData.append('idPregunta', idPregunta);            
         let totalVotos = await this.modelo.mCalcularVotosRestantes(formData);
         return totalVotos;
     }

@@ -223,6 +223,7 @@ class MPartida{
                 $this->conexion->commit();
                 
                 $resultado = [
+                    "idPregunta" => $pregunta['idPregunta'],
                     "pregunta" => $pregunta["texto"],
                     "respuestas" => []
                 ];
@@ -290,6 +291,7 @@ class MPartida{
                 
 
                 $resultado = [
+                    "idPregunta" => $pregunta["idPregunta"], 
                     "pregunta" => $pregunta["texto"], 
                     "respuestas" => []
                     
@@ -336,6 +338,26 @@ class MPartida{
 
             $numJugadores = $stmt->fetch(PDO::FETCH_ASSOC);
             return $numJugadores['numJugadores'];
+        }
+        catch(Exception $e){
+            error_log("Error al enviar voto: " . $e->getMessage());
+            return false;
+        }
+
+    }
+    function mPreguntaMasVotada($idPregunta, $letraMasVotada){
+
+        try{
+
+            $sql = "SELECT respuesta FROM Respuestas WHERE idPregunta = :idPregunta AND letraRespuesta = :letraRespuesta;";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
+            $stmt->bindValue(':letraRespuesta', $letraMasVotada, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $texto = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $texto['respuesta'];
         }
         catch(Exception $e){
             error_log("Error al enviar voto: " . $e->getMessage());
