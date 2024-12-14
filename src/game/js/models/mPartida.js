@@ -228,7 +228,6 @@ export class MPartida {
                 respuesta2.textContent = `${data.respuestas[1].letra}: ${data.respuestas[1].texto}`; // Respuesta B
                 respuesta3.textContent = `${data.respuestas[2].letra}: ${data.respuestas[2].texto}`; // Respuesta C
                 respuesta4.textContent = `${data.respuestas[3].letra}: ${data.respuestas[3].texto}`; // Respuesta D
-                console.log('idPregunta ' + data.idPregunta)
                 return data.idPregunta;
             }
             
@@ -320,6 +319,29 @@ export class MPartida {
                 console.log('respuesta ' + result)
                 let data = JSON.parse(result);
                 return data;
+            }
+                
+            
+        } catch (error) {
+            console.log('CATCH error')
+        }
+    }
+    async mFinalPartida(formData) {  
+
+        try {
+            const response = await fetch('index.php?c=Partida&m=cActualizarFinalPartida', {
+                method: 'POST',
+                body: formData,
+            });
+            
+            if (response.ok){
+                
+                const result = await response.text();
+                if(result == 'correcto'){
+                    console.log('Partida guardada y finalizada...')
+                }else{
+                    console.error('Error al guardar la partida')
+                }
             }
                 
             

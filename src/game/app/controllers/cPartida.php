@@ -248,14 +248,25 @@ class CPartida{
             $votosD  = $datosJson['D'];
             $totalVotos =  $votosA+$votosB+$votosC+$votosD;
             if($totalVotos == $datos['numJugadores']){
+
                 unlink($rutaArchivo);
+
                 $letraMasVotada = $this->comprobarLetraMayorVotada($votosA,$votosB,$votosC,$votosD);
+
                 $textoPreguntaMasVotada = $this->objMPartida->mPreguntaMasVotada($datos['idPregunta'], $letraMasVotada);
+                
+                $valoresRespuesta = $this->objMPartida->mValoresRespuesta($datos['idPregunta'], $letraMasVotada);
+
                 $votosLetraMasVotada = $this->comprobarVotosLetraMayorVotada($letraMasVotada,$votosA,$votosB,$votosC,$votosD);
+
                 $json = [
                     "letraVotada" => $letraMasVotada,
                     "numeroVotos" => $votosLetraMasVotada,
-                    "texto" => $textoPreguntaMasVotada
+                    "texto" => $textoPreguntaMasVotada,
+                    'educacion'=> $valoresRespuesta['educacion'],
+                    'sanidad'=> $valoresRespuesta['sanidad'],
+                    'seguridad'=> $valoresRespuesta['seguridad'],
+                    'economia' => $valoresRespuesta['economia']
                 ];
                 file_put_contents($rutaArchivo, json_encode($json, JSON_PRETTY_PRINT));
                 
@@ -274,6 +285,20 @@ class CPartida{
         echo json_encode($json);
     }
 
+
+    function cActualizarFinalPartida($datos){
+        $this->vista = '';
+        if($this->objMPartida->mActualizarFinalPartida($datos)){
+            $this->vista = '';
+            echo 'correcto';
+            exit;
+        }
+        else{
+            $this->vista = '';
+            echo 'incorrecto';
+            exit;
+        }
+    }
 
     private function generarCodigoAleatorio($longitud = 6) {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -309,6 +334,6 @@ class CPartida{
                 return 0; // Por si hay algún error
         }
     }
-    
+
 
 }

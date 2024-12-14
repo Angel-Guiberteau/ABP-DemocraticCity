@@ -11,7 +11,6 @@
     <?php
         echo '<input type="hidden" id="idPartidaOculto" value="'.$_SESSION['idPartida'].'">';
         echo '<input type="hidden" id="nombreCiudadOculto" value="'.$_SESSION['nombreCiudad'].'">';
-
     ?>
     <div id="juego">
         <nav class="inicio">
@@ -31,10 +30,10 @@
                     echo '<button id="respuesta4"></button>';
                 echo '</div>';
                 echo '<div class="medidores">';
-                    echo '<button id="economia" disabled>Economia: 5</button>';
-                    echo '<button id="sanidad" disabled>Sanidad: 5</button>';
-                    echo '<button id="seguridad" disabled>Seguridad: 5</button>';
-                    echo '<button id="educacion" disabled>Educación: 5</button>';
+                    echo '<button id="economia">Economia: <span id="valorEconomia">5</span></button>';
+                    echo '<button id="sanidad">Sanidad: <span id="valorSanidad">5</span></button>';
+                    echo '<button id="seguridad">Seguridad <span id="valorSeguridad">5</span></button>';
+                    echo '<button id="educacion">Educacion: <span id="valorEducacion">5</span></button>';
                 echo '</div>';
             ?>
             <div class="mapa">
@@ -59,6 +58,7 @@
     </div>
 
     <!-- MODAL INICIO JUEGO -->
+
     <div id="modalInicioJuego">
         <div class="modal-content">
             <span class="close" id="closeModalInicioJuego">&times;</span>
@@ -70,6 +70,8 @@
             </div>
         </div>
     </div>
+
+    <!-- MODAL ESPERAR VOTOS -->
 
     <div id="modalEsperarVotos">
         <div class="modal-content">
@@ -97,6 +99,21 @@
                 <p id="letraMasVotado"></p>
                 <p id="textoMasVotado"></p>
                 <button class="boton" id="siguientePregunta">Siguiente Preguta</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FINAL PARTIDA -->
+
+    <div>
+        <div id="modalFinalPartida">
+            <div class="modal-content">
+                <h1>Fin de la partida</h1>
+                <div id="cModalFinalPartida">
+                    <p id="textoFinalPartida"></p>
+                    <p id="puntuacionFinalPartida"></p>
+                    <button id="btnVolver">Volver</button>
+                </div>
             </div>
         </div>
     </div>

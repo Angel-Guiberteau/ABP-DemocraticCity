@@ -94,4 +94,13 @@ export class CPartida {
         let totalVotos = await this.modelo.mCalcularVotosRestantes(formData);
         return totalVotos;
     }
+    cFinalPartida(idPartida, economia, sanidad, seguridad, educacion){
+        let formData = new FormData();                
+        formData.append('idPartida', idPartida);                
+        formData.append('economia', economia);                
+        formData.append('sanidad', sanidad);            
+        formData.append('seguridad', seguridad);            
+        formData.append('educacion', educacion);            
+        this.modelo.mFinalPartida(formData);
+    }
 }

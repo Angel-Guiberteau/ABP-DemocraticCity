@@ -294,7 +294,6 @@ class MPartida{
                     "idPregunta" => $pregunta["idPregunta"], 
                     "pregunta" => $pregunta["texto"], 
                     "respuestas" => []
-                    
                 ];
     
                 foreach ($respuestas as $respuesta) {
@@ -365,5 +364,51 @@ class MPartida{
         }
 
     }
+    function mValoresRespuesta($idPregunta, $letraRespuesta){
 
+        try{
+
+            $sql = "SELECT educacion, sanidad, seguridad, economia FROM Respuestas WHERE idPregunta = :idPregunta AND letraRespuesta = :letraRespuesta;";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
+            $stmt->bindValue(':letraRespuesta', $letraRespuesta, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $valores = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $valores;
+        }
+        catch(Exception $e){
+            error_log("Error al enviar voto: " . $e->getMessage());
+            return false;
+        }
+
+    }
+
+    function mActualizarFinalPartida($datos){
+
+        try{
+         
+            $sql = "UPDATE Partidas SET vEducacion = :educacion, vSanidad = :sanidad, vSeguridad = :seguridad, vEconomia = :economia WHERE idPartida = :idPartida;";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':educacion', $datos['educacion'], PDO::PARAM_INT);
+            $stmt->bindValue(':sanidad', $datos['sanidad'], PDO::PARAM_INT);
+            $stmt->bindValue(':seguridad', $datos['seguridad'], PDO::PARAM_INT);
+            $stmt->bindValue(':economia', $datos['economia'], PDO::PARAM_INT);
+            $stmt->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_INT);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0)
+                return true;
+            else
+                return false;
+
+
+        }catch(Exception $e){
+            error_log("Error al actualizar medidores: " . $e->getMessage());
+            return false;
+        }
+
+    }
 }

@@ -12,6 +12,7 @@ async function calcularJugadores() {
 }
 let numJugadores = await calcularJugadores();
 
+let contador = 0;
 let idPregunta;
 let intervaloId;
 const pregunta = document.getElementById('pregunta');
@@ -25,6 +26,59 @@ for (let i = 1; i <= 16; i++) {
 }
 
 /////////////////////////// COMENZAR JUEGO AL MOSTRAR PREGUNTA
+
+function mostrarPanelFinalPartida(economia, sanidad, seguridad, educacion){
+    document.getElementById('modalFinalPartida').style.display = 'flex';
+    document.getElementById('textoFinalPartida').innerHTML = 'Tu partida ha acabado';
+    document.getElementById('puntuacionFinalPartida').innerHTML = 'Economia: ' + economia + ' Sanidad: ' + sanidad + ' Seguridad: '+ seguridad + ' Educación: ' + educacion;
+}
+async function comprobarFinal(economia, sanidad, seguridad, educacion){
+        if(contador==5 || economia < 1 || sanidad < 1 || seguridad < 1 || educacion < 1){
+            controlador.cFinalPartida(idPartida, economia, sanidad, seguridad, educacion);
+            mostrarPanelFinalPartida(economia, sanidad, seguridad, educacion);
+        }
+}
+
+
+function modificarMedidores(json){
+    contador++;
+    let economia = document.getElementById('valorEconomia');
+    let sanidad = document.getElementById('valorSanidad');
+    let seguridad = document.getElementById('valorSeguridad');
+    let educacion = document.getElementById('valorEducacion');
+
+    let economiaValor = parseInt(economia.innerHTML) || 0;
+    let sanidadValor = parseInt(sanidad.innerHTML) || 0;
+    let seguridadValor = parseInt(seguridad.innerHTML) || 0;
+    let educacionValor = parseInt(educacion.innerHTML) || 0;
+
+    let valorFinalEconomia = economiaValor + (json.economia);
+    let valorFinalSanidad = sanidadValor + (json.sanidad);
+    let valorFinalSeguridad = seguridadValor + (json.seguridad);
+    let valorFinalEducacion = educacionValor + (json.educacion);
+
+    economia.innerHTML = valorFinalEconomia;
+    if(valorFinalEconomia <= 3){ economia.style.color = 'red' }
+    else if(valorFinalEconomia >= 8){ economia.style.color = 'green' }
+        else if(valorFinalEconomia == 5){ economia.style.color = 'black' }
+    
+    sanidad.innerHTML = valorFinalSanidad;
+    if(valorFinalSanidad <= 3){ sanidad.style.color = 'red' }
+    else if(valorFinalSanidad >= 8){ sanidad.style.color = 'green' }
+        else if(valorFinalSanidad == 5){ sanidad.style.color = 'black' }
+
+    seguridad.innerHTML = valorFinalSeguridad;
+    if(valorFinalSeguridad <= 3){ seguridad.style.color = 'red' }
+    else if(valorFinalSeguridad >= 8){ seguridad.style.color = 'green' }
+        else if(valorFinalSeguridad == 5){ seguridad.style.color = 'black' }
+        
+    educacion.innerHTML = valorFinalEducacion;
+    if(valorFinalEducacion <= 3){ educacion.style.color = 'red' }
+    else if(valorFinalEducacion >= 8){ educacion.style.color = 'green' }
+        else if(valorFinalEducacion == 5){ educacion.style.color = 'black' }
+
+    comprobarFinal(valorFinalEconomia,valorFinalSanidad,valorFinalSeguridad,valorFinalEducacion);
+}
 async function esperar(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -37,6 +91,7 @@ async function mostrarModalVotosActuales(){
     document.getElementById('modalEsperarVotos').style.display = 'flex';
 }
 
+
 async function mostrarPreguntaAnfitrion(){
     idPregunta = await controlador.cMostrarPreguntaAnfitrion(idPartida, nombreCiudad, pregunta, respuesta1, respuesta2, respuesta3, respuesta4);
     
@@ -44,7 +99,7 @@ async function mostrarPreguntaAnfitrion(){
 document.getElementById('siguientePregunta').addEventListener('click', async ()=>{
     if(intervaloId)
         clearInterval(intervaloId);
-    
+
     document.getElementById('modalEsperarVotos').style.display = 'none';
     document.getElementById('cModalMostrarVotos').style.display = 'flex';
     document.querySelector('.centrarContenido').style.display = 'flex';
@@ -66,7 +121,6 @@ async function dinamicaJuego(){
     mostrarModalVotosActuales();
 
     intervaloId = setInterval(async () => {
-        console.log('vista idpregunta ' + idPregunta);
 
         const json = await calcularVotosRestantes();
 
@@ -84,6 +138,7 @@ async function dinamicaJuego(){
             document.getElementById('votosRestantes').innerHTML = 'Votos restantes: ' + (numJugadores - json.totalVotos);
             
         } else if (esTipoLetraVotadaJSON(json)) {
+            clearInterval(intervaloId);
             document.getElementById('cModalMostrarVotos').style.display = 'none';
             document.querySelector('.centrarContenido').style.display = 'none';
             document.querySelector('.none').style.display = 'flex';
@@ -91,8 +146,9 @@ async function dinamicaJuego(){
 
             document.getElementById('letraMasVotado').style.cssText = 'font-size: 2.5rem; font-weight: 700; color: rgb(221, 215, 37); text-shadow: -1px 1px 3px black;';
             document.getElementById('textoMasVotado').style.cssText = 'font-size: 2.5rem; font-weight: 700; color: rgb(221, 215, 37); text-shadow: -1px 1px 3px black;';
-
             document.getElementById('textoMasVotado').innerHTML = '⭐Respuesta: '+json.texto+'⭐';
+            modificarMedidores(json);
+            
 
 
         } else {
