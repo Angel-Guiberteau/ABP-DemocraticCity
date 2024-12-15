@@ -63,7 +63,7 @@ class CUsuarios{
 
     public function cMostrarRanking(){
     
-        $this->vista = 'Ranking';
+        $this->vista = 'ranking';
 
         if($datos = $this->objMUsuario->mMostrarRanking())
             return $datos;  
