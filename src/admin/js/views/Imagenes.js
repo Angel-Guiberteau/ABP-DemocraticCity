@@ -1,4 +1,4 @@
-import { CImagenes } from "../../js/controllers/cImagenes.js";
+import { CImagenes } from "../controllers/cImagenes.js";
 const objCImagenes = new CImagenes();
 
 document.getElementById("formularioImagenes").addEventListener("submit", async (event) => {
@@ -24,27 +24,4 @@ document.getElementById("formularioImagenes").addEventListener("submit", async (
     }
 
     objCImagenes.prepararImagen(archivo);
-    
-    /*// Crear un nuevo nombre para la imagen
-    //const nombreNuevo = "imagen_" + new Date().getTime() + "." + archivo.name.split(".").pop();
-
-    // Crear un objeto FormData para enviar el archivo al servidor.
-    const formData = new FormData();
-    formData.append("imagen", archivo, nombreNuevo); // Añadir el archivo con el nuevo nombre.
-    // Enviar el archivo al servidor usando fetch.
-    try {
-        const response = await fetch("src/admin/img", { // <-- aqui va la ruta del servidor.
-            method: "POST",
-            body: formData
-        });
-
-        if (response.ok) {
-            alert("Imagen enviada exitosamente.");
-        } else {
-            alert("Hubo un error al enviar la imagen.");
-        }
-    } catch (error) {
-        console.error("Error al enviar la imagen:", error);
-        alert("Hubo un problema al enviar la imagen.");
-    }*/
 });
