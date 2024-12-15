@@ -199,8 +199,6 @@ class CPartida{
         if(file_exists($rutaArchivo)){
             unlink($rutaArchivo);
         }
-        
-        
         $json = [
             "A" => 0,
             "B" => 0,
@@ -291,9 +289,9 @@ class CPartida{
         if($this->objMPartida->mActualizarFinalPartida($datos)){
             $this->vista = '';
             echo 'correcto';
+            unlink(RUTA_JSON.$datos['nombreArchivo']);
             exit;
-        }
-        else{
+        }else{
             $this->vista = '';
             echo 'incorrecto';
             exit;

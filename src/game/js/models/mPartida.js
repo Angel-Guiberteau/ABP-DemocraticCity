@@ -337,7 +337,7 @@ export class MPartida {
             if (response.ok){
                 
                 const result = await response.text();
-                if(result == 'correcto'){
+                if(result.trim() == 'correcto'){
                     console.log('Partida guardada y finalizada...')
                 }else{
                     console.error('Error al guardar la partida')

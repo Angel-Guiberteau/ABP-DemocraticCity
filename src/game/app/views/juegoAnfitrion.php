@@ -112,7 +112,7 @@
                 <div id="cModalFinalPartida">
                     <p id="textoFinalPartida"></p>
                     <p id="puntuacionFinalPartida"></p>
-                    <button id="btnVolver">Volver</button>
+                    <a href="index.php?c=Usuarios&m=mostrarInicio" class="boton">Volver</a>
                 </div>
             </div>
         </div>

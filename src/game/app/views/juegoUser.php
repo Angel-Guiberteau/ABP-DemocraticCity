@@ -37,12 +37,13 @@
                 echo '</div>';
             ?>
         </div>
-        <div class="mapa">
+        
+    </div>
+    <div class="mapa">
+        <img src="img/mapaJuego.png" alt="">
             <div id="edificio1"></div>
             <div id="edificio2"></div>
         </div>
-    </div>
-
     <!-- MODAL INICIO JUEGO -->
     <div id="modalInicioJuego">
         <div class="modal-content">
@@ -85,7 +86,7 @@
                 <div id="cModalFinalPartida">
                     <p id="textoFinalPartida"></p>
                     <p id="puntuacionFinalPartida"></p>
-                    <button id="btnVolver" class="boton">Volver</button>
+                    <a href="index.php?c=Usuarios&m=mostrarInicio" class="boton">Volver</a>
                 </div>
             </div>
         </div>

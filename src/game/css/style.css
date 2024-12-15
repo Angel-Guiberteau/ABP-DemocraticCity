@@ -111,12 +111,13 @@ input[type="checkbox"]{
 }
 
 
-form p, #modalInicioJuego p, #modalEsperarVotos p{
+form p, #modalInicioJuego p, #modalEsperarVotos p, #modalFinalPartida p{
     margin: 1rem 0;
     color: #FFFFFF; /* Blanco para destacar */
     text-shadow: -1px 1px 3px rgba(0, 0, 0, 1); /* Sombra para mayor visibilidad */
     font-weight: 700;
     font-size: 1.5rem;
+    text-align: center;
 }
 form p a{
     text-decoration: none;
@@ -733,7 +734,7 @@ border-radius: 5px;
 .medidores{
 display: flex;
 flex-direction: row;
-width: 60%;
+width: 100%;
 justify-content: space-evenly;
 align-items: center;
 margin: 1rem  0 auto;
@@ -751,18 +752,24 @@ margin: 1rem  0 auto;
 }
 
 
-.mapa{
-    margin-top: 2.6rem;
-    background-image: url("../img/mapaJuego.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
+.mapa {
     width: 100%;
-    height: 600px;
-    z-index: 16;
-    /* background-color: #32CD32; */
 }
+.mapa img{
+    width: 100%;
+}
+/* @media (max-width: 1150px) {
+    .mapa{
+        width: 100%;
+        height: 700px;
+    }
+}
+@media (max-width: 768px) {
+    .mapa{
+        width: 100%;
+        height: 400px;
+    }
+} */
 #edificio1, #edificio2, #edificio3, #edificio4, #edificio5, 
 #edificio6, #edificio7, #edificio8, #edificio9, #edificio10, 
 #edificio11, #edificio12, #edificio13, #edificio14, #edificio15, 

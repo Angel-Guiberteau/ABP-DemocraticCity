@@ -79,8 +79,9 @@ class MUsuarios{
     public function mMostrarRanking(){
 
         try{
-            $sql = 'SELECT nombreCiudad, puntuacion FROM Partidas ORDER BY puntuacion DESC LIMIT 5;';
+            $sql = 'SELECT nombreCiudad, puntuacion FROM Partidas WHERE empezada = :empezada ORDER BY puntuacion DESC LIMIT 5;';
             $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':empezada', 't', PDO::PARAM_STR);
             $stmt->execute();
 
             $array = [];

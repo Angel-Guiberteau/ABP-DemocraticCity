@@ -12,7 +12,6 @@ const controlador = new CPartida();
     let numJugadores = await calcularJugadores();
 
     let contador = 0;
-    let votosTotales;
     let idPregunta = -1000;
     let intervaloMostrarPregunta;
     let intervaloCalcularVotosRestantes;
@@ -22,7 +21,7 @@ const controlador = new CPartida();
     let pregunta = document.getElementById('pregunta');
     let respuesta1 = document.getElementById('respuesta1');
     let respuesta2 = document.getElementById('respuesta2');
-    let respuesjsonta3 = document.getElementById('respuesta3');
+    let respuesta3 = document.getElementById('respuesta3');
     let respuesta4 = document.getElementById('respuesta4');
     let edificios = [];
     for (let i = 1; i <= 16; i++) {
@@ -47,6 +46,7 @@ function mostrarPreguntaUsuario(){
         
         // Si el idPregunta es válido y diferente al anterior, detener el intervalo
         if (idPregunta >= 0 && idPregunta !== lastIdPregunta) {
+            contador++;
             lastIdPregunta = idPregunta;  // Actualizar el idPregunta
             clearInterval(intervaloMostrarPregunta); // Detener el intervalo al obtener una pregunta válida
             document.getElementById('modalEsperarVotos').style.display = 'none';
@@ -64,9 +64,9 @@ function mostrarPanelFinalPartida(economia, sanidad, seguridad, educacion){
     document.getElementById('puntuacionFinalPartida').innerHTML = 'Economia: ' + economia + ' Sanidad: ' + sanidad + ' Seguridad: '+ seguridad + ' Educación: ' + educacion;
 }
 
-async function comprobarFinal(economia, sanidad, seguridad, educacion){
+function comprobarFinal(economia, sanidad, seguridad, educacion){
+    console.log("Valores finales:", { economia, sanidad, seguridad, educacion, contador });
     if(contador==5 || economia < 1 || sanidad < 1 || seguridad < 1 || educacion < 1){
-        controlador.cFinalPartida(idPartida, economia, sanidad, seguridad, educacion);
         mostrarPanelFinalPartida(economia, sanidad, seguridad, educacion);
     }
 }
@@ -87,6 +87,11 @@ function modificarMedidores(json){
     let valorFinalSanidad = sanidadValor + (json.sanidad);
     let valorFinalSeguridad = seguridadValor + (json.seguridad);
     let valorFinalEducacion = educacionValor + (json.educacion);
+    // Limitar valores máximos a 10
+    valorFinalEconomia = Math.min(valorFinalEconomia, 10);
+    valorFinalSanidad = Math.min(valorFinalSanidad, 10);
+    valorFinalSeguridad = Math.min(valorFinalSeguridad, 10);
+    valorFinalEducacion = Math.min(valorFinalEducacion, 10);
 
     economia.innerHTML = valorFinalEconomia;
     if(valorFinalEconomia <= 3){ economia.style.color = 'red' }
@@ -108,7 +113,7 @@ function modificarMedidores(json){
     else if(valorFinalEducacion >= 8){ educacion.style.color = 'green' }
         else if(valorFinalEducacion == 5){ educacion.style.color = 'black' }
 
-    comprobarFinal(economia, sanidad, seguridad, educacion);
+    comprobarFinal(valorFinalEconomia,valorFinalSanidad,valorFinalSeguridad,valorFinalEducacion);
 }
 
 /////////////////////////// ENVIAR VOTO AL JSON
@@ -184,7 +189,10 @@ function mostrarModalEsperar(textoRespuesta) {
             let parrafoRespuestaEsperarVotos = document.getElementById('respuestaEsperarVotos');
             let cargando = document.querySelector('.dot-spinner');
             cargando.style.display = 'none';
-            parrafoVotosRestantes.style.cssText = 'font-size: 2.5rem; font-weight: 700; color: rgb(221, 215, 37); text-shadow: -1px 1px 3px black;';
+            parrafoVotosRestantes.style.fontSize = '2.5rem';
+            parrafoVotosRestantes.style.fontWeight = '700';
+            parrafoVotosRestantes.style.color = 'rgb(221, 215, 37)';
+            parrafoVotosRestantes.style.textShadow = '-1px 1px 3px black';
 
             parrafoVotosRestantes.innerHTML = '⭐¡La letra más votada es: ' + json.letraVotada + ' con ' + json.numeroVotos + ' votos!⭐';
 

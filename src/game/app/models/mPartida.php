@@ -388,14 +388,16 @@ class MPartida{
     function mActualizarFinalPartida($datos){
 
         try{
-         
-            $sql = "UPDATE Partidas SET vEducacion = :educacion, vSanidad = :sanidad, vSeguridad = :seguridad, vEconomia = :economia WHERE idPartida = :idPartida;";
+        
+            $sql = "UPDATE Partidas SET vEducacion = :educacion, vSanidad = :sanidad, vSeguridad = :seguridad, vEconomia = :economia, empezada = :empezada, puntuacion = :puntuacion WHERE idPartida = :idPartida;";
 
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindValue(':educacion', $datos['educacion'], PDO::PARAM_INT);
             $stmt->bindValue(':sanidad', $datos['sanidad'], PDO::PARAM_INT);
             $stmt->bindValue(':seguridad', $datos['seguridad'], PDO::PARAM_INT);
             $stmt->bindValue(':economia', $datos['economia'], PDO::PARAM_INT);
+            $stmt->bindValue(':empezada', 't', PDO::PARAM_STR);
+            $stmt->bindValue(':puntuacion', $datos['puntuacion'], PDO::PARAM_INT);
             $stmt->bindValue(':idPartida', $datos['idPartida'], PDO::PARAM_INT);
             $stmt->execute();
 

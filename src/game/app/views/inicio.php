@@ -35,7 +35,7 @@
             <h1 id="tituloJuego">Democratic City</h1>
             <div class="botones-inicio">
                 <a href="index.php?c=Usuarios&m=mostrarInicioJuego" class="boton">Jugar</a>
-                <a href="index.php?c=Usuarios&m=mostrarRanking" class="boton">Ranking</a>
+                <a href="index.php?c=Usuarios&m=cMostrarRanking" class="boton">Ranking</a>
                 <a href="#" class="boton">Manual de juego</a>
             </div>
             <div class="alcaldes">

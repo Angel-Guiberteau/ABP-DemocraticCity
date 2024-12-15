@@ -34,8 +34,10 @@ function mostrarPanelFinalPartida(economia, sanidad, seguridad, educacion){
 }
 async function comprobarFinal(economia, sanidad, seguridad, educacion){
         if(contador==5 || economia < 1 || sanidad < 1 || seguridad < 1 || educacion < 1){
-            controlador.cFinalPartida(idPartida, economia, sanidad, seguridad, educacion);
             mostrarPanelFinalPartida(economia, sanidad, seguridad, educacion);
+            await esperar(2500);
+            controlador.cFinalPartida(idPartida, economia, sanidad, seguridad, educacion, contador, nombreArchivoJson);
+            
         }
 }
 
@@ -56,6 +58,11 @@ function modificarMedidores(json){
     let valorFinalSanidad = sanidadValor + (json.sanidad);
     let valorFinalSeguridad = seguridadValor + (json.seguridad);
     let valorFinalEducacion = educacionValor + (json.educacion);
+
+    valorFinalEconomia = Math.min(valorFinalEconomia, 10);
+    valorFinalSanidad = Math.min(valorFinalSanidad, 10);
+    valorFinalSeguridad = Math.min(valorFinalSeguridad, 10);
+    valorFinalEducacion = Math.min(valorFinalEducacion, 10);
 
     economia.innerHTML = valorFinalEconomia;
     if(valorFinalEconomia <= 3){ economia.style.color = 'red' }
