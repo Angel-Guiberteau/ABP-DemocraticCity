@@ -61,7 +61,7 @@ CREATE TABLE Edificios (
     nombreEdificio VARCHAR(255) NOT NULL,
     idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_edificio PRIMARY KEY (idEdificio),
-    CONSTRAINT fk_edificio FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
+    CONSTRAINT fk_edificio FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia) ON DELETE CASCADE
 );
 
 CREATE TABLE Logros(

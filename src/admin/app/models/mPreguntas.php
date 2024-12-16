@@ -61,33 +61,35 @@ class MPreguntas{
         try{
             $this->conexion->beginTransaction();
     
-            // Primero, insertar el multimedia para la pregunta
             $idMultimediaPregunta = 0;
     
-            if (isset($datos['imagenPregunta'])) {
+            if (isset($datos['imagenPregunta'])) { // Validacion para ver si se ha subido una imagen para la pregunta
+
                 // Validar tipo de archivo para la pregunta (solo JPG y PNG)
                 $tipoArchivoPregunta = strtolower(pathinfo($datos['imagenPregunta']['name'], PATHINFO_EXTENSION));
 
-                if (!in_array($tipoArchivoPregunta, ['jpg', 'jpeg', 'png'])) {
-                    throw new Exception("El archivo de la pregunta debe ser PNG o JPG.");
+                if (!in_array($tipoArchivoPregunta, ['jpg', 'jpeg', 'png'])) { // Validacion para ver si el archivo es una imagen
+                    throw new Exception("El archivo de la pregunta debe ser PNG o JPG."); // Mensaje de error si el archivo no es del formato correcto
                 }
     
                 // Generar un nombre único para la multimedia de la pregunta
-                $nombrePregunta = pathinfo($datos['imagenPregunta']['name'], PATHINFO_FILENAME);
-                $nombreMultimedia = $nombrePregunta . "_" . uniqid() . "." . $tipoArchivoPregunta;
+                $nombrePregunta = pathinfo($datos['imagenPregunta']['name'], PATHINFO_FILENAME); // Cogemos el ombre del archivo
+                $nombreMultimedia = $nombrePregunta . "_" . uniqid() . "." . $tipoArchivoPregunta; // Le añadimos un id unico para que no se repita el nombre
     
                 // Definir rutas
                 $rutaPregunta1 = "img/edificios/" . $nombreMultimedia;
                 $rutaPregunta2 = "../game/img/edificios/" . $nombreMultimedia;
     
                 // Mover archivo a las dos carpetas
-                move_uploaded_file($datos['imagenPregunta']['tmp_name'], $rutaPregunta2);
+                move_uploaded_file($datos['imagenPregunta']['tmp_name'], $rutaPregunta2); // Movemos el archivo a la carpeta del juego
 
-                move_uploaded_file($datos['imagenPregunta']['tmp_name'], $rutaPregunta1);
+                move_uploaded_file($datos['imagenPregunta']['tmp_name'], $rutaPregunta1); // Movemos el archivo a la carpeta de la web
                 
     
-                // Insertar en la tabla Multimedia
+                // Insertar en la tabla Multimedia (para la pregunta)
+
                 $sqlMultimediaPregunta = "INSERT INTO Multimedia (nombreMultimedia, ruta, tipo) VALUES (:nombre, :ruta, 'P')";
+
                 $stmtMultimediaPregunta = $this->conexion->prepare($sqlMultimediaPregunta);
                 // $hash = hash_file('md5', $nombreMultimedia);
                 $stmtMultimediaPregunta->bindValue(':nombre', $nombreMultimedia, PDO::PARAM_STR);
@@ -95,23 +97,25 @@ class MPreguntas{
                 // $stmtMultimediaPregunta->bindValue(':hasheo', $hash, PDO::PARAM_STR);
                 $stmtMultimediaPregunta->execute();
     
-                $idMultimediaPregunta = $this->conexion->lastInsertId();
+                $idMultimediaPregunta = $this->conexion->lastInsertId(); // Cogemos el ultimo id insertado para su uso en la pregunta
             }
     
-            // Insertar la pregunta con su multimedia
+            // Insertar la pregunta con su multimedia que se ha insertado antes
             $sqlPregunta = "INSERT INTO Preguntas (texto, idMultimedia) VALUES (:pregunta, :idMultimedia)";
             $stmtPregunta = $this->conexion->prepare($sqlPregunta);
             $stmtPregunta->bindValue(':pregunta', $datos['pregunta'], PDO::PARAM_STR);
             $stmtPregunta->bindValue(':idMultimedia', $idMultimediaPregunta, PDO::PARAM_INT);
             $stmtPregunta->execute();
     
-            $idPregunta = $this->conexion->lastInsertId();
+            $idPregunta = $this->conexion->lastInsertId(); // Cogemos el ultimo id insertado para su uso en las respuestas
     
             // Insertar las respuestas y asociar multimedia a cada respuesta
             $sqlRespuestas = "INSERT INTO Respuestas (idPregunta, letraRespuesta, respuesta, educacion, sanidad, seguridad, economia, idEdificio) 
                               VALUES (:idPregunta, :letraRespuesta, :respuesta, :educacion, :sanidad, :seguridad, :economia, :idEdificio)";
-            $stmtRespuesta = $this->conexion->prepare($sqlRespuestas);
+            $stmtRespuesta = $this->conexion->prepare($sqlRespuestas); //   Preparo la consulta para insertar las respuestas
     
+            // Array con las respuestas
+
             $respuestas = [
                 ['letra' => 'a', 'respuesta' => $datos['respuesta1'], 'educacion' => $datos['educacion1'], 'sanidad' => $datos['sanidad1'], 'seguridad' => $datos['seguridad1'], 'economia' => $datos['economia1'], 'imagen' => $datos['respuesta1file']],
                 ['letra' => 'b', 'respuesta' => $datos['respuesta2'], 'educacion' => $datos['educacion2'], 'sanidad' => $datos['sanidad2'], 'seguridad' => $datos['seguridad2'], 'economia' => $datos['economia2'], 'imagen' => $datos['respuesta2file']],
@@ -119,14 +123,16 @@ class MPreguntas{
                 ['letra' => 'd', 'respuesta' => $datos['respuesta4'], 'educacion' => $datos['educacion4'], 'sanidad' => $datos['sanidad4'], 'seguridad' => $datos['seguridad4'], 'economia' => $datos['economia4'], 'imagen' => $datos['respuesta4file']],
             ];
     
-            foreach($respuestas as $respuesta){
-                $idMultimediaRespuesta = null;
+            foreach($respuestas as $respuesta){ // Recorremos el array de respuestas para ir insertandolas a la base de datos
+
+                $idMultimediaRespuesta = 0;
     
-                if (isset($respuesta['imagen']) && $respuesta['imagen']['tmp_name']) {
+                if (isset($respuesta['imagen']) && $respuesta['imagen']['tmp_name']) { // Validar si se ha subido una imagen para la respuesta
                     // Validar tipo de archivo para la respuesta (solo JPG y PNG)
                     $tipoArchivoRespuesta = strtolower(pathinfo($respuesta['imagen']['name'], PATHINFO_EXTENSION));
-                    if (!in_array($tipoArchivoRespuesta, ['jpg', 'jpeg', 'png'])) {
-                        throw new Exception("El archivo de la respuesta debe ser PNG o JPG.");
+
+                    if (!in_array($tipoArchivoRespuesta, ['jpg', 'jpeg', 'png'])) { // Validar si el archivo es una imagen
+                        throw new Exception("El archivo de la respuesta debe ser PNG o JPG."); // Mensaje de error si el archivo no es del formato correcto
                     }
     
                     // Generar un nombre único para la multimedia de la respuesta
@@ -134,24 +140,28 @@ class MPreguntas{
                     $nombreMultimediaRespuesta = $nombreRespuesta . "_" . uniqid() . "." . $tipoArchivoRespuesta;
     
                     // Definir rutas
-                    $rutaRespuesta1 = "img/edificios/" . $nombreMultimediaRespuesta;
+                    $rutaRespuesta1 = "img/edificios/" . $nombreMultimediaRespuesta; 
                     $rutaRespuesta2 = "../game/img/edificios/" . $nombreMultimediaRespuesta;
     
                     // Mover archivo a las dos carpetas
-                    move_uploaded_file($respuesta['imagen']['tmp_name'], $rutaRespuesta1);
-                    move_uploaded_file($respuesta['imagen']['tmp_name'], $rutaRespuesta2);
+                    move_uploaded_file($respuesta['imagen']['tmp_name'], $rutaRespuesta1); // Movemos el archivo a la carpeta de la web
+                    move_uploaded_file($respuesta['imagen']['tmp_name'], $rutaRespuesta2); // Movemos el archivo a la carpeta del juego
     
-                    // Insertar en la tabla Multimedia para respuesta
+                    // Insertamos primero en la tabla Multimedia para poder insertar el ediificio asociado a la respuesta y posteriormente la respuesta
+
                     $sqlMultimediaRespuesta = "INSERT INTO Multimedia (nombreMultimedia, ruta, tipo) VALUES (:nombre, :ruta, 'E')";
                     $stmtMultimediaRespuesta = $this->conexion->prepare($sqlMultimediaRespuesta);
+
                     // $hashRespuesta = hash_file('md5', $nombreMultimediaRespuesta);
                     $stmtMultimediaRespuesta->bindValue(':nombre', $nombreMultimediaRespuesta, PDO::PARAM_STR);
                     $stmtMultimediaRespuesta->bindValue(':ruta', $rutaRespuesta1, PDO::PARAM_STR);
                     // $stmtMultimediaRespuesta->bindValue(':hasheo', $hashRespuesta, PDO::PARAM_STR);
                     $stmtMultimediaRespuesta->execute();
     
-                    $idMultimediaRespuesta = $this->conexion->lastInsertId();
+                    $idMultimediaRespuesta = $this->conexion->lastInsertId(); // Cogemos el ultimo id insertado para su uso en el edificio
 
+
+                    // Insertar en la tabla Edificios (para la respuesta asociada a la multimedia)
                     $sqlEdificio = "INSERT INTO Edificios (nombreEdificio, idMultimedia) VALUES (:nombreEdificio, :idMultimedia)";
 
                     $stmtEdificio = $this->conexion->prepare($sqlEdificio);
@@ -159,7 +169,7 @@ class MPreguntas{
                     $stmtEdificio->bindValue(':idMultimedia', $idMultimediaRespuesta, PDO::PARAM_INT);
                     $stmtEdificio->execute();
 
-                    $idEdificio = $this->conexion->lastInsertId();
+                    $idEdificio = $this->conexion->lastInsertId(); // Cogemos el ultimo id insertado para su uso en la respuesta
 
                 }
     
@@ -172,17 +182,17 @@ class MPreguntas{
                 $stmtRespuesta->bindValue(':seguridad', $respuesta['seguridad'], PDO::PARAM_INT);
                 $stmtRespuesta->bindValue(':economia', $respuesta['economia'], PDO::PARAM_INT);
                 $stmtRespuesta->bindValue(':idEdificio', $idEdificio, PDO::PARAM_INT);
-                $stmtRespuesta->execute();
+                $stmtRespuesta->execute(); // Ejecutamos la consulta de la respuesta preparada anteriormente y ya que hemos insertado la multimedia y el edificio asociado a la multimedia que esta asociado a la respuesta en la base de datos anteriormente
             }
     
-            $this->conexion->commit();
+            $this->conexion->commit(); // Hacemos commit de la transacción
             return true;
     
         } catch (PDOException $e) {
-            $this->conexion->rollBack();
+            $this->conexion->rollBack(); 
             error_log("Error en la consulta: " . $e->getMessage());
             return false;
-        } catch (Exception $e) {
+        } catch (Exception $e) { // Excepcion personalizada para la validacion de los archivos
             $this->conexion->rollBack();
             error_log("Formato de la imagen no valido" . $e->getMessage());
             return false;
@@ -278,15 +288,31 @@ class MPreguntas{
     public function mEliminarPregunta($idPregunta){
         try{
             $this->conexion->beginTransaction();
-            $sqlPreguntas='DELETE FROM Preguntas WHERE Preguntas.idPregunta = :idPregunta;';
-            $stmtPreguntas = $this->conexion->prepare($sqlPreguntas);
-            $stmtPreguntas->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
-            $stmtPreguntas->execute();
+
+            // Primero eliminamos la multimedia asociada al edificio que esta asociado a la respuesta que queremos borrar
+
+            // $sqlEdificio = 'DELETE FROM Edificios WHERE idEdificio IN (SELECT idEdificio FROM Respuestas WHERE idPregunta = :idPregunta);';
+            
+            // $stmtEdificio = $this->conexion->prepare($sqlEdificio);
+            // $stmtEdificio->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
+            // $stmtEdificio->execute();
+
+
+
+            // Ahora podemos eliminar las respuestas asociadas a la pregunta ya que hemos eliminado el edificio asociado a la respuesta
 
             $sqlRespuesta='DELETE FROM Respuestas WHERE Respuestas.idPregunta = :idPregunta;';
             $stmtRespuesta = $this->conexion->prepare($sqlRespuesta);
             $stmtRespuesta->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
             $stmtRespuesta->execute();
+            
+            //Ahora eliminamos el multimedia asociado a la pregunta
+
+            $sqlPreguntas='DELETE FROM Preguntas WHERE Preguntas.idPregunta = :idPregunta;';
+            $stmtPreguntas = $this->conexion->prepare($sqlPreguntas);
+            $stmtPreguntas->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
+            $stmtPreguntas->execute();
+
             $this->conexion->commit();
             return true; 
         }catch (PDOException $e) {

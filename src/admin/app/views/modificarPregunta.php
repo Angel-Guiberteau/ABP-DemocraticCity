@@ -21,6 +21,11 @@
                 echo '<input type="number" placeholder="Introduce la pregunta" name="idPregunta" id="idPregunta" value="'.$datos['idPregunta'].'" hidden>';
                 echo '<div class="validacionPregunta"></div>';
                 echo '<input type="text" placeholder="Introduce la pregunta" name="pregunta" id="pregunta" value="'.$datos['texto'].'">';
+                echo '<div>'; 
+                echo '<input type="file" name="imagenPregunta" id="imagenPregunta" class="inputFile">';
+                echo '<img src="img/'.$datos['ruta'].'" alt="'.$datos['nombreMultimedia'].'">';
+                echo '<input type="text" placeholder="Nombre archivo" name="nombrePregunta" id="nombrePregunta" value="'.$datos['nombreMultimedia'].'">';
+                echo '</div>';
                 
                 $contador = 1; // Contador para nombres e IDs únicos
                 foreach ($datos['respuestas'] as $respuesta) {
