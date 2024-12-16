@@ -61,7 +61,7 @@ CREATE TABLE Edificios (
     nombreEdificio VARCHAR(255) NOT NULL,
     idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_edificio PRIMARY KEY (idEdificio),
-    CONSTRAINT fk_edificio FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia) ON DELETE CASCADE
+    CONSTRAINT fk_edificio FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Logros(
@@ -85,7 +85,7 @@ CREATE TABLE Preguntas(
     texto VARCHAR(255) NOT NULL,
     idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_pregunta PRIMARY KEY (idPregunta),
-    CONSTRAINT fk_pregunta FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
+    CONSTRAINT fk_pregunta FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Partidas_preguntas(
@@ -93,7 +93,7 @@ CREATE TABLE Partidas_preguntas(
     idPregunta TINYINT UNSIGNED,
     CONSTRAINT pk_partida_pregunta PRIMARY KEY (idPartida, idPregunta),
     CONSTRAINT fk_partida_partida_pregunta FOREIGN KEY (idPartida) REFERENCES Partidas (idPartida) ON DELETE CASCADE ON UPDATE CASCADE, 
-    CONSTRAINT fk_pregunta_partida_pregunta FOREIGN KEY (idPregunta) REFERENCES Preguntas (idPregunta)
+    CONSTRAINT fk_pregunta_partida_pregunta FOREIGN KEY (idPregunta) REFERENCES Preguntas (idPregunta) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Respuestas(
@@ -106,9 +106,7 @@ CREATE TABLE Respuestas(
     idEdificio TINYINT UNSIGNED NULL,    
     respuesta VARCHAR(255) NOT NULL,
     CONSTRAINT pk_respuesta PRIMARY KEY (idPregunta, letraRespuesta),
-    CONSTRAINT fk_respuesta_pregunta FOREIGN KEY (idPregunta) REFERENCES Preguntas (idPregunta)
-        ON UPDATE CASCADE 
-        ON DELETE CASCADE, 
+    CONSTRAINT fk_respuesta_pregunta FOREIGN KEY (idPregunta) REFERENCES Preguntas (idPregunta) ON UPDATE CASCADE ON DELETE CASCADE, 
     CONSTRAINT fk_respuesta_edificio FOREIGN KEY (idEdificio) REFERENCES Edificios (idEdificio),
     CONSTRAINT chk_letraRespuesta CHECK (letraRespuesta IN ('A', 'B', 'C', 'D')),
     CONSTRAINT chk_educacion CHECK (educacion BETWEEN -10 AND 10),

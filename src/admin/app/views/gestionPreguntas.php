@@ -49,14 +49,20 @@
                     foreach ($datos as $pregunta) {
                         echo '<details>';
                             echo '<summary>'.$pregunta['texto'].'</summary>';
+                            echo '<div class="center summaryContainer">';
+                            echo '<img src="'.$pregunta['rutaPregunta'].'" alt="Imagen de la pregunta" class="imagenListar">';
+                            echo '</div>';
                                 foreach($pregunta['respuestas'] as $respuesta){
                                     echo '<div class="summaryContainer">';
                                         echo '<div>';
+                                        echo '<div>';
+                                        echo '</div>';
                                         echo '<table>';
                                             echo '<tr>';
                                                 echo '<td rowspan="2" colspan="2" class="center">';
                                                     echo '<h2>'.$respuesta['letraRespuesta'].' - '.$respuesta['respuesta'].'</h2>';
                                                 echo '</td>';
+                                                echo '<td rowspan="2"><img src="'.$respuesta['rutaEdificio'].'" alt="Imagen Edificio"< class="imagenListar"></td>';
                                                 echo '<td>Educacion</td>';
                                                 echo '<td>Sanidad</td>';
                                                 echo '<td>Seguridad</td>';
@@ -74,7 +80,15 @@
                             }
                             echo '<div class="botonesPreguntas">';
                                 echo '<form class="sinnada2" action="index.php?c=Preguntas&m=cEliminarPregunta" method="POST" id="formEliminar">';
-                                    echo '<input type="number" value="'.$pregunta['idPregunta'].'" hidden name="idPregunta">';
+                                    echo '<input type="hidden" value="'.$pregunta['idPregunta'].'" name="idPregunta">';
+                                    echo '<input type="hidden" value="'.$pregunta['idMultimediaPregunta'].'" name="idMultimediaPregunta">';
+                                    echo '<input type="hidden" value="'.$pregunta['rutaPregunta'].'" name="rutaPregunta">';
+                                    $cont = 1;
+                                    foreach($pregunta['respuestas'] as $respuesta){
+                                        echo '<input type="hidden" value="'.$respuesta['idMultimediaEdificio'].'" name="idMultimediaPregunta'.$cont.'">';
+                                        echo '<input type="hidden" value="'.$respuesta['rutaEdificio'].'" name="rutaEdificio'.$cont.'">';
+                                        $cont++;
+                                    }
                                     echo '<button type="button" class="boton eliminar" data-id="'.$pregunta['idPregunta'].'">Eliminar</button>';
                                 echo '</form>';
                             
@@ -84,8 +98,6 @@
                                 echo '</form>';
                             echo '</div>';
                         echo '</details>';
-
-                                    
                     }
                     
                 }else{

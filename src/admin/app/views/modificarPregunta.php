@@ -21,13 +21,33 @@
                 echo '<input type="number" placeholder="Introduce la pregunta" name="idPregunta" id="idPregunta" value="'.$datos['idPregunta'].'" hidden>';
                 echo '<div class="validacionPregunta"></div>';
                 echo '<input type="text" placeholder="Introduce la pregunta" name="pregunta" id="pregunta" value="'.$datos['texto'].'">';
+                echo '<div>';
+
+                //Id multimedia de la pregunta
+                echo '<input type="hidden" name="idMultimediaPregunta" id="idPregunta" value="'.$datos['idMultimediaPregunta'].'">';
+                //rutaPregunta
+                echo '<input type="hidden" name="rutaPregunta" value="'.$datos['rutaPregunta'].'">';
+                
+
+                echo '<img src="'.$datos['rutaPregunta'].'" alt="Imagen de la pregunta" class="imagenModificar">';
                 echo '<input type="file" name="imagenPregunta" id="imagenPregunta" class="inputFile">';
+                echo '</div>';
 
                 $contador = 1; // Contador para nombres e IDs únicos
                 foreach ($datos['respuestas'] as $respuesta) {
                     echo '<div class="validacionRespuesta'.$contador.'"></div>';
                     echo ' <input type="text" placeholder="Respuesta '.$contador.'" name="respuesta'.$contador.'" id="respuesta'.$contador.'" value="'.$respuesta['respuesta'].'">';
+                    echo '<div>';
+
+                     //Id multimedia de la respuesta
+                    echo '<input type="hidden" name="idMultimediaEdificio'.$contador.'" value="'.$respuesta['idMultimediaEdificio'].'">';
+                    //rutaRespuesta
+                    echo '<input type="hidden" name="rutaEdificio'.$contador.'" value="'.$respuesta['rutaEdificio'].'">';
+
                     echo '<input type="file" name="respuesta'.$contador.'file" id="respuesta'.$contador.'file" class="inputFile">';
+                    echo '<img src="'.$respuesta['rutaEdificio'].'" alt="Imagen de la pregunta" class="imagenModificar">';
+                    echo '</div>';
+                    
                     echo '<div>';
                     echo '<div class="validacionEducacion'.$contador.'"></div>';
                     echo '<input type="number" placeholder="Educación" name="educacion'.$contador.'" id="educacion'.$contador.'" value="'.$respuesta['educacion'].'">';

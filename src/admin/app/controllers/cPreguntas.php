@@ -63,7 +63,7 @@ class CPreguntas{
         $imagenes = $_FILES;
 
         $datos += $imagenes;
-
+        // echo json_encode($datos);
         if($this->objMPreguntas->mGuardarModificacionPregunta($datos)){
             $preguntas = $this->cMostrarPreguntasyRespuestas();
             $this->vista = '';
@@ -79,7 +79,7 @@ class CPreguntas{
     }
     public function cEliminarPregunta($datos){
         if($this->cComprobarDatos($datos)){
-            if($this->objMPreguntas->mEliminarPregunta($datos['idPregunta'])){
+            if($this->objMPreguntas->mEliminarPregunta($datos)){
                 $preguntas = $this->cMostrarPreguntasyRespuestas();
                 return $preguntas;
             }else{
