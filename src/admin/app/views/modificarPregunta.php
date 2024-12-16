@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Iniciar Sesión</title>
+    <title>Modificar Pregunta</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -21,11 +21,13 @@
                 echo '<input type="number" placeholder="Introduce la pregunta" name="idPregunta" id="idPregunta" value="'.$datos['idPregunta'].'" hidden>';
                 echo '<div class="validacionPregunta"></div>';
                 echo '<input type="text" placeholder="Introduce la pregunta" name="pregunta" id="pregunta" value="'.$datos['texto'].'">';
-                
+                echo '<input type="file" name="imagenPregunta" id="imagenPregunta" class="inputFile">';
+
                 $contador = 1; // Contador para nombres e IDs únicos
                 foreach ($datos['respuestas'] as $respuesta) {
                     echo '<div class="validacionRespuesta'.$contador.'"></div>';
                     echo ' <input type="text" placeholder="Respuesta '.$contador.'" name="respuesta'.$contador.'" id="respuesta'.$contador.'" value="'.$respuesta['respuesta'].'">';
+                    echo '<input type="file" name="respuesta'.$contador.'file" id="respuesta'.$contador.'file" class="inputFile">';
                     echo '<div>';
                     echo '<div class="validacionEducacion'.$contador.'"></div>';
                     echo '<input type="number" placeholder="Educación" name="educacion'.$contador.'" id="educacion'.$contador.'" value="'.$respuesta['educacion'].'">';

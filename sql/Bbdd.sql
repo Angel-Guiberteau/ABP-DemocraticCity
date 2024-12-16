@@ -13,7 +13,7 @@ CREATE TABLE Multimedia (
     nombreMultimedia VARCHAR(50) NOT NULL,
     ruta VARCHAR(100) NOT NULL,
     tipo CHAR (1) NOT NULL,
-    hash VARCHAR (255) NOT NULL,
+    hasheo VARCHAR (255) NULL,
     CONSTRAINT pk_multimedia PRIMARY KEY (idMultimedia),
     CONSTRAINT check_tipo CHECK (tipo IN ('E', 'P', 'U', 'L')) 
 );
@@ -41,7 +41,7 @@ CREATE TABLE Partidas (
     idAnfitrion SMALLINT UNSIGNED NOT NULL,
     CONSTRAINT pk_partida PRIMARY KEY (idPartida),
     CONSTRAINT fk_partida FOREIGN KEY (idAnfitrion) REFERENCES Usuarios (idUsuario),
-    CONSTRAINT chk_empezada CHECK (empezada IN ('s', 'n')),
+    CONSTRAINT chk_empezada CHECK (empezada IN ('s', 'n', 't')),
     CONSTRAINT chk_vEducacion CHECK (vEducacion BETWEEN -10 AND 10),
     CONSTRAINT chk_vSanidad CHECK (vSanidad BETWEEN -10 AND 10),
     CONSTRAINT chk_vSeguridad CHECK (vSeguridad BETWEEN -10 AND 10),
@@ -61,7 +61,7 @@ CREATE TABLE Edificios (
     nombreEdificio VARCHAR(255) NOT NULL,
     idMultimedia TINYINT UNSIGNED NULL,
     CONSTRAINT pk_edificio PRIMARY KEY (idEdificio),
-    CONSTRAINT fk_edificio FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia)
+    CONSTRAINT fk_edificio FOREIGN KEY (idMultimedia) REFERENCES Multimedia (idMultimedia) ON DELETE CASCADE
 );
 
 CREATE TABLE Logros(
