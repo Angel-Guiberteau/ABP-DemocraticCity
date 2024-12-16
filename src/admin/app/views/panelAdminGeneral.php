@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1400px, initial-scale=.0, user-scalable=no">
-    <title>Iniciar Sesión</title>
+    <title>Panel Admin</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
 </head>

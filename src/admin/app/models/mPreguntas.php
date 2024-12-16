@@ -239,8 +239,10 @@ class MPreguntas{
 
                 $stmt = $this->conexion->prepare($sql);
                 $stmt->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
-
+                
                 $stmt->execute();
+
+                
                 if($stmt->rowCount() > 0){
                     $datos = [];
                     while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -275,31 +277,26 @@ class MPreguntas{
     public function mGuardarModificacionPregunta($datos){
         try {
             $this->conexion->beginTransaction();
-    
+            
             if (isset($datos['imagenPregunta'])){ // Validacion para ver si se ha subido una imagen para la pregunta
 
                 // Validar tipo de archivo para la pregunta (solo JPG y PNG)
                 $tipoArchivoPregunta = strtolower(pathinfo($datos['imagenPregunta']['name'], PATHINFO_EXTENSION));
 
-                if (!in_array($tipoArchivoPregunta, ['jpg', 'jpeg', 'png'])) { // Validacion para ver si el archivo es una imagen
-                    throw new Exception("El archivo de la pregunta debe ser PNG o JPG."); // Mensaje de error si el archivo no es del formato correcto
-                }
+                // if (!in_array($tipoArchivoPregunta, ['jpg', 'jpeg', 'png'])) { // Validacion para ver si el archivo es una imagen
+                //     throw new Exception("El archivo de la pregunta debe ser PNG o JPG."); // Mensaje de error si el archivo no es del formato correcto
+                // }
+
     
                 // Generar un nombre único para la multimedia de la pregunta
                 $nombrePregunta = pathinfo($datos['imagenPregunta']['name'], PATHINFO_FILENAME); // Cogemos el ombre del archivo
                 $nombreMultimedia = $nombrePregunta . "_" . uniqid() . "." . $tipoArchivoPregunta; // Le añadimos un id unico para que no se repita el nombre
-    
                 // Definir rutas
                 $rutaPregunta1 = "img/edificios/" . $nombreMultimedia;
                 $rutaPregunta2 = "../game/img/edificios/" . $nombreMultimedia;
-    
                 // Mover archivo a las dos carpetas
                 move_uploaded_file($datos['imagenPregunta']['tmp_name'], $rutaPregunta2); // Movemos el archivo a la carpeta del juego
-
                 move_uploaded_file($datos['imagenPregunta']['tmp_name'], $rutaPregunta1); // Movemos el archivo a la carpeta de la web
-
-                //Actualizamos la multimedia asociado a la pregunta a modificar
-
                 $sqlMultimediaPregunta = "UPDATE Multimedia SET nombreMultimedia = :nombre, ruta = :ruta WHERE idMultimedia IN (SELECT idMultimedia FROM Preguntas WHERE idPregunta = :idPregunta);";
 
                 $stmtMultimediaPregunta = $this->conexion->prepare($sqlMultimediaPregunta);
@@ -313,7 +310,7 @@ class MPreguntas{
                 $idMultimediaPregunta = $this->conexion->lastInsertId();
 
                 //Como se ha añadido una multimedia nueva entonces debemos tambien modificar en la pregunta el idMultimedia que tiene asociado para que este correcto con el nuevo introducido
-
+                echo 'justo antes de consulta 2';
                 $sqlPregunta = "UPDATE Preguntas SET texto = :texto, idMultimedia = :idMultimedia WHERE idPregunta = :idPregunta";
                 $stmtPregunta = $this->conexion->prepare($sqlPregunta);
                 $stmtPregunta->bindValue(':texto', $datos['pregunta'], PDO::PARAM_STR);
@@ -325,7 +322,7 @@ class MPreguntas{
             else{
 
                 //Si no se introduce un multimedia nuevo, entonces actualizamos solamente los datos de la pregunta, ya que no cambia el multimedia que tiene asociado
-
+                echo 'justo antes de consulta 2';
                 $sqlPregunta = "UPDATE Preguntas SET texto = :texto WHERE idPregunta = :idPregunta";
                 $stmtPregunta = $this->conexion->prepare($sqlPregunta);
                 $stmtPregunta->bindValue(':texto', $datos['pregunta'], PDO::PARAM_STR);
@@ -346,7 +343,7 @@ class MPreguntas{
                 if(empty($respuestas['imagen'])){
 
                     //Si esta vacio, entonces es que no se ha introducido un archivo nuevo, por lo que no hace falta modificar ni el multimedia ni el edificio ya que es el mismo
-
+                    echo 'justo antes de consulta 3';
                     $sqlRespuestas = "UPDATE Respuestas 
                     SET respuesta = :respuesta, educacion = :educacion, sanidad = :sanidad, 
                         seguridad = :seguridad, economia = :economia 
@@ -385,7 +382,7 @@ class MPreguntas{
                     // Mover archivo a las dos carpetas
                     move_uploaded_file($respuesta['imagen']['tmp_name'], $rutaRespuesta1); // Movemos el archivo a la carpeta de la web
                     move_uploaded_file($respuesta['imagen']['tmp_name'], $rutaRespuesta2); // Movemos el archivo a la carpeta del juego
-
+                    echo 'justo antes de consulta 3';
                     $sqlMultimediaEdificio = "UPDATE Multimedia SET nombreMultimedia = :nombre, ruta = :ruta WHERE idMultimedia IN (SELECT idMultimedia FROM Preguntas WHERE idPregunta = :idPregunta);";
 
                     $stmMultimediaEdificio = $this->conexion->prepare($sqlMultimediaEdificio);
@@ -399,7 +396,7 @@ class MPreguntas{
                     $idMultimediaEdificio = $this->conexion->lastInsertId();
 
                     //Una vez acuatlizado el Multimedia actualizamos el edificio asociado a ese multimedia
-
+                    echo 'justo antes de consulta 4';
                     $sqlEdificio = "UPDATE Edificios SET nombreEdificio = :nombreEdificio, idMultimedia = :idMultimedia WHERE idEdificio = (SELECT idEdificio FROM Respuestas WHERE idPregunta = :idPregunta AND letraRespuesta = :letraRespuesta);";
 
                     $stmEdificio = $this->conexion->prepare($sqlEdificio);
@@ -414,7 +411,7 @@ class MPreguntas{
                     $idEdificio = $this->conexion->lastInsertId();
 
                     //Una vez actualizado el edificio podemos actualizar la respuesta
-
+                    echo 'justo antes de consulta 5';
                     $sqlRespuestas = "UPDATE Respuestas 
                     SET respuesta = :respuesta, educacion = :educacion, sanidad = :sanidad, 
                         seguridad = :seguridad, economia = :economia, idEdificio = :idEdificio 
