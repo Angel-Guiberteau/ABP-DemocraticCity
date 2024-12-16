@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Creacion de sala</title>
+    <title><?php
+        echo $_SESSION['nombreCiudad'];
+    ?>
+    </title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -84,7 +87,6 @@
             <button id="botonSalaExpirada" class="boton" onclick="salaEliminada()">Salir</button>
         </div>
     </div>
-    
     <script type="module" src="js/views/musica.js"></script>
     <script type="module" src="js/views/partidaEmpezada.js"></script>
     <script type="module" src="js/views/mostrarJugadores.js"></script>

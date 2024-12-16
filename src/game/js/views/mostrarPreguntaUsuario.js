@@ -56,7 +56,6 @@ function mostrarPreguntaUsuario(){
             respuesta4.disabled = false;
         }
     }, 1000);
-    
 }
 function mostrarPanelFinalPartida(economia, sanidad, seguridad, educacion){
     document.getElementById('modalFinalPartida').style.display = 'flex';
