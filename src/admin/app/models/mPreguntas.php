@@ -450,10 +450,6 @@ class MPreguntas{
         try {
             $this->conexion->beginTransaction();
         
-<<<<<<< HEAD
-            //1: Eliminar registros de Partidas_preguntas
-=======
->>>>>>> cef6e4185f2cdc2a5551cc8cb9a2791119c31a9c
             $sqlPartidasPreguntas = "DELETE FROM Partidas_preguntas WHERE idPregunta = :idPregunta";
             $stmtPartidasPreguntas = $this->conexion->prepare($sqlPartidasPreguntas);
             $stmtPartidasPreguntas->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
