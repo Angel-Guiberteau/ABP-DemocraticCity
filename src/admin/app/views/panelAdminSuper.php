@@ -34,7 +34,7 @@
             <h1>Panel administración</h1>
             <div class="paneles">
                 <div class="paneles1">
-                    <a href="" class="panel1">
+                    <a href="index.php?c=Multimedia&m=cMostrarGestionMultimedia" class="panel1">
                         <p>Gestor multimedia</p>
                     </a>
                     <a href="" class="panel1">

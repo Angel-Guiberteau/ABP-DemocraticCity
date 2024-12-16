@@ -27,7 +27,12 @@ class CPreguntas{
         }
     } 
     public function cAniadirPreguntas($datos){
-        if($this->cComprobarDatos($datos)){
+
+        $datos = $_POST;
+        $imagenes = $_FILES;
+
+        $datos += $imagenes;
+
             $preguntas=$this->objMPreguntas->mAniadirPreguntas($datos);
             if($preguntas){
                 $this->vista = '';
@@ -39,16 +44,12 @@ class CPreguntas{
                 echo 'incorrecto';
                 return false;
             }
-        }else{
-            $this->vista = '';
-            echo 'incorrecto';
-            return false;
-        }
         
     } 
 
-    public function cModificarPregunta($datos){
+    public function cModificarPregunta($datos){ //ESTO SOLO MUESTRA EN LOS INPUTS LA INFO DE LA PREGUNTA QUE SE QUIERE MODIFICAR
         $this->vista = 'modificarPregunta';
+        
         if($pregunta = $this->objMPreguntas->mModificarPregunta($datos['idPregunta'])){
             return $pregunta;
         }else{
@@ -56,18 +57,18 @@ class CPreguntas{
         }
 
     }
-    public function cGuardarModificacionPregunta($datos){
-        if($this->cComprobarDatos($datos)){
-            if($this->objMPreguntas->mGuardarModificacionPregunta($datos)){
-                $preguntas = $this->cMostrarPreguntasyRespuestas();
-                $this->vista = '';
-                echo 'correcto';
-                return $preguntas;
-            }else{
-                $this->vista = '';
-                echo 'incorrecto';
-                return false;
-            }
+    public function cGuardarModificacionPregunta($datos){ //METODO USADO PARA MODIFICAR LA PREGUNTA 
+
+        $datos = $_POST;
+        $imagenes = $_FILES;
+
+        $datos += $imagenes;
+
+        if($this->objMPreguntas->mGuardarModificacionPregunta($datos)){
+            $preguntas = $this->cMostrarPreguntasyRespuestas();
+            $this->vista = '';
+            echo 'correcto';
+            return $preguntas;
         }else{
             $this->vista = '';
             echo 'incorrecto';
@@ -103,5 +104,5 @@ class CPreguntas{
     
         return true;
     }
-    
+
 }

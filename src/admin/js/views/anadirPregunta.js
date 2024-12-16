@@ -1,6 +1,19 @@
 import { CAnadirPregunta } from '../controllers/cAnadirPregunta.js';
 const controlador = new CAnadirPregunta();
 
+
+let imagenPregunta = document.getElementById('imagenPregunta');
+let respuesta1file = document.getElementById('respuesta1file');
+let respuesta2file = document.getElementById('respuesta2file');
+let respuesta3file = document.getElementById('respuesta3file');
+let respuesta4file = document.getElementById('respuesta4file');
+
+function validarImagenes(){
+
+}
+imagenPregunta.addEventListener('input', ()=>{
+    //validar que sea imagen y eso
+})
 // Validar campos del formulario
 function validarCampo(input) {
     const valor = input.value.trim(); // Eliminar espacios en blanco
