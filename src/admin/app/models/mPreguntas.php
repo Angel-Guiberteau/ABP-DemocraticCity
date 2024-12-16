@@ -187,24 +187,30 @@ class MPreguntas{
         }
     }
     public function mEliminarPregunta($idPregunta){
-        try{
+        try {
             $this->conexion->beginTransaction();
-            $sqlPreguntas='DELETE FROM Preguntas WHERE Preguntas.idPregunta = :idPregunta;';
-            $stmtPreguntas = $this->conexion->prepare($sqlPreguntas);
-            $stmtPreguntas->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
-            $stmtPreguntas->execute();
-
-            $sqlRespuesta='DELETE FROM Respuestas WHERE Respuestas.idPregunta = :idPregunta;';
-            $stmtRespuesta = $this->conexion->prepare($sqlRespuesta);
-            $stmtRespuesta->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
-            $stmtRespuesta->execute();
+        
+            //1: Eliminar registros de Partidas_preguntas
+            $sqlPartidasPreguntas = "DELETE FROM Partidas_preguntas WHERE idPregunta = :idPregunta";
+            $stmtPartidasPreguntas = $this->conexion->prepare($sqlPartidasPreguntas);
+            $stmtPartidasPreguntas->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
+            $stmtPartidasPreguntas->execute();
+        
+            //2: Cogemos los idEdificio asociados a las respuestas de la pregunta
+            $sqlSelectEdificios = "SELECT idEdificio FROM Respuestas WHERE idPregunta = :idPregunta";
+            $stmtSelectEdificios = $this->conexion->prepare($sqlSelectEdificios);
+            $stmtSelectEdificios->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
+            $stmtSelectEdificios->execute();
+            $edificios = $stmtSelectEdificios->fetchAll(PDO::FETCH_COLUMN);
+        
+            // Confirmar transacción
             $this->conexion->commit();
-            return true; 
-        }catch (PDOException $e) {
+        } catch (Exception $e) {
+            // Revertir transacción en caso de error
             $this->conexion->rollBack();
-            error_log("Error en la consulta: " . $e->getMessage());
-            return false;
+            throw $e;
         }
+        
     }
     
 
