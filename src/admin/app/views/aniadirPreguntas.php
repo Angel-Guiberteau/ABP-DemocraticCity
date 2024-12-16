@@ -33,7 +33,7 @@
         </nav>
         <div>
             <h1>Añadir pregunta</h1>
-            <form id="formularioAniadirPreguntas">
+            <form enctype="multipart/form-data" id="formularioAniadirPreguntas">
                 <?php
                     if(isset($_GET['operacion']) &&$_GET['operacion'] == 'correcto'){
                         echo '<div class="registroExistoso">';
@@ -41,15 +41,18 @@
                         echo '</div>';
                     }
                 ?>
+                <p id="validacionImagenes"></p>
                 <div class="validacionPregunta"></div> <!-- Agregado para validación -->
                 <input type="text" placeholder="Introduce la pregunta" name="pregunta" id="pregunta">
+                <input type="file" name="imagenPregunta" id="imagenPregunta" class="inputFile">
                 
                 <div class="validacionRespuesta1"></div>
                 <input type="text" placeholder="Respuesta A" name="respuesta1" id="respuesta1">
-                
+                <input type="file" name="respuesta1file" id="respuesta1file" class="inputFile">
+
                 <div>
                     <input type="number" placeholder="Educación" name="educacion1" id="educacion1">
-                    <div class="validacionEducacion1""></div>
+                    <div class="validacionEducacion1"></div>
                     <input type="number" placeholder="Sanidad" name="sanidad1" id="sanidad1">
                     <div class="validacionSanidad1"></div>
                     <input type="number" placeholder="Seguridad" name="seguridad1" id="seguridad1">
@@ -60,6 +63,7 @@
 
                 <div class="validacionRespuesta2"></div>
                 <input type="text" placeholder="Respuesta B" name="respuesta2" id="respuesta2">
+                <input type="file" name="respuesta2file" id="respuesta2file" class="inputFile">
 
                 <div>
                     <input type="number" placeholder="Educación" name="educacion2" id="educacion2">
@@ -74,6 +78,7 @@
 
                 <div class="validacionRespuesta3"></div>
                 <input type="text" placeholder="Respuesta C" name="respuesta3" id="respuesta3">
+                <input type="file" name="respuesta3file" id="respuesta3file" class="inputFile">
 
                 <div>
                     <input type="number" placeholder="Educación" name="educacion3" id="educacion3">
@@ -88,6 +93,7 @@
 
                 <div class="validacionRespuesta4"></div>
                 <input type="text" placeholder="Respuesta D" name="respuesta4" id="respuesta4">
+                <input type="file" name="respuesta4file" id="respuesta4file" class="inputFile">
 
                 <div>
                     <input type="number" placeholder="Educación" name="educacion4" id="educacion4">

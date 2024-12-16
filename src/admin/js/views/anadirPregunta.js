@@ -1,28 +1,66 @@
 import { CAnadirPregunta } from '../controllers/cAnadirPregunta.js';
 const controlador = new CAnadirPregunta();
 
-// Validar campos del formulario
-function validarCampo(input) {
-    const valor = input.value.trim(); // Eliminar espacios en blanco
-    let mensajeError = ''; 
-    const idCampo = input.id; // Id del campo
 
-    // Validar que el campo de pregunta no esté vacío
+let imagenPregunta = document.getElementById('imagenPregunta');
+let archivoPregunta;
+let respuesta1file = document.getElementById('respuesta1file');
+let archivoRespuesta1;
+let respuesta2file = document.getElementById('respuesta2file');
+let archivoRespuesta2;
+let respuesta3file = document.getElementById('respuesta3file');
+let archivoRespuesta3;
+let respuesta4file = document.getElementById('respuesta4file');
+let archivoRespuesta4;
+
+function validarImagenes() {
+    const formatosPermitidos = ['image/jpeg', 'image/png', 'image/gif'];
+
+    // Obtener los archivos seleccionados
+    archivoPregunta = imagenPregunta.files[0];
+    archivoRespuesta1 = respuesta1file.files[0];
+    archivoRespuesta2 = respuesta2file.files[0];
+    archivoRespuesta3 = respuesta3file.files[0];
+    archivoRespuesta4 = respuesta4file.files[0];
+
+    // Validar que cada archivo existe y tiene un formato permitido
+    if (!archivoPregunta || !formatosPermitidos.includes(archivoPregunta.type)) {
+        return false;
+    }
+    if (!archivoRespuesta1 || !formatosPermitidos.includes(archivoRespuesta1.type)) {
+        return false;
+    }
+    if (!archivoRespuesta2 || !formatosPermitidos.includes(archivoRespuesta2.type)) {
+        return false;
+    }
+    if (!archivoRespuesta3 || !formatosPermitidos.includes(archivoRespuesta3.type)) {
+        return false;
+    }
+    if (!archivoRespuesta4 || !formatosPermitidos.includes(archivoRespuesta4.type)) {
+        return false;
+    }
+
+    return true; // Si pasa todas las validaciones, retorna verdadero
+}
+
+
+function validarCampo(input) {
+    const valor = input.value.trim();
+    let mensajeError = ''; 
+    const idCampo = input.id;
+
     if (idCampo === 'pregunta' && valor === '') {
         mensajeError = 'Este campo es obligatorio. Por favor, ingrese una pregunta.';
     }
 
-    // Validar que los campos de respuesta no estén vacíos
     if (idCampo.includes('respuesta') && valor === '') {
         mensajeError = 'Este campo es obligatorio. Por favor, ingrese una respuesta.';
     }
 
-    // Validar campos numéricos (Educación, Sanidad, Seguridad, Economía)
     if (idCampo.includes('educacion') || idCampo.includes('sanidad') || idCampo.includes('seguridad') || idCampo.includes('economia')) {
 
-        const numero = parseInt(valor); // Convertir el valor a número
+        const numero = parseInt(valor);
 
-        // Verificar que sea un número válido y dentro del rango permitido
         if (isNaN(numero) || valor === '') {
             mensajeError = 'Este campo debe contener un número.';
         } else if (numero < -10 || numero > 10) {
@@ -30,26 +68,25 @@ function validarCampo(input) {
         }
     }
 
-    // Mostrar mensaje de error o limpiar mensaje anterior
-    const divError = document.querySelector(`.validacion${idCampo.charAt(0).toUpperCase() + idCampo.slice(1)}`); // Buscar el div de error correspondiente
-    const botonRegistrar = document.getElementById('aniadirPregunta'); // Botón de registro
+    const divError = document.querySelector(`.validacion${idCampo.charAt(0).toUpperCase() + idCampo.slice(1)}`);
+    const botonRegistrar = document.getElementById('aniadirPregunta');
 
     if (mensajeError) {
-        divError.style.display = 'block'; // Mostrar mensaje de error
-        divError.textContent = mensajeError; // Asignar el texto 
-        input.classList.add('error'); // Añadir clase
-        botonRegistrar.disabled = true; // Desactivar el botón de registro si hay errores
-        botonRegistrar.style.cursor = 'not-allowed'; // Cambiar el cursor a prohibido
+        divError.style.display = 'block';
+        divError.textContent = mensajeError;
+        input.classList.add('error');
+        botonRegistrar.disabled = true;
+        botonRegistrar.style.cursor = 'not-allowed';
     } else {
-        divError.style.display = 'none'; // Ocultar mensaje de error
-        divError.textContent = ''; // Limpiar texto del mensaje
-        input.classList.remove('error'); // Quitar la clase 
+        divError.style.display = 'none';
+        divError.textContent = '';
+        input.classList.remove('error'); 
         if (todosCamposValidos()) {
-            botonRegistrar.disabled = false; // Activar el botón de registro si todo está correcto
-            botonRegistrar.style.cursor = 'pointer'; // Cambiar el cursor a correcto
+            botonRegistrar.disabled = false;
+            botonRegistrar.style.cursor = 'pointer';
         } else {
-            botonRegistrar.disabled = true; // Desactivar el botón de registro si hay errores
-            botonRegistrar.style.cursor = 'not-allowed'; // Cambiar el cursor a prohibido
+            botonRegistrar.disabled = true;
+            botonRegistrar.style.cursor = 'not-allowed';
         }
     }
 }
@@ -78,16 +115,23 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('formularioAniadirPreguntas').addEventListener('submit', async (event) => {
         
         event.preventDefault(); // Evita recargar la página
+        if(validarImagenes()){
+            document.getElementById('validacionImagenes').innerHTML = '';
+        
+            const formulario = document.getElementById('formularioAniadirPreguntas'); // Obtener el formulario
+            const formData = new FormData(formulario); 
 
-        const formulario = document.getElementById('formularioAniadirPreguntas'); // Obtener el formulario
-        const formData = new FormData(formulario); 
-
-        // Validar el formulario antes de enviarlo
-        if (formulario.checkValidity()) {
-            // Llamar al controlador para gestionar los datos del formulario
-            controlador.procesarFormulario(formData);
-        } else {
-            alert('Por favor, asegúrese de completar todos los campos requeridos.'); // Mostrar mensaje si faltan campos
+            // Validar el formulario antes de enviarlo
+            if (formulario.checkValidity()) {
+                // Llamar al controlador para gestionar los datos del formulario
+                controlador.procesarFormulario(formData);
+            } else {
+                alert('Por favor, asegúrese de completar todos los campos requeridos.'); // Mostrar mensaje si faltan campos
+            }
+        }else{
+            let parrafoErrorImagenes = document.getElementById('validacionImagenes');
+            parrafoErrorImagenes.innerHTML = 'Debe introducir todas las imagenes';
+            parrafoErrorImagenes.style.display = 'inline';
         }
     });
 });
