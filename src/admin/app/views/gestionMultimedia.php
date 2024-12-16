@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Gestion Multimedia</title>
+        <title>Galería Multimedia</title>
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
@@ -48,7 +48,6 @@
                     echo '<details class="detailsMultimedia">';
                     echo '    <summary class="summaryImg">';
                     echo '        <img src="'. $logro['ruta'].'" alt="' . $logro['nombreMultimedia'] . '">';
-                    echo '        <h3>' . $logro['textoLogro'] . '</h3>';
                     echo '    </summary>';
                     echo '    <div class="fondo">';
                     echo '        <div class="containerContenido">';
@@ -65,10 +64,6 @@
                     echo '                <p>' . $logro['ruta'] . '</p>';
                     echo '            </div>';
                     echo '        </div>';
-                    echo '        <div class="botonesMultimedia">';
-                    echo '            <button class="boton">Modificar</button>';
-                    echo '            <button class="boton">Eliminar</button>';
-                    echo '        </div>';
                     echo '    </div>';
                     echo '</details>';
                 }
@@ -82,7 +77,6 @@
                         echo '<details class="detailsMultimedia">';
                         echo '    <summary class="summaryImg">';
                         echo '        <img src="' . $edificio['ruta'] . '" alt="' . $edificio['nombreMultimedia'] . '">';
-                        echo '        <h3>' . $edificio['nombreEdificio'] . '</h3>';
                         echo '    </summary>';
                         echo '    <div class="fondo">';
                         echo '        <div class="containerContenido">';
@@ -94,10 +88,6 @@
                         echo '                <h4>Ruta</h4>';
                         echo '                <p>' . $edificio['ruta'] . '</p>';
                         echo '            </div>';
-                        echo '        </div>';
-                        echo '        <div class="botonesMultimedia">';
-                        echo '            <button class="boton">Modificar</button>';
-                        echo '            <button class="boton">Eliminar</button>';
                         echo '        </div>';
                         echo '    </div>';
                         echo '</details>';
@@ -112,7 +102,6 @@
                         echo '<details class="detailsMultimedia">';
                         echo '    <summary class="summaryImg">';
                         echo '        <img src="' . $pregunta['ruta'] . '" alt="' . $pregunta['nombreMultimedia'] . '">';
-                        echo '        <h3>' . $pregunta['texto'] . '</h3>';
                         echo '    </summary>';
                         echo '    <div class="fondo">';
                         echo '        <div class="containerContenido">';
@@ -128,10 +117,6 @@
                         echo '                <h4>Ruta</h4>';
                         echo '                <p>' . $pregunta['ruta'] . '</p>';
                         echo '            </div>';
-                        echo '        </div>';
-                        echo '        <div class="botonesMultimedia">';
-                        echo '            <button class="boton">Modificar</button>';
-                        echo '            <button class="boton">Eliminar</button>';
                         echo '        </div>';
                         echo '    </div>';
                         echo '</details>';

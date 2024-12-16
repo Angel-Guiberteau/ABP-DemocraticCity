@@ -11,7 +11,6 @@ export class MModificarPregunta {
 
             if (response.ok) {
                 const result = await response.text(); 
-                alert(result);
                 if (result === 'correcto') {
                     window.location.href = "index.php?c=Preguntas&m=cMostrarPreguntasyRespuestas";
                 } else {
