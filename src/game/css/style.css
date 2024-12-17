@@ -828,9 +828,11 @@ box-shadow: inset 7px 7px 14px #aa9375,
 
 .mapa {
     width: 100%;
+    position: relative;
 }
 .mapa img{
     width: 100%;
+    z-index: -1;
 }
 /* @media (max-width: 1150px) {
     .mapa{
@@ -846,17 +848,12 @@ box-shadow: inset 7px 7px 14px #aa9375,
 } */
 #edificio1, #edificio2, #edificio3, #edificio4, #edificio5, 
 #edificio6, #edificio7, #edificio8, #edificio9, #edificio10, 
-#edificio11, #edificio12, #edificio13, #edificio14, #edificio15, 
-#edificio16 {
-    width: 100%;
-    height: 600px;
-    display: none;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+#edificio11, #edificio12, #edificio13 {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    display: none;
     z-index: 1;
 }
 

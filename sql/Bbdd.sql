@@ -13,7 +13,6 @@ CREATE TABLE Multimedia (
     nombreMultimedia VARCHAR(50) NOT NULL,
     ruta VARCHAR(100) NOT NULL,
     tipo CHAR (1) NOT NULL,
-    hasheo VARCHAR (255) NULL,
     CONSTRAINT pk_multimedia PRIMARY KEY (idMultimedia),
     CONSTRAINT check_tipo CHECK (tipo IN ('E', 'P', 'U', 'L')) 
 );

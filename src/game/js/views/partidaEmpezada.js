@@ -8,7 +8,7 @@ const idPartida = document.getElementById('idPartidaOculto').value;
 function salaEmpezada() {
     setInterval(() => {
         controlador.cSalaEmpezada(idPartida);
-    }, 2500);
+    }, 1500);
 }
 
 window.salaEmpezada = salaEmpezada;

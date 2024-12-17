@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const botonMute = document.getElementById('musica2'); // Obtiene el botón de silencio.
     boton.addEventListener('click', function () { // Agrega un evento al hacer clic en el botón.
         const audio = document.getElementById('audio'); // Obtiene el elemento de audio.
-        sonido.volume = 0.5;
+        sonido.volume = 0.2;
         audio.play();
         botonMute.style.display = 'inline'; // Muestra el botón de silencio.
         boton.style.display = 'none'; // Muestra el botón de silencio.
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para reproducir el sonido
     const reproducirSonido = () => {
         sonido.currentTime = 0; // Reinicia el sonido si ya se estaba reproduciendo
-        sonido.volume = 0.5;
+        sonido.volume = 0.1;
         sonido.play(); // Reproduce el sonido
     };
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para reproducir el sonido
     const reproducirSonidoBotonesJuego = () => {
         sonidoJuego.currentTime = 0; // Reinicia el sonido si ya se estaba reproduciendo
-        sonidoJuego.volume = 0.5;
+        sonidoJuego.volume = 0.1;
         sonidoJuego.play(); // Reproduce el sonido
     };
 

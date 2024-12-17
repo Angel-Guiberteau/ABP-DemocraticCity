@@ -1,0 +1,10 @@
+{
+    "letraVotada": "A",
+    "numeroVotos": 1,
+    "texto": "Hotel",
+    "educacion": 0,
+    "sanidad": -1,
+    "seguridad": -1,
+    "economia": 2,
+    "nombreArchivo": true
+}

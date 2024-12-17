@@ -514,7 +514,7 @@ class MPreguntas{
                     $rutaMultimediaRespuesta = $datos['rutaEdificio'.$cont];
 
                     unlink($rutaMultimediaRespuesta);
-                    $cont++;
+                    
 
                 } else {
                     // Si esta vacio, no se ha introducido un archivo nuevo, por lo que solo actualizamos los datos de la respuesta
@@ -533,6 +533,7 @@ class MPreguntas{
 
                     $stmtRespuestas->execute();
                 }
+                $cont++;
             }
     
             $this->conexion->commit();

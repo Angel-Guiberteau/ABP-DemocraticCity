@@ -254,7 +254,7 @@ class CPartida{
                 $textoPreguntaMasVotada = $this->objMPartida->mPreguntaMasVotada($datos['idPregunta'], $letraMasVotada);
                 
                 $valoresRespuesta = $this->objMPartida->mValoresRespuesta($datos['idPregunta'], $letraMasVotada);
-
+                $nombreArchivo = $this->objMPartida->mNombreArchivo($datos['idPregunta'], $letraMasVotada);
                 $votosLetraMasVotada = $this->comprobarVotosLetraMayorVotada($letraMasVotada,$votosA,$votosB,$votosC,$votosD);
 
                 $json = [
@@ -264,7 +264,8 @@ class CPartida{
                     'educacion'=> $valoresRespuesta['educacion'],
                     'sanidad'=> $valoresRespuesta['sanidad'],
                     'seguridad'=> $valoresRespuesta['seguridad'],
-                    'economia' => $valoresRespuesta['economia']
+                    'economia' => $valoresRespuesta['economia'],
+                    'nombreArchivo' => $nombreArchivo
                 ];
                 file_put_contents($rutaArchivo, json_encode($json, JSON_PRETTY_PRINT));
                 

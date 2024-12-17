@@ -413,4 +413,34 @@ class MPartida{
         }
 
     }
+
+    public function mNombreArchivo($idPregunta,$letraRespuesta ){
+
+        try{
+
+            $sql = "SELECT nombreEdificio FROM Respuestas INNER JOIN Edificios ON Respuestas.idEdificio = Edificios.idEdificio
+                    WHERE idPregunta = :idPregunta AND letraRespuesta = :letraRespuesta;";
+            
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':idPregunta', $idPregunta, PDO::PARAM_INT);
+            $stmt->bindValue(':letraRespuesta', $letraRespuesta, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            $fila = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    
+            if ($stmt->rowCount() > 0)
+                return $fila['nombreEdificio'];
+            else
+                return false;
+
+
+        }catch(Exception $e){
+            error_log("Error al actualizar medidores: " . $e->getMessage());
+            return false;
+        }
+        
+
+    }
 }

@@ -16,6 +16,7 @@
     ?>
     <div id="juego">
     <audio src="audio/musicaInicio.mp3" preload="auto" id="audio"></audio>
+    <audio src="audio/finPartida.mp3" preload="auto" id="victorySound"></audio>
 
     <nav class="icons">
             <button id="musica" class="unmute"><svg  xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-volume"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 8a5 5 0 0 1 0 8" /><path d="M17.7 5a9 9 0 0 1 0 14" /><path d="M6 15h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l3.5 -4.5a.8 .8 0 0 1 1.5 .5v14a.8 .8 0 0 1 -1.5 .5l-3.5 -4.5" /></svg></button>
@@ -46,8 +47,19 @@
     </div>
     <div class="mapa">
         <img src="img/mapaJuego.png" alt="">
-            <div id="edificio1"></div>
-            <div id="edificio2"></div>
+        <img src="" alt="" id="edificio1">
+        <img src="" alt="" id="edificio2">
+        <img src="" alt="" id="edificio3">
+        <img src="" alt="" id="edificio4">
+        <img src="" alt="" id="edificio5">
+        <img src="" alt="" id="edificio6">
+        <img src="" alt="" id="edificio7">
+        <img src="" alt="" id="edificio8">
+        <img src="" alt="" id="edificio9">
+        <img src="" alt="" id="edificio10">
+        <img src="" alt="" id="edificio11">
+        <img src="" alt="" id="edificio12">
+        <img src="" alt="" id="edificio13"> 
     </div>
     <!-- MODAL INICIO JUEGO -->
     <div id="modalInicioJuego">

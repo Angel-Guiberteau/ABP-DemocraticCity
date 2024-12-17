@@ -24,7 +24,7 @@ const controlador = new CPartida();
     let respuesta3 = document.getElementById('respuesta3');
     let respuesta4 = document.getElementById('respuesta4');
     let edificios = [];
-    for (let i = 1; i <= 16; i++) {
+    for (let i = 1; i <= 13; i++) {
         edificios['edificio' + i] = document.getElementById('edificio' + i);
     }
 
@@ -59,17 +59,52 @@ function mostrarPreguntaUsuario(){
 }
 function mostrarPanelFinalPartida(economia, sanidad, seguridad, educacion){
     document.getElementById('modalFinalPartida').style.display = 'flex';
-    document.getElementById('textoFinalPartida').innerHTML = 'Tu partida ha acabado';
+    let victorySound = document.getElementById('victorySound'); // Selecciona el sonido
+    let textoFinal = document.getElementById('textoFinalPartida');
+    if(economia<=0)
+        textoFinal.innerHTML = 'Debido a la pobreza, el creador de SpaceX ha comprado la ciudad para poner sus instalaciones en el dejándote sin territorio...';
+    else if(sanidad<=0)
+        textoFinal.innerHTML = 'La rabia a llegado a tu ciudad y ha hecho que todos se infecten, ya no hay huida...';
+        else if(seguridad<=0)
+            textoFinal.innerHTML = 'Oh no, debido a la baja seguridad, una mafia que estaba oculta en la ciudad se ha hecho con el poder...';
+            else if(educacion<=0)
+                textoFinal.innerHTML = 'Debido a la poca educación que hay en la ciudad, la gente se ha mudado a estudiar a otras ciudades dejándonos solos...';
+                else if(contador>=13){
+                    victorySound.play().catch(error => console.log('Error al reproducir el audio:', error));
+                    textoFinal.innerHTML = '⭐¡Tu ciudad ha crecido segura y próspera!⭐';
+                    textoFinal.style.color = 'yellow';
+                }
+                    
     document.getElementById('puntuacionFinalPartida').innerHTML = 'Economia: ' + economia + ' Sanidad: ' + sanidad + ' Seguridad: '+ seguridad + ' Educación: ' + educacion;
 }
 
 function comprobarFinal(economia, sanidad, seguridad, educacion){
     console.log("Valores finales:", { economia, sanidad, seguridad, educacion, contador });
-    if(contador==5 || economia < 1 || sanidad < 1 || seguridad < 1 || educacion < 1){
+    if(contador==13 || economia < 1 || sanidad < 1 || seguridad < 1 || educacion < 1){
         mostrarPanelFinalPartida(economia, sanidad, seguridad, educacion);
     }
 }
 mostrarPreguntaUsuario();
+/////////////////////////// MOSTRAR EDIFICIOS
+function mostrarEdificios(json) {
+    let imgEdificio = document.getElementById('edificio' + contador);
+    let originalName = json.nombreArchivo; 
+
+    // Verifica que el nombre del archivo sea el esperado
+    console.log("Nombre original:", originalName);
+
+    // Elimina la parte con guion bajo y 13 caracteres alfanuméricos, usando una expresión regular
+    let newName = originalName.replace(/_[a-zA-Z0-9]{13}\./, `${contador}.`); // Reemplaza _ + 13 caracteres alfanuméricos + punto por el contador
+    console.log("Nombre con contador:", newName);
+
+    // Asegura que la extensión sea correctamente modificada
+    // newName = newName.replace(/(\.(png|jpg))$/, `.${contador}$1`); // Solo agrega el contador antes de la extensión
+    console.log("Nombre final:", newName);
+
+    // Asigna la nueva ruta a la imagen
+    imgEdificio.src = 'img/edificios/' + newName;
+    imgEdificio.style.display = 'inline';
+}
 /////////////////////////// MODIFICAR MEDIDORES
 function modificarMedidores(json){
     let economia = document.getElementById('valorEconomia');
@@ -95,25 +130,26 @@ function modificarMedidores(json){
     economia.innerHTML = valorFinalEconomia;
     if(valorFinalEconomia <= 3){ economia.style.color = 'red' }
     else if(valorFinalEconomia >= 8){ economia.style.color = 'green' }
-        else if(valorFinalEconomia == 5){ economia.style.color = 'black' }
-    
+    else if([4, 5, 6, 7].includes(valorFinalEconomia)){ economia.style.color = '#fddaac' }
+
     sanidad.innerHTML = valorFinalSanidad;
     if(valorFinalSanidad <= 3){ sanidad.style.color = 'red' }
     else if(valorFinalSanidad >= 8){ sanidad.style.color = 'green' }
-        else if(valorFinalSanidad == 5){ sanidad.style.color = 'black' }
+    else if([4, 5, 6, 7].includes(valorFinalSanidad)){ sanidad.style.color = '#fddaac' }
 
     seguridad.innerHTML = valorFinalSeguridad;
     if(valorFinalSeguridad <= 3){ seguridad.style.color = 'red' }
     else if(valorFinalSeguridad >= 8){ seguridad.style.color = 'green' }
-        else if(valorFinalSeguridad == 5){ seguridad.style.color = 'black' }
-        
+    else if([4, 5, 6, 7].includes(valorFinalSeguridad)){ seguridad.style.color = '#fddaac' }
+
     educacion.innerHTML = valorFinalEducacion;
     if(valorFinalEducacion <= 3){ educacion.style.color = 'red' }
     else if(valorFinalEducacion >= 8){ educacion.style.color = 'green' }
-        else if(valorFinalEducacion == 5){ educacion.style.color = 'black' }
+    else if([4, 5, 6, 7].includes(valorFinalEducacion)){ educacion.style.color = '#fddaac' }
 
     comprobarFinal(valorFinalEconomia,valorFinalSanidad,valorFinalSeguridad,valorFinalEducacion);
 }
+
 
 /////////////////////////// ENVIAR VOTO AL JSON
 
@@ -184,6 +220,7 @@ function mostrarModalEsperar(textoRespuesta) {
             if(document.getElementById('modalEsperarVotos').style.display != 'flex'){
                 document.getElementById('modalEsperarVotos').style.display = 'flex'
             }
+
             let parrafoVotosRestantes = document.getElementById('votosRestantes');
             let parrafoRespuestaEsperarVotos = document.getElementById('respuestaEsperarVotos');
             let cargando = document.querySelector('.dot-spinner');
@@ -192,15 +229,14 @@ function mostrarModalEsperar(textoRespuesta) {
             parrafoVotosRestantes.style.fontWeight = '700';
             parrafoVotosRestantes.style.color = 'rgb(221, 215, 37)';
             parrafoVotosRestantes.style.textShadow = '-1px 1px 3px black';
-
             parrafoVotosRestantes.innerHTML = '⭐¡La letra más votada es: ' + json.letraVotada + ' con ' + json.numeroVotos + ' votos!⭐';
-
             parrafoRespuestaEsperarVotos.innerHTML ='Tu respuesta: '+ textoRespuesta;
             document.getElementById('esperarVotos').innerHTML = 'Esperando siguiente pregunta...';
+
+            mostrarEdificios(json);
+
             clearInterval(intervaloCalcularVotosRestantes);
             modificarMedidores(json);
-            
-            
             idPregunta= -1000;
             mostrarPreguntaUsuario();
             
