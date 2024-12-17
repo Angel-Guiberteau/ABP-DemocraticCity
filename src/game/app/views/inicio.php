@@ -36,7 +36,7 @@
             <div class="botones-inicio">
                 <a href="index.php?c=Usuarios&m=mostrarInicioJuego" class="boton">Jugar</a>
                 <a href="index.php?c=Usuarios&m=cMostrarRanking" class="boton">Ranking</a>
-                <a href="#" class="boton">Manual de juego</a>
+                <a href="index.php?c=Usuarios&m=mostrarManual" class="boton">Manual de juego</a>
             </div>
             <div class="alcaldes">
                 <div><img src="img/alcalde1.png" alt=""></div>

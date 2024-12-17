@@ -23,6 +23,9 @@ class CUsuarios{
     public function mostrarRanking(){
         $this->vista = 'ranking';
     }
+    public function mostrarManual(){
+        $this->vista = 'manualJuego';
+    }
 
 
     public function registrar($datos){

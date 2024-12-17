@@ -1,0 +1,81 @@
+details{ /*desde aqui*/
+    margin-bottom: 2rem;
+}
+summary {
+    margin: 0 auto;
+    padding: 2rem;
+    width: 75%;
+    border-radius: 1em; 
+    box-shadow: -3px 3px 7px black;
+    border: none;
+    color: #0e221f;
+    font-weight: bold;
+    font-size: 1.7rem;
+    text-align: left;
+    margin-top: 2rem;
+    list-style-type: disc;
+}
+
+details:nth-of-type(even) > summary {
+    background: -webkit-linear-gradient(90deg, #419889, #8EBBA7, #A5E2C7);
+    background: linear-gradient(90deg, #419889, #8EBBA7, #A5E2C7);
+}
+
+details:nth-of-type(odd) > summary {
+    background: -webkit-linear-gradient(90deg, #A5E2C7, #8EBBA7, #419889);
+    background: linear-gradient(90deg, #A5E2C7, #8EBBA7, #419889);
+}
+
+.summaryContainer{
+    width: 75%;
+    margin: 0 auto;
+    background-color: #000000be;
+    padding: 1rem;
+    font-size: 1.5rem;
+    color: white;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+
+.summaryContainer hr{
+    background-color: white;
+    height: 0.3rem;
+}/*hasta aqui es copiado del styleAdmin.css sin mofificarlo*/
+
+.summaryContainer > div{
+    margin: 2rem 0;
+    display: flex;
+}
+
+.texto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.summaryContainer > div > div:nth-child(odd){
+    width: 50%;
+    margin: 0 1rem;
+}
+
+.summaryContainer img{
+    width: 100%;
+    border-radius: 5%;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px){
+    .summaryContainer > div > div:first-child{  
+        width: 70%;
+    }
+    .texto{
+        font-size: 1rem;
+        flex-direction: row;
+
+        flex-grow: 1;
+        flex-shrink: 2;
+    }
+    .texto p{
+        margin: 0 1rem;
+    }
+}
