@@ -51,22 +51,26 @@ function mostrarEdificios(json) {
 function mostrarPanelFinalPartida(economia, sanidad, seguridad, educacion){
     document.getElementById('modalFinalPartida').style.display = 'flex';
     let victorySound = document.getElementById('victorySound'); // Selecciona el sonido
-    document.getElementById('puntuacionFinalPartida').innerHTML = 'Economia: ' + economia + ' Sanidad: ' + sanidad + ' Seguridad: '+ seguridad + ' Educación: ' + educacion;
-    document.getElementById('modalFinalPartida').style.display = 'flex';
+    let gameOver = document.getElementById('loseSound'); // Selecciona el sonido
     let textoFinal = document.getElementById('textoFinalPartida');
-    if(economia<=0)
+    if(economia<=0){
+        gameOver.play().catch(error => console.log('Error al reproducir el audio:', error));
         textoFinal.innerHTML = 'Debido a la pobreza, el creador de SpaceX ha comprado la ciudad para poner sus instalaciones en el dejándote sin territorio...';
-    else if(sanidad<=0)
+    }else if(sanidad<=0){
+        gameOver.play().catch(error => console.log('Error al reproducir el audio:', error));
         textoFinal.innerHTML = 'La rabia a llegado a tu ciudad y ha hecho que todos se infecten, ya no hay huida...';
-        else if(seguridad<=0)
+    } else if(seguridad<=0) {
+            gameOver.play().catch(error => console.log('Error al reproducir el audio:', error));
             textoFinal.innerHTML = 'Oh no, debido a la baja seguridad, una mafia que estaba oculta en la ciudad se ha hecho con el poder...';
-            else if(educacion<=0)
-                textoFinal.innerHTML = 'Debido a la poca educación que hay en la ciudad, la gente se ha mudado a estudiar a otras ciudades dejándonos solos...';
-                else if(contador==13){
-                    victorySound.play().catch(error => console.log('Error al reproducir el audio:', error));
-                    textoFinal.innerHTML = '⭐¡Tu ciudad ha crecido segura y próspera!⭐';
-                    textoFinal.style.color = 'yellow';
-                }
+    }else if(educacion<=0){
+        gameOver.play().catch(error => console.log('Error al reproducir el audio:', error));
+        textoFinal.innerHTML = 'Debido a la poca educación que hay en la ciudad, la gente se ha mudado a estudiar a otras ciudades dejándonos solos...';
+    }else if(contador>=13){
+        victorySound.play().catch(error => console.log('Error al reproducir el audio:', error));
+        textoFinal.innerHTML = '⭐¡Tu ciudad ha crecido segura y próspera!⭐';
+        textoFinal.style.color = 'yellow';
+    }          
+    document.getElementById('puntuacionFinalPartida').innerHTML = 'Economia: ' + economia + ' Sanidad: ' + sanidad + ' Seguridad: '+ seguridad + ' Educación: ' + educacion;
 }
 async function comprobarFinal(economia, sanidad, seguridad, educacion){
         if(contador==13 || economia < 1 || sanidad < 1 || seguridad < 1 || educacion < 1){
@@ -196,7 +200,7 @@ async function dinamicaJuego(){
         } else {
             console.log('JSON no reconocido');
         }
-    }, 1000);
+    }, 750);
 
 
     // Configurar el texto en el modal
