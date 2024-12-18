@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/styleManual.css">
     </head>
-    <body id>
+    <body>
         <main>
             <nav class="icons">
                 
